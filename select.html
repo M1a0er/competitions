@@ -176,6 +176,8 @@
       color: var(--text);
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
     }
     .card:hover {
       transform: translateY(-3px);
@@ -334,6 +336,49 @@
     }
     .back-link:hover { transform: translateY(-2px); }
 
+    /* 推荐专业角标 */
+    .major-badge {
+      position: absolute;
+      top: 8px;
+      right: -28px;
+      width: 100px;
+      padding: 2px 0;
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 1px;
+      transform: rotate(45deg);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    /* 角标内文字，负责切换动画 */
+    .major-badge-text {
+      display: block;
+      will-change: transform;
+      -webkit-font-smoothing: antialiased;
+      backface-visibility: hidden;
+    }
+    .major-badge-text.slide-out {
+      animation: badgeOut 0.35s cubic-bezier(0.4, 0, 1, 1) forwards;
+    }
+    .major-badge-text.slide-in {
+      animation: badgeIn 0.35s cubic-bezier(0, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes badgeOut {
+      from { transform: translate(0, 0); opacity: 1; }
+      to   { transform: translate(30px, 0); opacity: 0; }
+    }
+    @keyframes badgeIn {
+      from { transform: translate(-30px, 0); opacity: 0; }
+      to   { transform: translate(0, 0); opacity: 1; }
+    }
+
     @media (max-width: 640px) {
       .title { font-size: 30px; }
       .card-grid { grid-template-columns: 1fr; }
@@ -359,7 +404,7 @@
 
     <!-- ========== 搜索框 ========== -->
     <div class="search-wrap animate-item anim-cards">
-      <input class="search-input" id="searchInput" type="text" placeholder="搜索竞赛名称或词条…" />
+      <input class="search-input" id="searchInput" type="text" placeholder="搜索竞赛名称，词条，专业…" />
     </div>
 
     <!-- ========== 筛选栏 ========== -->
@@ -394,15 +439,15 @@
     // 竞赛数据：编号, 名称, 难度, 热度, 卷度, 级别, 类别字母, [分类标签]
     var competitions = [
       [ 1, "中国国际大学生创新大赛", 9, 10, 7, "国", "A类", ["稀有","创新","创业","综合实践"]],
-      [ 2, "挑战杯全国大学生课外学术科技作品竞赛", 9, 10, 7, "国", "A类", ["史诗","创新","创业","技术","综合实践"]],
+      [ 2, "挑战杯全国大学生课外学术科技作品竞赛", 9, 10, 7, "国", "A类", ["资深","创新","创业","技术","综合实践"]],
       [ 3, "挑战杯中国大学生创业计划大赛", 8, 10, 6, "国", "A类", ["稀有","创新","创业","综合实践"]],
-      [ 4, "ACM-ICPC国际大学生程序设计竞赛", 10, 10, 10, "国", "A类", ["高含金量","计算机","信息","编程","算法","学科类"]],
-      [ 5, "全国大学生数学建模竞赛", 7, 10, 8, "国", "A类", ["史诗","数学","算法","编程","论文","学科类","熬夜"],],
-      [ 6, "全国大学生电子设计竞赛", 9, 10, 9, "国", "A类", ["高含金量","电子","机械","算法","学科类","熬夜"]],
-      [ 7, "全国大学生机械创新设计大赛", 7, 7, 5, "国", "A类", ["稀有","熬夜","机械","设计","创新","实践","学科类"]],
-      [ 8, "全国大学生结构设计竞赛", 8, 9, 5, "国", "A类", ["稀有","熬夜","土木","结构","设计","力学","学科类"]],
+      [ 4, "ACM-ICPC国际大学生程序设计竞赛", 10, 10, 10, "国", "A类", ["顶尖","计算机","信息","编程","算法","学科类"]],
+      [ 5, "全国大学生数学建模竞赛", 7, 10, 8, "国", "A类", ["资深","数学","算法","编程","论文","学科类","需要熬夜"],],
+      [ 6, "全国大学生电子设计竞赛", 9, 10, 9, "国", "A类", ["顶尖","电子","机械","算法","学科类","需要熬夜"]],
+      [ 7, "全国大学生机械创新设计大赛", 7, 7, 5, "国", "A类", ["稀有","需要熬夜","机械","设计","创新","实践","学科类"]],
+      [ 8, "全国大学生结构设计竞赛", 8, 9, 5, "国", "A类", ["稀有","需要熬夜","土木","结构","设计","力学","学科类"]],
       [ 9, "全国大学生广告艺术大赛", 5, 9, 4, "国", "A类", ["较水","设计","传媒","广告","创意","艺术"]],
-      [10, "全国大学生智能汽车竞赛", 8, 7, 6, "国", "A类", ["史诗","电子","机械","编程","自动化","学科类"]],
+      [10, "全国大学生智能汽车竞赛", 8, 7, 6, "国", "A类", ["资深","电子","机械","编程","自动化","学科类"]],
       [11, "全国大学生交通运输科技大赛", 6, 9, 4, "国", "A类", ["交通","运输","技术","综合实践"]],
       [12, "全国大学生电子商务创新创意及创业挑战赛", 5, 7, 4, "国", "A类", ["创新","创业","电子商务","商业"]],
       [13, "全国大学生节能减排社会实践与科技竞赛", 6, 9, 5, "国", "A类", ["能源","环保","技术","社会实践"]],
@@ -419,9 +464,9 @@
       [24, "中国大学生服务外包创新创业大赛", 6, 7, 5, "国", "A类", ["创新","创业","IT","服务","商业"]],
       [25, "两岸新锐设计竞赛华灿奖", 5, 8, 4, "国", "A类", ["设计","创意","艺术","文化"]],
       [26, "中国高校计算机大赛", 7, 7, 5, "国", "A类", ["计算机","编程","算法","IT","大数据"]],
-      [27, "中国机器人大赛暨RoboCup机器人世界杯中国赛", 9, 3, 7, "国", "A类", ["高含金量","机器人","AI","编程","电子","自动化"]],
+      [27, "中国机器人大赛暨RoboCup机器人世界杯中国赛", 9, 3, 7, "国", "A类", ["顶尖","机器人","AI","编程","电子","自动化"]],
       [28, "全国大学生信息安全竞赛", 8, 7, 6, "国", "A类", ["稀有","计算机","信息安全","网络","CTF"]],
-      [29, "全国周培源大学生力学竞赛", 8, 4, 6, "国", "A类", ["史诗","力学","数学","理论","学科类"]],
+      [29, "全国周培源大学生力学竞赛", 8, 4, 6, "国", "A类", ["资深","力学","数学","理论","学科类"]],
       [30, "中国大学生机械工程创新创意大赛", 7, 7, 5, "国", "A类", ["机械","工程","创新","设计","制造"]],
       [31, "蓝桥杯全国软件和信息技术专业人才大赛", 5, 10, 4, "国", "A类", ["较水","编程","算法","计算机","IT"]],
       [32, "全国大学生金相技能大赛", 5, 8, 4, "国", "A类", ["材料","机械","实验","学科类"]],
@@ -431,7 +476,7 @@
       [36, "中美青年创客大赛", 6, 9, 5, "国", "A类", ["创新","创业","创意","技术","国际"]],
       [37, "全国大学生地质技能竞赛", 6, 8, 5, "国", "A类", ["地质","地球科学","实践","野外","学科类"]],
       [38, "米兰设计周中国高校设计学科师生优秀作品展", 5, 6, 4, "国", "A类", ["较水","设计","艺术","展示","文化","国际"]],
-      [39, "全国大学生集成电路创新创业大赛", 8, 4, 6, "国", "A类", ["史诗","集成电路","电子","半导体","芯片","创新"]],
+      [39, "全国大学生集成电路创新创业大赛", 8, 4, 6, "国", "A类", ["资深","集成电路","电子","半导体","芯片","创新"]],
       [40, "中国机器人及人工智能大赛CRAIC", 7, 8, 5, "国", "A类", ["机器人","AI","编程","算法"]],
       [41, "全国高校商业精英挑战赛", 5, 7, 4, "国", "A类", ["商业","管理","创新","创业","综合实践"]],
       [42, "中国好创意暨全国数字艺术设计大赛", 5, 7, 4, "国", "A类", ["设计","数字艺术","创意","IT","传媒"]],
@@ -445,7 +490,7 @@
       [50, "华为ICT大赛", 7, 7, 6, "国", "A类", ["稀有","计算机","网络","通信","IT","华为"]],
       [51, "全国大学生嵌入式芯片与系统设计竞赛", 7, 9, 5, "国", "A类", ["稀有","嵌入式","芯片","电子","编程","硬件"]],
       [52, "中国高校智能机器人创意大赛", 7, 9, 5, "国", "A类", ["机器人","创意","AI","设计","机械"]],
-      [53, "全国大学生数学竞赛", 8, 10, 6, "国", "A类", ["史诗","数学","理论","学科类"]],
+      [53, "全国大学生数学竞赛", 8, 10, 6, "国", "A类", ["资深","数学","理论","学科类"]],
       [54, "四川省大学生工业设计大赛", 4, 6, 3, "省", "A类", ["工业设计","设计","产品","艺术","实践"]],
       [55, "四川省大学生模拟法庭大赛", 5, 5, 4, "省", "A类", ["法学","辩论","法律","实践"]],
       [56, "四川省大学生材料设计大赛", 5, 4, 4, "省", "A类", ["材料","设计","实验","学科类"]],
@@ -454,8 +499,37 @@
       [59, "中国大学生物理学术竞赛", 7, 8, 5, "国", "B类/同A类加分", ["物理","学术","辩论","实验","学科类"]]
     ];
 
+    // 推荐专业：专业名 -> 对应卡片编号数组
+    var recommendedMajors = [
+      ["应物", [34, 46, 59]],
+      ["电讯", [6, 34, 39, 45, 50, 51]],
+      ["计算机", [4, 5, 22, 26, 28, 31, 33, 40, 48]],
+      ["机械", [7, 8, 10, 14, 18, 19, 21, 27, 30, 52]],
+      ["数学", [5, 29, 53]],
+      ["设计", [9, 22, 25, 35, 38, 42, 43]],
+      ["电气", [6, 10, 13, 19, 27, 39, 45, 46, 51]],
+      ["交运", [11, 8, 10, 15]],
+      ["工商", [12, 23, 24, 41, 44]],
+      ["物流", [15, 12]],
+      ["外语", [16]],
+      ["化学", [20, 13, 32]],
+      ["生命", [49, 13]],
+      ["测绘", [57, 37, 8, 21]]
+    ];
+
     // 已创建详情页的竞赛编号（新增页面后在此添加编号即可）
     var existingPages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
+    // 构建 编号 → 专业名数组 的快速查找
+    var majorMap = {};
+    recommendedMajors.forEach(function(m) {
+      var majorName = m[0];
+      var ids = m[1];
+      ids.forEach(function(cid) {
+        if (!majorMap[cid]) majorMap[cid] = [];
+        majorMap[cid].push(majorName);
+      });
+    });
 
     var grid = document.getElementById('cardGrid');
     var html = '';
@@ -466,10 +540,10 @@
       var specialTags = '', normalTags = '';
       cats.forEach(function(cat) {
         var extra = '';
-        if (cat.indexOf('高含金量') !== -1) extra = ' tag-legend';
-        else if (cat.indexOf('史诗') !== -1) extra = ' tag-epic';
+        if (cat.indexOf('顶尖') !== -1) extra = ' tag-legend';
+        else if (cat.indexOf('资深') !== -1) extra = ' tag-epic';
         else if (cat.indexOf('稀有') !== -1) extra = ' tag-rare';
-        else if (cat.indexOf('熬夜') !== -1) extra = ' tag-night';
+        else if (cat.indexOf('需要熬夜') !== -1) extra = ' tag-night';
         else if (cat.indexOf('较水') !== -1) extra = ' tag-done';
         if (extra !== '') {
           specialTags += '<span class="tag-cat' + extra + '">' + cat + '</span>';
@@ -477,8 +551,14 @@
           normalTags += '<span class="tag-cat">' + cat + '</span>';
         }
       });
+      // 推荐专业角标（多专业时只渲染第一个，其余通过轮播切换）
+      var badges = '';
+      if (majorMap[id]) {
+        badges = '<span class="major-badge"><span class="major-badge-text" data-majors="' + majorMap[id].join(',') + '">' + majorMap[id][0] + '</span></span>';
+      }
       html +=
         '<div class="card" data-id="' + id + '" data-cls="' + cls + '" data-level="' + level + '" tabindex="0">' +
+          badges +
           '<div class="card-top">' +
             '<span class="card-num">' + numStr + '</span>' +
             '<span class="card-name">' + name + '</span>' +
@@ -511,6 +591,40 @@
 
     grid.innerHTML = html;
 
+    // 多专业角标轮播（只切换内层文字，红色底条固定不动）
+    var badgeTexts = grid.querySelectorAll('.major-badge-text');
+    badgeTexts.forEach(function(badgeText) {
+      var majors = badgeText.getAttribute('data-majors').split(',');
+      if (majors.length <= 1) return;
+      var idx = 0;
+      var busy = false;
+
+      function cycle() {
+        if (busy) return;
+        busy = true;
+        // 文字滑出
+        badgeText.classList.add('slide-out');
+        badgeText.addEventListener('animationend', function onOut() {
+          badgeText.removeEventListener('animationend', onOut);
+          badgeText.classList.remove('slide-out');
+          // 切换文字
+          idx = (idx + 1) % majors.length;
+          badgeText.textContent = majors[idx];
+          // 文字滑入
+          badgeText.classList.add('slide-in');
+          badgeText.addEventListener('animationend', function onIn() {
+            badgeText.removeEventListener('animationend', onIn);
+            badgeText.classList.remove('slide-in');
+            busy = false;
+          });
+        });
+      }
+
+      setInterval(function() {
+        if (!busy) cycle();
+      }, 1000);
+    });
+
     // 搜索 + 筛选
     var searchInput = document.getElementById('searchInput');
     var filterClass = document.getElementById('filterClass');
@@ -529,7 +643,11 @@
         var catText = '';
         catSpans.forEach(function(s) { catText += s.textContent.toLowerCase() + ' '; });
 
-        var matchSearch = (keyword === '' || name.indexOf(keyword) !== -1 || catText.indexOf(keyword) !== -1);
+        // 角标专业名
+        var majorBadge = card.querySelector('.major-badge-text');
+        var majorText = majorBadge ? majorBadge.getAttribute('data-majors').toLowerCase() : '';
+
+        var matchSearch = (keyword === '' || name.indexOf(keyword) !== -1 || catText.indexOf(keyword) !== -1 || majorText.indexOf(keyword) !== -1);
 
         // cls 中包含对应字母即匹配
         var matchClass = true;
