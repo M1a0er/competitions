@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>全国大学生电子商务创新创意及创业挑战赛 · 信息卡</title>
+  <style>
+    :root { --accent: #a41f1b; --bg: #faf9f7; --text: #111; --text_y: #968172; --card-bg: #fdfcfb; --border: rgba(164, 31, 27, 0.15); }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+      font-family: "NSimSun", "SimSun", "Songti SC", "Microsoft YaHei", serif;
+      display: flex; align-items: flex-start; justify-content: center;
+      overflow-x: hidden; position: relative; padding: 36px 24px 80px;
+    }
+    body::before, body::after {
+      content: ""; position: fixed; left: -80px; width: 320px; height: 2px;
+      background: var(--accent); transform-origin: left center; z-index: 0; opacity: 0.6;
+    }
+    body::before { top: 40px; transform: rotate(-45deg); }
+    body::after  { bottom: 40px; transform: rotate(45deg); }
+    .wrap { position: relative; z-index: 1; width: min(860px, 100%); }
+
+    @keyframes riseFade {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-item { opacity: 0; animation: riseFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .anim-logo     { animation-delay: 0.05s; }
+    .anim-divider  { animation-delay: 0.12s; }
+    .anim-dept     { animation-delay: 0.20s; }
+    .anim-icon     { animation-delay: 0.28s; }
+    .anim-h1       { animation-delay: 0.34s; }
+    .anim-sub      { animation-delay: 0.40s; }
+    .anim-progress { animation-delay: 0.48s; }
+    .anim-tags1    { animation-delay: 0.54s; }
+    .anim-tags2    { animation-delay: 0.58s; }
+    .anim-meta     { animation-delay: 0.64s; }
+    .anim-oneliner { animation-delay: 0.68s; }
+    .anim-tabs     { animation-delay: 0.76s; }
+    .anim-footer   { animation-delay: 1.1s; }
+
+    .header { text-align: center; margin-bottom: 8px; }
+    .logo { width: 90px; height: auto; display: block; margin: 0 auto 2px; object-fit: contain; }
+    .divider { width: 100%; max-width: 420px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 2px; background: currentColor; }
+    .divider .square { width: 12px; height: 12px; background: currentColor; transform: rotate(45deg); flex-shrink: 0; }
+    .dept { font-size: 17px; font-weight: 700; margin: 6px 0 28px; text-align: center; font-family: inherit; }
+    .title-block { text-align: center; margin-bottom: 10px; }
+    .title { font-size: 44px; font-weight: bolder; letter-spacing: 3px; margin: 0; line-height: 1.2; color: var(--accent); }
+    .title-en { margin-top: 4px; font-size: 14px; letter-spacing: 1px; color: var(--text_y); }
+    .comp-icon { width: 80px; height: auto; display: block; margin: 0 auto 12px; object-fit: contain; }
+    .radar-wrap { display: flex; justify-content: center; margin: 8px auto 0; }
+    .radar-canvas { display: block; max-width: 300px; width: 100%; height: auto; }
+
+    .meta-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 32px; margin: 18px 0 10px; font-size: 15px; color: var(--text_y); text-align: center; }
+    .meta-bar span { white-space: nowrap; }
+    .detail-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 6px; }
+
+    .tag-a { display: inline-flex; align-items: center; height: 20px; background: var(--accent); color: #fff; padding: 0 8px; border-radius: 3px; font-size: 11px; font-weight: 700; letter-spacing: 1px; line-height: 1; vertical-align: middle; }
+    .tag-level { display: inline-flex; align-items: center; height: 20px; border: 1px solid var(--accent); color: var(--accent); padding: 0 6px; border-radius: 3px; font-size: 11px; font-weight: 700; letter-spacing: 1px; line-height: 1; vertical-align: middle; }
+    .tag-cat { display: inline-flex; align-items: center; height: 20px; background: rgba(164, 31, 27, 0.06); color: var(--text_y); padding: 0 6px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; line-height: 1; vertical-align: middle; }
+    .tag-legend { background: linear-gradient(135deg, #b8860b, #daa520); color: #fff; box-shadow: 0 0 8px rgba(218, 165, 32, 0.5), 0 0 16px rgba(218, 165, 32, 0.2); }
+    .tag-epic   { background: linear-gradient(135deg, #7b2d8b, #b44dc9); color: #fff; box-shadow: 0 0 8px rgba(180, 77, 201, 0.5), 0 0 16px rgba(180, 77, 201, 0.2); }
+    .tag-rare   { background: linear-gradient(135deg, #1b8b2d, #3dc95a); color: #fff; box-shadow: 0 0 8px rgba(61, 201, 90, 0.5), 0 0 16px rgba(61, 201, 90, 0.2); }
+    .tag-night  { background: linear-gradient(135deg, #0d1b3e, #1c3a6b); color: #c8daf5; box-shadow: 0 0 8px rgba(28, 58, 107, 0.5), 0 0 16px rgba(28, 58, 107, 0.2); }
+    .tag-done   { background: #8a8a8a; color: #fff; }
+
+    .oneliner { text-align: center; max-width: 640px; margin: 12px auto 24px; padding: 14px 20px; background: rgba(164, 31, 27, 0.04); border-left: 3px solid var(--accent); border-right: 3px solid var(--accent); font-size: 15px; line-height: 1.7; color: #333; }
+    .tab-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0; margin: 20px 0 28px; border-bottom: 2px solid var(--border); }
+    .tab-btn { position: relative; bottom: -2px; padding: 10px 18px; font-size: 14px; font-weight: 700; font-family: inherit; color: var(--text_y); background: none; border: 2px solid transparent; border-bottom: none; cursor: pointer; transition: color 0.25s, border-color 0.25s; letter-spacing: 1px; white-space: nowrap; }
+    .tab-btn:hover { color: var(--accent); }
+    .tab-btn.active { color: var(--accent); border-color: var(--border); background: var(--bg); }
+    .section { display: none; margin: 22px 0 12px; }
+    .section.active { display: block; }
+    .section.switch-in { animation: riseFade 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .section-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .section-num { width: 30px; height: 30px; background: var(--accent); color: #fff; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .section-title { font-size: 20px; font-weight: 700; color: var(--accent); letter-spacing: 1px; }
+    .info-grid { display: grid; grid-template-columns: 120px 1fr; gap: 1px; border: 1px solid var(--border); background: var(--border); }
+    .info-grid .label { background: #fff; padding: 10px 14px; font-weight: 700; font-size: 14px; color: var(--accent); display: flex; align-items: flex-start; }
+    .info-grid .value { background: #fff; padding: 10px 14px; font-size: 14px; line-height: 1.6; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.6; }
+    thead th { background: var(--accent); color: #fff; padding: 10px 12px; font-weight: 700; font-size: 13px; text-align: center; letter-spacing: 1px; }
+    tbody td { padding: 10px 12px; border: 1px solid var(--border); vertical-align: top; background: #fff; }
+    tbody tr:nth-child(even) td { background: #fdfcfb; }
+    tbody td:first-child { font-weight: 700; color: var(--accent); text-align: center; white-space: nowrap; width: 110px; }
+    .rhythm-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .rhythm-card { background: #fff; border: 1px solid var(--border); padding: 14px 16px; border-radius: 4px; }
+    .rhythm-card .period { font-weight: 700; color: var(--accent); font-size: 15px; margin-bottom: 6px; }
+    .rhythm-card .desc { font-size: 13px; line-height: 1.7; color: #444; }
+    .source-list { list-style: none; padding: 0; font-size: 13px; line-height: 2; color: #555; }
+    .source-list li::before { content: "▸ "; color: var(--accent); }
+    .footer-line { width: 100%; max-width: 420px; margin: 40px auto 0; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
+    .footer-line::before, .footer-line::after { content: ""; flex: 1; height: 2px; background: currentColor; }
+    .footer-year { font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 4px; letter-spacing: 2px; }
+    .back-link { position: fixed; top: 18px; left: 18px; z-index: 10; display: inline-block; padding: 8px 18px; border-radius: 999px; background: var(--accent); color: #fff; text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(164, 31, 27, 0.2); transition: transform 0.2s ease; }
+    .back-link:hover { transform: translateY(-2px); }
+    @media (max-width: 640px) {
+      .title { font-size: 30px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .info-grid .label { border-bottom: none; padding-bottom: 2px; }
+      .info-grid .value { padding-top: 2px; }
+      .rhythm-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link animate-item anim-footer" href="select.html">←返回</a>
+
+  <div class="wrap">
+    <div class="header">
+      <img class="logo animate-item anim-logo" src="xiaohui.png" alt="校徽" />
+      <div class="divider animate-item anim-divider"><span class="square"></span></div>
+      <div class="dept animate-item anim-dept">物理科学与技术学院 · 科创工作室</div>
+    </div>
+
+    <div class="title-block">
+      <img class="comp-icon animate-item anim-icon" src="logos/12.jpg" alt="竞赛图标" />
+      <h1 class="title animate-item anim-h1">全国大学生电子商务创新创意及创业挑战赛</h1>
+      <div class="title-en animate-item anim-sub">National College Students E-Commerce Innovation, Creativity and Entrepreneurship Challenge</div>
+      <div class="radar-wrap animate-item anim-progress">
+        <canvas class="radar-canvas" id="radarChart" width="300" height="300"></canvas>
+      </div>
+    </div>
+
+    <div class="detail-tags animate-item anim-tags1">
+      <span class="tag-a">A类</span>
+      <span class="tag-level">国</span>
+    </div>
+    <div class="detail-tags animate-item anim-tags2">
+      <span class="tag-cat">创新</span>
+      <span class="tag-cat">创业</span>
+      <span class="tag-cat">电子商务</span>
+      <span class="tag-cat">商业</span>
+    </div>
+
+    <div class="meta-bar animate-item anim-meta"><span>更新日期：2026年7月30日</span></div>
+
+    <div class="oneliner animate-item anim-oneliner">
+      把一个创意变成有用户数据、有运营验证、能挣钱的项目，并通过路演答辩竞争晋级。
+    </div>
+
+    <nav class="tab-nav animate-item anim-tabs">
+      <button class="tab-btn active" data-tab="sec-1">基础信息</button>
+      <button class="tab-btn" data-tab="sec-2">竞赛内容</button>
+      <button class="tab-btn" data-tab="sec-3">能力要求</button>
+      <button class="tab-btn" data-tab="sec-4">团队组成</button>
+      <button class="tab-btn" data-tab="sec-5">时间节点</button>
+      <button class="tab-btn" data-tab="sec-source">资料来源</button>
+    </nav>
+
+    <div id="sec-1" class="section">
+      <div class="section-head"><span class="section-num">一</span><span class="section-title">基础信息</span></div>
+      <div class="info-grid">
+        <div class="label">竞赛简称</div><div class="value">三创赛</div>
+        <div class="label">主办单位</div><div class="value">全国大学生电子商务"创新、创意及创业"挑战赛竞赛组织委员会</div>
+        <div class="label">校内组织</div><div class="value">本科生院、经济管理学院；创新创业中心及校内选拔组委会</div>
+        <div class="label">相关方向</div><div class="value">电子商务、创业策划、产品运营、直播/跨境电商、乡村振兴</div>
+        <div class="label">适合年级</div><div class="value">各专业各年级；有产品、市场、设计或运营兴趣的学生均可参与</div>
+      </div>
+    </div>
+
+    <div id="sec-2" class="section">
+      <div class="section-head"><span class="section-num">二</span><span class="section-title">竞赛内容说明</span></div>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">围绕命题方向完成项目策划、产品/平台开发和商业模式验证，通过校赛→省赛→全国赛逐级选拔，以项目计划书、PPT、视频/产品演示和现场答辩展示创新实践成果。</p>
+      <table>
+        <thead><tr><th>阶段</th><th>主要做什么</th><th>赛制与提交</th><th>核心目标</th></tr></thead>
+        <tbody>
+          <tr><td>常规赛</td><td>围绕命题方向完成项目策划、产品/平台开发和商业模式验证</td><td>项目计划书、PPT、视频/产品演示和现场答辩</td><td>形成逻辑闭环、可验证、可持续的商业方案</td></tr>
+          <tr><td>实战赛</td><td>跨境电商、数据分析、直播等专项赛道进行运营实操</td><td>平台数据、运营记录、专项报告和答辩</td><td>在真实商业场景取得可衡量的成绩</td></tr>
+          <tr><td>校赛→省赛→全国赛</td><td>不断迭代用户洞察、产品打磨、市场验证和团队证明</td><td>校赛选拔，省赛评审，全国网评/现场赛</td><td>同一个项目在每一轮都获得实质提升</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:14px;line-height:1.7;margin:12px 0 4px;"><strong>主要竞赛阶段：</strong>常规赛围绕命题方向完成项目策划、产品/平台开发和商业模式验证，提交项目计划书、PPT、视频/产品演示并参加现场答辩，形成逻辑闭环、可验证、可持续的商业方案。实战赛在跨境电商、数据分析、直播等专项赛道进行运营实操，提交平台数据、运营记录、专项报告和答辩，在真实商业场景取得可衡量的成绩。从校赛到省赛再到全国赛，同一项目在每一轮都应获得实质提升。</p>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 8px;font-weight:700;color:var(--accent);">参赛路径</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:14px;margin-bottom:4px;">
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">校内报名组队</span><span style="color:var(--accent);font-weight:700;">→</span>
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">校内选拔/路演</span><span style="color:var(--accent);font-weight:700;">→</span>
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">四川省赛</span><span style="color:var(--accent);font-weight:700;">→</span>
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">全国网评/总决赛</span>
+      </div>
+      <p style="font-size:12px;color:var(--text_y);margin:6px 0 0;">三创赛强调"真做、真数据、真运营"——项目必须有用户验证和运营数据支撑，空泛的商业计划难以通过评审。各赛道时间安排不同，实战赛需提前熟悉对应平台规则并积累运营数据。</p>
+    </div>
+
+    <div id="sec-3" class="section">
+      <div class="section-head"><span class="section-num">三</span><span class="section-title">参赛能力要求</span></div>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">本赛覆盖"市场与商业""产品与运营""计划与路演"三大方向——团队需要有人做调研和商业模式，有人做产品和运营验证，有人把故事讲清楚。</p>
+      <table>
+        <thead><tr><th>方向/模块</th><th>需要掌握的工具与知识</th><th>需要具备的具体能力</th></tr></thead>
+        <tbody>
+          <tr><td>市场与商业</td><td>问卷访谈、竞品分析、商业模式画布、Excel</td><td>能定位目标用户痛点和需求、市场规模、盈利方式和关键假设</td></tr>
+          <tr><td>产品与运营</td><td>原型工具、电商/内容平台、数据分析、短视频/直播</td><td>能做出最小可行原型、设计获客转化流程并运营验证</td></tr>
+          <tr><td>计划与路演</td><td>Word、PowerPoint、财务测算、视频</td><td>能把创新、实践成果和商业/社会价值讲清，每步论证可追溯</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="sec-4" class="section">
+      <div class="section-head"><span class="section-num">四</span><span class="section-title">团队组成要求</span></div>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">通常3~5名学生，可跨校组队（西南交大为队长所在高校）。每队须配备高校指导教师和企业指导教师，项目须原创且未重复参赛。</p>
+      <table>
+        <thead><tr><th>项目</th><th>参赛要求</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>组队</td><td>通常3~5名学生，可跨校组队（西南交大为队长所在高校）</td><td>队员和项目名称及摘要一旦确定后不得变更</td></tr>
+          <tr><td>项目与导师</td><td>每队须配备高校指导教师和企业指导教师，项目须原创且未重复参赛</td><td>同一项目不可跨赛道重复参赛，赛前应充分磨合</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:14px;font-weight:700;color:var(--accent);margin:14px 0 8px;">推荐分工（3~5人）</p>
+      <table>
+        <thead><tr><th>角色</th><th>分工内容</th></tr></thead>
+        <tbody>
+          <tr><td>市场/商业主责</td><td>问卷访谈、竞品分析、商业模式画布、市场规模测算</td></tr>
+          <tr><td>产品/运营主责</td><td>原型设计、电商/内容平台运营、数据分析与获客转化</td></tr>
+          <tr><td>路演/财务主责</td><td>PPT与视频制作、财务测算、路演答辩与故事线</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px;line-height:1.7;color:#555;margin:8px 0 0;">物理学院学生可发挥数据分析、技术产品化和逻辑论证优势，应重点补齐商业分析、用户调研和路演表达。赛前应充分磨合团队协作和分工节奏。</p>
+    </div>
+
+    <div id="sec-5" class="section">
+      <div class="section-head"><span class="section-num">五</span><span class="section-title">时间节点设置</span></div>
+      <p style="font-size:12px;color:var(--text_y);margin:0 0 10px;">下表列出三创赛从校内报名到成果归档的完整节奏，各赛道具体时间以省赛通知和全国组委会通知为准。</p>
+      <table>
+        <thead><tr><th>阶段</th><th>时间</th><th>主要任务</th><th>层级/说明</th></tr></thead>
+        <tbody>
+          <tr><td>报名与校内注册</td><td>截止2025年12月31日</td><td>完成注册组队和校内信息收集</td><td>校级准备</td></tr>
+          <tr><td>校内选拔/路演</td><td>材料提交2026年2月1日~3月1日；校赛4月19日</td><td>提交材料并参加路演答辩</td><td>校级</td></tr>
+          <tr><td>四川省赛</td><td>通常2026年5~6月，以省赛通知为准</td><td>迭代项目与实战数据，参加省级评审</td><td>省级</td></tr>
+          <tr><td>全国网评/总决赛</td><td>通常2026年7~8月，各赛道时间不同</td><td>参加全国网评/实战赛和现场路演</td><td>国家级</td></tr>
+          <tr><td>成果归档</td><td>赛后1个月内</td><td>整理用户数据、计划书、答辩录像和下一轮迭代方案</td><td>项目传承</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text_y);margin:8px 0 16px;">截至2026年7月30日：校赛和省赛已完成或基本完成，全国总决赛阶段以各赛道通知为准。成果归档应在赛后1个月内完成，为下一轮参赛或项目落地做好准备。</p>
+      <p style="font-size:14px;font-weight:700;color:var(--accent);margin:14px 0 10px;">建议准备节奏</p>
+      <div class="rhythm-cards">
+        <div class="rhythm-card"><div class="period">组队期（赛前2~3个月）</div><div class="desc">确定方向、组建跨专业团队、完成选题调研和初步用户访谈。</div></div>
+        <div class="rhythm-card"><div class="period">产品期（赛前1~2个月）</div><div class="desc">完成最小可行产品/原型、设计商业模式和获客转化流程并初步运营验证。</div></div>
+        <div class="rhythm-card"><div class="period">打磨期（赛前2~4周）</div><div class="desc">迭代计划书和PPT、优化路演故事线、录制视频/产品演示。</div></div>
+        <div class="rhythm-card"><div class="period">冲刺期（赛前1周）</div><div class="desc">模拟答辩、预判评审问题、复核财务数据和运营数据，确保每步论证可追溯。</div></div>
+      </div>
+    </div>
+
+    <div id="sec-source" class="section">
+      <div class="section-head"><span class="section-num">六</span><span class="section-title">资料来源与说明</span></div>
+      <ol class="source-list">
+        <li>西南交通大学：2027年推免A类学科竞赛目录</li>
+        <li>西南交大第十五届三创赛报名通知</li>
+        <li>西南交大第十五届校赛安排</li>
+        <li>三创赛官方网站</li>
+        <li>三创赛全国决赛通知</li>
+        <li>西南交通大学经济管理学院</li>
+        <li>西南交通大学本科生院学科竞赛通知栏目</li>
+        <li>西南交通大学物理科学与技术学院</li>
+        <li>全国普通高校大学生竞赛排行榜</li>
+        <li>全国大学生竞赛信息平台</li>
+      </ol>
+      <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">说明：本信息卡面向西南交通大学物理科学与技术学院学生。信息核验至2026年7月30日；参赛资格、赛道规则和时间安排以三创赛官方网站、经济管理学院及本科生院最新通知为准。</p>
+    </div>
+
+    <div style="text-align:center;">
+      <div class="footer-line animate-item anim-footer"><span class="footer-year">©2026 物院科创工作室</span></div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var tabs = document.querySelectorAll('.tab-btn');
+      var sections = document.querySelectorAll('.section');
+      var currentId = 'sec-1';
+      function switchTo(targetId) {
+        if (targetId === currentId) return;
+        var prev = document.getElementById(currentId);
+        var next = document.getElementById(targetId);
+        if (!next) return;
+        tabs.forEach(function(t) { t.classList.remove('active'); if (t.getAttribute('data-tab') === targetId) t.classList.add('active'); });
+        if (prev) { prev.classList.remove('active', 'switch-in'); }
+        next.classList.add('active'); void next.offsetWidth; next.classList.add('switch-in');
+        currentId = targetId;
+      }
+      tabs.forEach(function(btn) { btn.addEventListener('click', function() { switchTo(this.getAttribute('data-tab')); }); });
+      setTimeout(function() { var first = document.getElementById('sec-1'); first.classList.add('active'); void first.offsetWidth; first.classList.add('switch-in'); }, 1000);
+    })();
+    document.addEventListener('animationend', function(e) { if (e.target.classList.contains('switch-in')) { e.target.classList.remove('switch-in'); } });
+  </script>
+
+  <script>
+    (function() {
+      var canvas = document.getElementById('radarChart');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var W = canvas.width, H = canvas.height, cx = W / 2, cy = H / 2, R = 100, N = 6;
+      var labels = ['难度', '热度', '卷度', '肝度', '获奖难度', '含金量'];
+      var values = [5, 7, 4, 5, 5, 6];
+      var maxVal = 10, levels = 5;
+      ctx.strokeStyle = 'rgba(164,31,27,0.10)'; ctx.lineWidth = 1;
+      for (var l = 1; l <= levels; l++) { var r = (R / levels) * l; ctx.beginPath(); for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var x = cx + r * Math.cos(angle), y = cy + r * Math.sin(angle); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); } ctx.closePath(); ctx.stroke(); }
+      ctx.strokeStyle = 'rgba(164,31,27,0.25)'; ctx.lineWidth = 1;
+      for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + R * Math.cos(angle), cy + R * Math.sin(angle)); ctx.stroke(); }
+      ctx.fillStyle = 'rgba(164,31,27,0.12)'; ctx.strokeStyle = '#a41f1b'; ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var vr = (R * values[i]) / maxVal; var x = cx + vr * Math.cos(angle), y = cy + vr * Math.sin(angle); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+      for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var vr = (R * values[i]) / maxVal; var x = cx + vr * Math.cos(angle), y = cy + vr * Math.sin(angle); ctx.fillStyle = '#a41f1b'; ctx.beginPath(); ctx.arc(x, y, 3.5, 0, 2 * Math.PI); ctx.fill(); }
+      ctx.font = 'bold 11px "NSimSun","SimSun","Songti SC",serif';
+      for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var lx = cx + (R + 34) * Math.cos(angle), ly = cy + (R + 34) * Math.sin(angle); ctx.fillStyle = '#a41f1b'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(labels[i] + ' ' + values[i], lx, ly); }
+    })();
+  </script>
+</body>
+</html>

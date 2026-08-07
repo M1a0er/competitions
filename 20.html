@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>全国大学生化工设计竞赛 · 信息卡</title>
+  <style>
+    :root { --accent: #a41f1b; --bg: #faf9f7; --text: #111; --text_y: #968172; --card-bg: #fdfcfb; --border: rgba(164, 31, 27, 0.15); }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+      font-family: "NSimSun", "SimSun", "Songti SC", "Microsoft YaHei", serif;
+      display: flex; align-items: flex-start; justify-content: center;
+      overflow-x: hidden; position: relative; padding: 36px 24px 80px;
+    }
+    body::before, body::after {
+      content: ""; position: fixed; left: -80px; width: 320px; height: 2px;
+      background: var(--accent); transform-origin: left center; z-index: 0; opacity: 0.6;
+    }
+    body::before { top: 40px; transform: rotate(-45deg); }
+    body::after  { bottom: 40px; transform: rotate(45deg); }
+    .wrap { position: relative; z-index: 1; width: min(860px, 100%); }
+
+    @keyframes riseFade {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-item { opacity: 0; animation: riseFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .anim-logo     { animation-delay: 0.05s; }
+    .anim-divider  { animation-delay: 0.12s; }
+    .anim-dept     { animation-delay: 0.20s; }
+    .anim-icon     { animation-delay: 0.28s; }
+    .anim-h1       { animation-delay: 0.34s; }
+    .anim-sub      { animation-delay: 0.40s; }
+    .anim-progress { animation-delay: 0.48s; }
+    .anim-tags1    { animation-delay: 0.54s; }
+    .anim-tags2    { animation-delay: 0.58s; }
+    .anim-meta     { animation-delay: 0.64s; }
+    .anim-oneliner { animation-delay: 0.68s; }
+    .anim-tabs     { animation-delay: 0.76s; }
+    .anim-footer   { animation-delay: 1.1s; }
+
+    .header { text-align: center; margin-bottom: 8px; }
+    .logo { width: 90px; height: auto; display: block; margin: 0 auto 2px; object-fit: contain; }
+    .divider { width: 100%; max-width: 420px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 2px; background: currentColor; }
+    .divider .square { width: 12px; height: 12px; background: currentColor; transform: rotate(45deg); flex-shrink: 0; }
+    .dept { font-size: 17px; font-weight: 700; margin: 6px 0 28px; text-align: center; font-family: inherit; }
+    .title-block { text-align: center; margin-bottom: 10px; }
+    .title { font-size: 44px; font-weight: bolder; letter-spacing: 3px; margin: 0; line-height: 1.2; color: var(--accent); }
+    .title-en { margin-top: 4px; font-size: 14px; letter-spacing: 1px; color: var(--text_y); }
+    .comp-icon { width: 80px; height: auto; display: block; margin: 0 auto 12px; object-fit: contain; }
+    .radar-wrap { display: flex; justify-content: center; margin: 8px auto 0; }
+    .radar-canvas { display: block; max-width: 300px; width: 100%; height: auto; }
+
+    .meta-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 32px; margin: 18px 0 10px; font-size: 15px; color: var(--text_y); text-align: center; }
+    .meta-bar span { white-space: nowrap; }
+    .detail-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 6px; }
+
+    .tag-a { display: inline-flex; align-items: center; height: 20px; background: var(--accent); color: #fff; padding: 0 8px; border-radius: 3px; font-size: 11px; font-weight: 700; letter-spacing: 1px; line-height: 1; vertical-align: middle; }
+    .tag-level { display: inline-flex; align-items: center; height: 20px; border: 1px solid var(--accent); color: var(--accent); padding: 0 6px; border-radius: 3px; font-size: 11px; font-weight: 700; letter-spacing: 1px; line-height: 1; vertical-align: middle; }
+    .tag-cat { display: inline-flex; align-items: center; height: 20px; background: rgba(164, 31, 27, 0.06); color: var(--text_y); padding: 0 6px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; line-height: 1; vertical-align: middle; }
+    .tag-legend { background: linear-gradient(135deg, #b8860b, #daa520); color: #fff; box-shadow: 0 0 8px rgba(218, 165, 32, 0.5), 0 0 16px rgba(218, 165, 32, 0.2); }
+    .tag-epic   { background: linear-gradient(135deg, #7b2d8b, #b44dc9); color: #fff; box-shadow: 0 0 8px rgba(180, 77, 201, 0.5), 0 0 16px rgba(180, 77, 201, 0.2); }
+    .tag-rare   { background: linear-gradient(135deg, #1b8b2d, #3dc95a); color: #fff; box-shadow: 0 0 8px rgba(61, 201, 90, 0.5), 0 0 16px rgba(61, 201, 90, 0.2); }
+    .tag-night  { background: linear-gradient(135deg, #0d1b3e, #1c3a6b); color: #c8daf5; box-shadow: 0 0 8px rgba(28, 58, 107, 0.5), 0 0 16px rgba(28, 58, 107, 0.2); }
+    .tag-done   { background: #8a8a8a; color: #fff; }
+
+    .oneliner { text-align: center; max-width: 640px; margin: 12px auto 24px; padding: 14px 20px; background: rgba(164, 31, 27, 0.04); border-left: 3px solid var(--accent); border-right: 3px solid var(--accent); font-size: 15px; line-height: 1.7; color: #333; }
+    .tab-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0; margin: 20px 0 28px; border-bottom: 2px solid var(--border); }
+    .tab-btn { position: relative; bottom: -2px; padding: 10px 18px; font-size: 14px; font-weight: 700; font-family: inherit; color: var(--text_y); background: none; border: 2px solid transparent; border-bottom: none; cursor: pointer; transition: color 0.25s, border-color 0.25s; letter-spacing: 1px; white-space: nowrap; }
+    .tab-btn:hover { color: var(--accent); }
+    .tab-btn.active { color: var(--accent); border-color: var(--border); background: var(--bg); }
+    .section { display: none; margin: 22px 0 12px; }
+    .section.active { display: block; }
+    .section.switch-in { animation: riseFade 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .section-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .section-num { width: 30px; height: 30px; background: var(--accent); color: #fff; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .section-title { font-size: 20px; font-weight: 700; color: var(--accent); letter-spacing: 1px; }
+    .info-grid { display: grid; grid-template-columns: 120px 1fr; gap: 1px; border: 1px solid var(--border); background: var(--border); }
+    .info-grid .label { background: #fff; padding: 10px 14px; font-weight: 700; font-size: 14px; color: var(--accent); display: flex; align-items: flex-start; }
+    .info-grid .value { background: #fff; padding: 10px 14px; font-size: 14px; line-height: 1.6; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.6; }
+    thead th { background: var(--accent); color: #fff; padding: 10px 12px; font-weight: 700; font-size: 13px; text-align: center; letter-spacing: 1px; }
+    tbody td { padding: 10px 12px; border: 1px solid var(--border); vertical-align: top; background: #fff; }
+    tbody tr:nth-child(even) td { background: #fdfcfb; }
+    tbody td:first-child { font-weight: 700; color: var(--accent); text-align: center; white-space: nowrap; width: 110px; }
+    .rhythm-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .rhythm-card { background: #fff; border: 1px solid var(--border); padding: 14px 16px; border-radius: 4px; }
+    .rhythm-card .period { font-weight: 700; color: var(--accent); font-size: 15px; margin-bottom: 6px; }
+    .rhythm-card .desc { font-size: 13px; line-height: 1.7; color: #444; }
+    .source-list { list-style: none; padding: 0; font-size: 13px; line-height: 2; color: #555; }
+    .source-list li::before { content: "▸ "; color: var(--accent); }
+    .footer-line { width: 100%; max-width: 420px; margin: 40px auto 0; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
+    .footer-line::before, .footer-line::after { content: ""; flex: 1; height: 2px; background: currentColor; }
+    .footer-year { font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 4px; letter-spacing: 2px; }
+    .back-link { position: fixed; top: 18px; left: 18px; z-index: 10; display: inline-block; padding: 8px 18px; border-radius: 999px; background: var(--accent); color: #fff; text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(164, 31, 27, 0.2); transition: transform 0.2s ease; }
+    .back-link:hover { transform: translateY(-2px); }
+    @media (max-width: 640px) {
+      .title { font-size: 30px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .info-grid .label { border-bottom: none; padding-bottom: 2px; }
+      .info-grid .value { padding-top: 2px; }
+      .rhythm-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link animate-item anim-footer" href="select.html">←返回</a>
+
+  <div class="wrap">
+    <div class="header">
+      <img class="logo animate-item anim-logo" src="xiaohui.png" alt="校徽" />
+      <div class="divider animate-item anim-divider"><span class="square"></span></div>
+      <div class="dept animate-item anim-dept">物理科学与技术学院 · 科创工作室</div>
+    </div>
+
+    <div class="title-block">
+      <img class="comp-icon animate-item anim-icon" src="logos/20.png" alt="竞赛图标" />
+      <h1 class="title animate-item anim-h1">全国大学生化工设计竞赛</h1>
+      <div class="title-en animate-item anim-sub">National Chemical Engineering Design Competition for College Students</div>
+      <div class="radar-wrap animate-item anim-progress">
+        <canvas class="radar-canvas" id="radarChart" width="300" height="300"></canvas>
+      </div>
+    </div>
+
+    <div class="detail-tags animate-item anim-tags1">
+      <span class="tag-a">A类</span>
+      <span class="tag-level">国</span>
+    </div>
+    <div class="detail-tags animate-item anim-tags2">
+      <span class="tag-cat">化工</span>
+      <span class="tag-cat">设计</span>
+      <span class="tag-cat">实践</span>
+      <span class="tag-cat">学科类</span>
+    </div>
+
+    <div class="meta-bar animate-item anim-meta"><span>更新日期：2026年7月30日</span></div>
+
+    <div class="oneliner animate-item anim-oneliner">
+      为指定产品完成一个完整化工装置设计，从工艺流程、设备设计、安全环保到经济评价——全栈工程方案。
+    </div>
+
+    <nav class="tab-nav animate-item anim-tabs">
+      <button class="tab-btn active" data-tab="sec-1">基础信息</button>
+      <button class="tab-btn" data-tab="sec-2">竞赛内容</button>
+      <button class="tab-btn" data-tab="sec-3">能力要求</button>
+      <button class="tab-btn" data-tab="sec-4">团队组成</button>
+      <button class="tab-btn" data-tab="sec-5">时间节点</button>
+      <button class="tab-btn" data-tab="sec-source">资料来源</button>
+    </nav>
+
+    <div id="sec-1" class="section">
+      <div class="section-head"><span class="section-num">一</span><span class="section-title">基础信息</span></div>
+      <div class="info-grid">
+        <div class="label">竞赛简称</div><div class="value">化工设计赛</div>
+        <div class="label">主办单位</div><div class="value">中国化工学会、中国化工教育协会</div>
+        <div class="label">校内组织</div><div class="value">本科生院、化学学院；化工设计大赛指导团队</div>
+        <div class="label">相关方向</div><div class="value">化工原理、反应工程、流程模拟、设备设计、技术经济</div>
+        <div class="label">适合年级</div><div class="value">以化工相关专业高年级为主，物理学院具备仿真、控制或仪表基础的也可参与</div>
+      </div>
+    </div>
+
+    <div id="sec-2" class="section">
+      <div class="section-head"><span class="section-num">二</span><span class="section-title">竞赛内容说明</span></div>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">围绕指定产品完成完整的化工装置设计，涵盖工艺流程模拟、设备设计、安全环保系统及技术经济分析，最终提交全套设计文件并参加现场答辩。</p>
+      <table>
+        <thead><tr><th>阶段</th><th>主要做什么</th><th>赛制与提交</th><th>核心目标</th></tr></thead>
+        <tbody>
+          <tr><td>工艺流程与模拟</td><td>选择路线，完成物料/能量衡算和流程优化</td><td>Aspen/HYSYS模型文件、流程图纸和说明书</td><td>用数据证明方案合理且满足产品指标</td></tr>
+          <tr><td>设备设计与安全</td><td>设计反应器、塔器、换热器、安全/环保系统</td><td>计算书、设备图、P&amp;ID,安全与环保说明</td><td>证明装置可制造、可控制且满足安全规范</td></tr>
+          <tr><td>经济、厂区与答辩</td><td>完成厂区/车间布置、投资和盈利分析</td><td>CAD图、经济评价、答辩说明和现场答辩</td><td>证明整体方案有据可依且经济合理</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:14px;line-height:1.7;margin:12px 0 4px;"><strong>主要竞赛阶段：</strong>全国大学生化工设计竞赛为团队赛，每队围绕同一命题产品独立完成完整设计。从工艺路线选择、流程模拟、设备设计、安全环保评价到技术经济分析，最终以全套设计文件质量和现场答辩表现为评审依据。竞赛要求全队统一工艺参数和设计基准文件版本，任何参数修改都需同步更新各章节。</p>
+    </div>
+
+    <div id="sec-3" class="section">
+      <div class="section-head"><span class="section-num">三</span><span class="section-title">参赛能力要求</span></div>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">本赛覆盖"工艺与化学工程""设备与工程图""经济与文档"三大方向——不必每人全能，但团队必须能独立完成表中的核心任务。</p>
+      <table>
+        <thead><tr><th>方向/模块</th><th>需要掌握的工具与知识</th><th>需要具备的具体能力</th></tr></thead>
+        <tbody>
+          <tr><td>工艺与化学工程</td><td>化工原理、热力学、反应工程；Aspen Plus/HYSYS</td><td>能选择反应路线，计算物料/能量衡算并进行流程优化</td></tr>
+          <tr><td>设备与工程图</td><td>设备设计规范、AutoCAD,塔器/换热器/反应器设计</td><td>能从工艺参数确定设备尺寸、材料、控制点和安全防护</td></tr>
+          <tr><td>经济与文档</td><td>Excel,经济评价,Word/LaTeX,PPT</td><td>能统一全套工艺参数并完成投资估算、敏感性分析和专业答辩</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="sec-4" class="section">
+      <div class="section-head"><span class="section-num">四</span><span class="section-title">团队组成要求</span></div>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">通常5名同校本科生组队参赛并配备指导教师，队内需覆盖工艺、设备、安全/环保和经济方向。</p>
+      <table>
+        <thead><tr><th>项目</th><th>参赛要求</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>组队</td><td>通常5名同校本科生组队并配备指导教师</td><td>队内需覆盖工艺、设备、安全/环保和经济方向，可跨专业组队</td></tr>
+          <tr><td>资格与指导</td><td>参赛者须为全日制在校本科生，每队配备指导教师</td><td>按学校通知统一报名，指导团队负责进度检查和设计把关</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:14px;font-weight:700;color:var(--accent);margin:14px 0 8px;">推荐分工（5人）</p>
+      <table>
+        <thead><tr><th>角色</th><th>分工内容</th></tr></thead>
+        <tbody>
+          <tr><td>工艺与化学工程</td><td>选择反应路线，计算物料/能量衡算和流程优化</td></tr>
+          <tr><td>设备与工程图</td><td>从工艺参数确定设备尺寸、材料、控制点和安全防护</td></tr>
+          <tr><td>经济与文档</td><td>统一全套参数，完成投资估算、敏感性分析和专业答辩</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px;line-height:1.7;color:#555;margin:8px 0 0;">适合流程模拟、热质传递、仪表设计和数据校核角色，需与化工专业组队承担工艺路线和规范。</p>
+      <p style="font-size:14px;line-height:1.7;margin:8px 0 0;color:var(--accent);font-weight:700;">特别提醒：</p>
+      <p style="font-size:13px;line-height:1.7;color:#555;margin:4px 0 0;">全队须统一工艺参数和设计基准文件版本，任何参数修改都要同步更新流程、设备、控制和经济各章节。</p>
+    </div>
+
+    <div id="sec-5" class="section">
+      <div class="section-head"><span class="section-num">五</span><span class="section-title">时间节点设置</span></div>
+      <p style="font-size:12px;color:var(--text_y);margin:0 0 10px;">下表列出第二十届全国大学生化工设计竞赛的完整节奏，具体日期以当届通知为准。</p>
+      <table>
+        <thead><tr><th>阶段</th><th>时间</th><th>主要任务</th><th>层级/说明</th></tr></thead>
+        <tbody>
+          <tr><td>竞赛项目发布</td><td>通常2026年2~3月</td><td>组队、解读题目并确定工艺路线</td><td>全国统一</td></tr>
+          <tr><td>校内设计与期中检查</td><td>2026年3~6月</td><td>完成工艺、设备、安全/环保和经济初步方案</td><td>校内指导</td></tr>
+          <tr><td>完整作品提交</td><td>2026年7月上旬前</td><td>提交全套设计文件和支撑材料</td><td>国家级评审</td></tr>
+          <tr><td>赛区/初审</td><td>通常2026年7月底~8月中旬</td><td>现场答辩、质询并争取全国资格</td><td>赛区</td></tr>
+          <tr><td>全国总决赛</td><td>通常2026年8月中下旬</td><td>提交优化作品并现场答辩</td><td>国家级</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text_y);margin:8px 0 16px;">截至2026年7月30日：第二十届作品提交即将截止或已截止，赛区评审和全国总决赛按日程推进中。</p>
+      <p style="font-size:14px;font-weight:700;color:var(--accent);margin:14px 0 10px;">建议准备节奏</p>
+      <div class="rhythm-cards">
+        <div class="rhythm-card"><div class="period">基础期（3~6周）</div><div class="desc">学习工艺与化学工程基础，熟悉Aspen Plus/HYSYS流程模拟。</div></div>
+        <div class="rhythm-card"><div class="period">专项期（1~2个月）</div><div class="desc">设备与工程图可行性分析，完成关键设备设计和安全评估。</div></div>
+        <div class="rhythm-card"><div class="period">整合期（1~2个月）</div><div class="desc">完成完整方案和答辩材料，统一各章节参数和文件版本。</div></div>
+        <div class="rhythm-card"><div class="period">赛前期（2~3周）</div><div class="desc">复核格式、流程和备选方案，准备现场答辩和质询应对。</div></div>
+      </div>
+    </div>
+
+    <div id="sec-source" class="section">
+      <div class="section-head"><span class="section-num">六</span><span class="section-title">资料来源与说明</span></div>
+      <ol class="source-list">
+        <li>西南交通大学：2027年推免A类学科竞赛目录</li>
+        <li>2026第二十届全国化工设计竞赛通知</li>
+        <li>化工设计赛官网</li>
+        <li>中国化工学会竞赛通知</li>
+        <li>2026竞赛作品格式要求</li>
+        <li>西南交大化学学院竞赛通知</li>
+        <li>本科生院学科竞赛通知栏目</li>
+        <li>物理科学与技术学院</li>
+        <li>全国普通高校大学生竞赛排行榜</li>
+        <li>全国大学生竞赛信息平台</li>
+      </ol>
+      <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">说明：本信息卡面向西南交通大学物理科学与技术学院学生。信息核验至2026年7月30日；第二十届作品提交即将截止或已截止，赛区评审和全国总决赛按日程推进中。具体以本科生院、化学学院及大赛官方最新通知为准。</p>
+    </div>
+
+    <div style="text-align:center;">
+      <div class="footer-line animate-item anim-footer"><span class="footer-year">©2026 物院科创工作室</span></div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var tabs = document.querySelectorAll('.tab-btn');
+      var sections = document.querySelectorAll('.section');
+      var currentId = 'sec-1';
+      function switchTo(targetId) {
+        if (targetId === currentId) return;
+        var prev = document.getElementById(currentId);
+        var next = document.getElementById(targetId);
+        if (!next) return;
+        tabs.forEach(function(t) { t.classList.remove('active'); if (t.getAttribute('data-tab') === targetId) t.classList.add('active'); });
+        if (prev) { prev.classList.remove('active', 'switch-in'); }
+        next.classList.add('active'); void next.offsetWidth; next.classList.add('switch-in');
+        currentId = targetId;
+      }
+      tabs.forEach(function(btn) { btn.addEventListener('click', function() { switchTo(this.getAttribute('data-tab')); }); });
+      setTimeout(function() { var first = document.getElementById('sec-1'); first.classList.add('active'); void first.offsetWidth; first.classList.add('switch-in'); }, 1000);
+    })();
+    document.addEventListener('animationend', function(e) { if (e.target.classList.contains('switch-in')) { e.target.classList.remove('switch-in'); } });
+  </script>
+
+  <script>
+    (function() {
+      var canvas = document.getElementById('radarChart');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var W = canvas.width, H = canvas.height, cx = W / 2, cy = H / 2, R = 100, N = 6;
+      var labels = ['难度', '热度', '卷度', '肝度', '获奖难度', '含金量'];
+      var values = [7, 7, 5, 7, 7, 7];
+      var maxVal = 10, levels = 5;
+      ctx.strokeStyle = 'rgba(164,31,27,0.10)'; ctx.lineWidth = 1;
+      for (var l = 1; l <= levels; l++) { var r = (R / levels) * l; ctx.beginPath(); for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var x = cx + r * Math.cos(angle), y = cy + r * Math.sin(angle); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); } ctx.closePath(); ctx.stroke(); }
+      ctx.strokeStyle = 'rgba(164,31,27,0.25)'; ctx.lineWidth = 1;
+      for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + R * Math.cos(angle), cy + R * Math.sin(angle)); ctx.stroke(); }
+      ctx.fillStyle = 'rgba(164,31,27,0.12)'; ctx.strokeStyle = '#a41f1b'; ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var vr = (R * values[i]) / maxVal; var x = cx + vr * Math.cos(angle), y = cy + vr * Math.sin(angle); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+      for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var vr = (R * values[i]) / maxVal; var x = cx + vr * Math.cos(angle), y = cy + vr * Math.sin(angle); ctx.fillStyle = '#a41f1b'; ctx.beginPath(); ctx.arc(x, y, 3.5, 0, 2 * Math.PI); ctx.fill(); }
+      ctx.font = 'bold 11px "NSimSun","SimSun","Songti SC",serif';
+      for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var lx = cx + (R + 34) * Math.cos(angle), ly = cy + (R + 34) * Math.sin(angle); ctx.fillStyle = '#a41f1b'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(labels[i] + ' ' + values[i], lx, ly); }
+    })();
+  </script>
+</body>
+</html>
