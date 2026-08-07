@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>竞赛信息库</title>
+  <style>
+    :root {
+        --accent: #a41f1b;
+        --bg: #faf9f7;
+        --text: #111;
+        --text_y: #968172;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "NSimSun", "SimSun", "Songti SC", "Microsoft YaHei", serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-x: hidden;
+        position: relative;
+        padding: 36px 24px 48px;
+    }
+
+    body::before,
+    body::after {
+        content: "";
+        position: fixed;
+        left: -80px;
+        width: 320px;
+        height: 2px;
+        background: var(--accent);
+        transform-origin: left center;
+        z-index: 0;
+        opacity: 0.9;
+    }
+
+    body::before {
+        top: 40px;
+        transform: rotate(-45deg);
+    }
+
+    body::after {
+        bottom: 40px;
+        transform: rotate(45deg);
+    }
+
+    .wrap {
+        position: relative;
+        z-index: 1;
+        width: min(760px, 100%);
+        text-align: center;
+    }
+
+    @keyframes riseFade {
+        from {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-item {
+        opacity: 0;
+        animation: riseFade 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .logo {
+        width: 150px;
+        height: auto;
+        display: flex;
+        margin: 0 auto 1px;
+        object-fit: contain;
+    }
+
+    .logo2 {
+        color: #a41f1b;
+        bottom: 0px;
+        width: 300px;
+        height: auto;
+        display: block;
+        margin: 0 auto 18px;
+        object-fit: contain;
+        filter: hue-rotate(0deg) saturate(0) brightness(0.2) contrast(1.2);
+    }
+
+    .anim-logo {
+        animation-delay: 0.05s;
+    }
+
+    .anim-logo2 {
+        animation-delay: 0.15s;
+    }
+
+    .anim-divider {
+        animation-delay: 0.25s;
+    }
+
+    .anim-dept {
+        animation-delay: 0.35s;
+    }
+
+    .anim-studio {
+        animation-delay: 0.45s;
+    }
+
+    .anim-title-block {
+        animation-delay: 0.55s;
+    }
+
+    .anim-enter {
+        animation-delay: 0.7s;
+    }
+
+    .anim-footer {
+        animation-delay: 0.8s;
+    }
+
+    .divider {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: var(--accent);
+    }
+
+    .divider::before,
+    .divider::after {
+        content: "";
+        flex: 1;
+        height: 2px;
+        background: currentColor;
+    }
+
+    .divider .square {
+        width: 12px;
+        height: 12px;
+        background: currentColor;
+        transform: rotate(45deg);
+        flex-shrink: 0;
+    }
+
+    .dept {
+        bottom: 1px;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 10px 0 6px;
+        font-family: "NSimSun", "SimSun", "Songti SC", "Microsoft YaHei", serif;
+    }
+
+    .studio {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 4px 0 28px;
+        font-family: "NSimSun", "SimSun", "Songti SC", "Microsoft YaHei", serif;
+    }
+
+    .title-block {
+        margin-top: 20px;
+        margin-bottom: 18px;
+    }
+
+    .title {
+        font-size: 65px;
+        font-weight: bolder;
+        letter-spacing: 4px;
+        margin: 0;
+        line-height: 1.1;
+        color: #a41f1b;
+        font-family: "NSimSun", "SimSun", "Songti SC", "Microsoft YaHei", serif;
+    }
+
+    .title-en {
+        margin-top: 0%;
+        font-size: 16px;
+        letter-spacing: 1px;
+        color: #968172;
+        font-family: "NSimSun", "SimSun", "Songti SC", "Microsoft YaHei", serif;
+    }
+
+    .footer-line {
+        width: 100%;
+        max-width: 500px;
+        margin: 28px auto 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: var(--accent);
+    }
+
+    .footer-line::before,
+    .footer-line::after {
+        content: "";
+        flex: 1;
+        height: 2px;
+        background: currentColor;
+    }
+
+    .footer-year {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--accent);
+        margin: 0 4px;
+        letter-spacing: 2px;
+        font-family: "NSimSun", "SimSun", "Songti SC", "Microsoft YaHei", serif;
+    }
+
+    .enter-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 12px 28px;
+        border-radius: 999px;
+        background: #a41f1b;
+        color: #fff;
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 10px rgba(164, 31, 27, 0.2);
+        transition: transform 0.2s ease;
+    }
+
+    .enter-btn:hover {
+        transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <img class="logo animate-item anim-logo" src="xiaohui.png" alt="校徽" />
+    <img class="logo2 animate-item anim-logo2" src="xnjd.png" alt="校名" />
+    <div class="divider animate-item anim-divider">
+      <span class="square"></span>
+    </div>
+    <div class="dept animate-item anim-dept">物理科学与技术学院</div>
+    <div class="studio animate-item anim-studio">科创工作室</div>
+    
+    <div class="title-block animate-item anim-title-block">
+      <h1 class="title">竞赛信息库</h1>
+      <div class="title-en">Competition Information Database</div>
+    </div>
+    <a class="enter-btn animate-item anim-enter" href="select.html">进入→</a>
+    <div class="footer-line animate-item anim-footer">
+      <span class="footer-year">©2026 物院科创工作室</span>
+    </div>
+  </div>
+</body>
+</html>

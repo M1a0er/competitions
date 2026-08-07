@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>页面不存在 · 竞赛信息库</title>
+  <style>
+    :root {
+      --accent: #a41f1b;
+      --bg: #faf9f7;
+      --text: #111;
+      --text_y: #968172;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "NSimSun", "SimSun", "Songti SC", "Microsoft YaHei", serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+      padding: 36px 24px;
+    }
+
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      left: -80px;
+      width: 320px;
+      height: 2px;
+      background: var(--accent);
+      transform-origin: left center;
+      z-index: 0;
+      opacity: 0.6;
+    }
+    body::before { top: 40px; transform: rotate(-45deg); }
+    body::after  { bottom: 40px; transform: rotate(45deg); }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    @keyframes riseFade {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-item {
+      opacity: 0;
+      animation: riseFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .anim-logo    { animation-delay: 0.05s; }
+    .anim-divider { animation-delay: 0.12s; }
+    .anim-dept    { animation-delay: 0.20s; }
+    .anim-code    { animation-delay: 0.28s; }
+    .anim-msg     { animation-delay: 0.36s; }
+    .anim-btn     { animation-delay: 0.46s; }
+    .anim-footer  { animation-delay: 0.56s; }
+
+    .logo {
+      width: 90px; height: auto; display: block;
+      margin: 0 auto 2px; object-fit: contain;
+    }
+
+    .divider {
+      width: 100%; max-width: 420px; margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; color: var(--accent);
+    }
+    .divider::before, .divider::after {
+      content: ""; flex: 1; height: 2px; background: currentColor;
+    }
+    .divider .square {
+      width: 12px; height: 12px; background: currentColor;
+      transform: rotate(45deg); flex-shrink: 0;
+    }
+
+    .dept {
+      font-size: 17px; font-weight: 700; margin: 6px 0 32px;
+    }
+
+    .code-404 {
+      font-size: 100px;
+      font-weight: bolder;
+      color: var(--accent);
+      line-height: 1;
+      margin: 0 0 8px;
+      letter-spacing: 6px;
+    }
+
+    .msg {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 6px;
+    }
+
+    .sub-msg {
+      font-size: 14px;
+      color: var(--text_y);
+      margin: 0 0 28px;
+      line-height: 1.6;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 12px 32px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(164, 31, 27, 0.2);
+      transition: transform 0.2s ease;
+    }
+    .back-btn:hover { transform: translateY(-2px); }
+
+    .footer-line {
+      width: 100%; max-width: 360px; margin: 36px auto 0;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; color: var(--accent);
+    }
+    .footer-line::before, .footer-line::after {
+      content: ""; flex: 1; height: 2px; background: currentColor;
+    }
+    .footer-year {
+      font-size: 14px; font-weight: 700; color: var(--accent);
+      margin: 0 4px; letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <img class="logo animate-item anim-logo" src="xiaohui.png" alt="校徽" />
+
+    <div class="divider animate-item anim-divider">
+      <span class="square"></span>
+    </div>
+
+    <div class="dept animate-item anim-dept">物理科学与技术学院 · 科创工作室</div>
+
+    <p class="code-404 animate-item anim-code">404</p>
+    <p class="msg animate-item anim-msg">该竞赛信息卡丢失</p>
+    <p class="sub-msg animate-item anim-msg">
+      该页面不见了，请等待更新或联系管理员<br>或返回竞赛列表浏览其他信息卡
+    </p>
+
+    <a class="back-btn animate-item anim-btn" href="select.html">← 返回竞赛列表</a>
+
+    <div class="footer-line animate-item anim-footer">
+      <span class="footer-year">©2026 物院科创工作室</span>
+    </div>
+
+  </div>
+</body>
+</html>

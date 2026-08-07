@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>中国国际大学生创新大赛 · 信息卡</title>
+  <style>
+    :root {
+      --accent: #a41f1b;
+      --bg: #faf9f7;
+      --text: #111;
+      --text_y: #968172;
+      --card-bg: #fdfcfb;
+      --border: rgba(164, 31, 27, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "NSimSun", "SimSun", "Songti SC", "Microsoft YaHei", serif;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+      padding: 36px 24px 80px;
+    }
+
+    /* 背景装饰线 */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      left: -80px;
+      width: 320px;
+      height: 2px;
+      background: var(--accent);
+      transform-origin: left center;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    body::before {
+      top: 40px;
+      transform: rotate(-45deg);
+    }
+
+    body::after {
+      bottom: 40px;
+      transform: rotate(45deg);
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: min(860px, 100%);
+    }
+
+    /* ===== 动画 ===== */
+    @keyframes riseFade {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-item {
+      opacity: 0;
+      animation: riseFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* ===== 头部 ===== */
+    .header {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .logo {
+      width: 90px;
+      height: auto;
+      display: block;
+      margin: 0 auto 2px;
+      object-fit: contain;
+    }
+
+    .anim-logo     { animation-delay: 0.05s; }
+    .anim-divider  { animation-delay: 0.12s; }
+    .anim-dept     { animation-delay: 0.20s; }
+    .anim-icon     { animation-delay: 0.28s; }
+    .anim-h1       { animation-delay: 0.34s; }
+    .anim-sub      { animation-delay: 0.40s; }
+    .anim-progress { animation-delay: 0.48s; }
+    .anim-tags1    { animation-delay: 0.54s; }
+    .anim-tags2    { animation-delay: 0.58s; }
+    .anim-meta     { animation-delay: 0.64s; }
+    .anim-oneliner { animation-delay: 0.64s; }
+    .anim-tabs     { animation-delay: 0.72s; }
+    .anim-footer   { animation-delay: 1.1s; }
+
+    /* 分隔线 */
+    .divider {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--accent);
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 2px;
+      background: currentColor;
+    }
+
+    .divider .square {
+      width: 12px;
+      height: 12px;
+      background: currentColor;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .dept {
+      font-size: 17px;
+      font-weight: 700;
+      margin: 6px 0 28px;
+      text-align: center;
+      font-family: inherit;
+    }
+
+    /* 标题 */
+    .title-block {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: 44px;
+      font-weight: bolder;
+      letter-spacing: 3px;
+      margin: 0;
+      line-height: 1.2;
+      color: var(--accent);
+    }
+
+    .title-en {
+      margin-bottom: 20px;
+      margin-top: 4px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: var(--text_y);
+    }
+
+    /* 竞赛图标 */
+    .comp-icon {
+      width: 80px;
+      height: auto;
+      display: block;
+      margin: 0 auto 12px;
+      object-fit: contain;
+    }
+
+    /* 雷达图 */
+    .radar-wrap {
+      display: flex; justify-content: center; margin: 8px auto 0;
+    }
+
+    .radar-canvas {
+      display: block;
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+    }
+
+    /* 元信息条 */
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 32px;
+      margin: 18px 0 10px;
+      font-size: 15px;
+      color: var(--text_y);
+      text-align: center;
+    }
+
+    .meta-bar span {
+      white-space: nowrap;
+    }
+
+    .meta-bar .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 2px 10px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* 标签 */
+    .detail-tags {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 6px; margin-bottom: 6px;
+    }
+
+    .tag-a {
+      display: inline-flex; align-items: center;
+      height: 20px;
+      background: var(--accent);
+      color: #fff;
+      padding: 0 8px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    .tag-level {
+      display: inline-flex; align-items: center;
+      height: 20px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0 6px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    .tag-cat {
+      display: inline-flex; align-items: center;
+      height: 20px;
+      background: rgba(164, 31, 27, 0.06);
+      color: var(--text_y);
+      padding: 0 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    .tag-legend {
+      background: linear-gradient(135deg, #b8860b, #daa520);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(218, 165, 32, 0.5), 0 0 16px rgba(218, 165, 32, 0.2);
+    }
+
+    .tag-epic {
+      background: linear-gradient(135deg, #7b2d8b, #b44dc9);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(180, 77, 201, 0.5), 0 0 16px rgba(180, 77, 201, 0.2);
+    }
+
+    .tag-rare {
+      background: linear-gradient(135deg, #1b8b2d, #3dc95a);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(61, 201, 90, 0.5), 0 0 16px rgba(61, 201, 90, 0.2);
+    }
+
+    .tag-night {
+      background: linear-gradient(135deg, #0d1b3e, #1c3a6b);
+      color: #c8daf5;
+      box-shadow: 0 0 8px rgba(28, 58, 107, 0.5), 0 0 16px rgba(28, 58, 107, 0.2);
+    }
+
+    .tag-done {
+      background: #8a8a8a;
+      color: #fff;
+    }
+
+    /* 一句话介绍 */
+    .oneliner {
+      text-align: center;
+      max-width: 640px;
+      margin: 12px auto 24px;
+      padding: 14px 20px;
+      background: rgba(164, 31, 27, 0.04);
+      border-left: 3px solid var(--accent);
+      border-right: 3px solid var(--accent);
+      font-size: 15px;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    /* ===== 选项卡导航 ===== */
+    .tab-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+      margin: 20px 0 28px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .tab-btn {
+      position: relative;
+      bottom: -2px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: inherit;
+      color: var(--text_y);
+      background: none;
+      border: 2px solid transparent;
+      border-bottom: none;
+      cursor: pointer;
+      transition: color 0.25s, border-color 0.25s;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--accent);
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-color: var(--border);
+      background: var(--bg);
+    }
+
+    /* ===== 章节 ===== */
+    .section {
+      display: none;
+      margin: 22px 0 12px;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section.switch-in {
+      animation: riseFade 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .section-num {
+      width: 30px;
+      height: 30px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+
+    /* 信息卡网格 */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1px;
+      border: 1px solid var(--border);
+      background: var(--border);
+    }
+
+    .info-grid .label {
+      background: #fff;
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--accent);
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .info-grid .value {
+      background: #fff;
+      padding: 10px 14px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* 表格 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    thead th {
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 12px;
+      font-weight: 700;
+      font-size: 13px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    tbody td {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+      background: #fff;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: #fdfcfb;
+    }
+
+    tbody td:first-child {
+      font-weight: 700;
+      color: var(--accent);
+      text-align: center;
+      white-space: nowrap;
+      width: 110px;
+    }
+
+    /* 流程步骤 */
+    .flow-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 8px 0;
+    }
+
+    .flow-list li {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      border-radius: 4px;
+    }
+
+    .flow-arrow {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    /* 节奏卡片 */
+    .rhythm-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .rhythm-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      border-radius: 4px;
+    }
+
+    .rhythm-card .period {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .rhythm-card .desc {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    /* 来源 */
+    .source-list {
+      list-style: none;
+      padding: 0;
+      font-size: 13px;
+      line-height: 2;
+      color: #555;
+    }
+
+    .source-list li::before {
+      content: "▸ ";
+      color: var(--accent);
+    }
+
+    /* 底部 */
+    .footer-line {
+      width: 100%;
+      max-width: 420px;
+      margin: 32px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--accent);
+    }
+
+    .footer-line::before,
+    .footer-line::after {
+      content: "";
+      flex: 1;
+      height: 2px;
+      background: currentColor;
+    }
+
+    .footer-year {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 4px;
+      letter-spacing: 2px;
+    }
+
+    /* 返回链接 —— 左上角固定 */
+    .back-link {
+      position: fixed; top: 18px; left: 18px; z-index: 10;
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(164, 31, 27, 0.2);
+      transition: transform 0.2s ease;
+    }
+
+    .back-link:hover {
+      transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      .title { font-size: 30px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .info-grid .label { border-bottom: none; padding-bottom: 2px; }
+      .info-grid .value { padding-top: 2px; }
+      .rhythm-cards { grid-template-columns: 1fr; }
+      .flow-list { flex-direction: column; align-items: stretch; }
+      .flow-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- ========== 头部 ========== -->
+    <div class="header">
+      <img class="logo animate-item anim-logo" src="xiaohui.png" alt="校徽" />
+      <div class="divider animate-item anim-divider">
+        <span class="square"></span>
+      </div>
+      <div class="dept animate-item anim-dept">物理科学与技术学院 · 科创工作室</div>
+    </div>
+
+    <div class="title-block">
+      <img class="comp-icon animate-item anim-icon" src="1.png" alt="竞赛图标" />
+      <h1 class="title animate-item anim-h1">中国国际大学生创新大赛</h1>
+      <div class="title-en animate-item anim-sub">China International College Students' Innovation Competition</div>
+      <div class="radar-wrap animate-item anim-progress">
+        <canvas class="radar-canvas" id="radarChart" width="300" height="300"></canvas>
+      </div>
+    </div>
+
+    <!-- ========== 标签 ========== -->
+    <div class="detail-tags animate-item anim-tags1">
+      <span class="tag-a">A类</span>
+      <span class="tag-level">国</span>
+      <span class="tag-cat tag-rare">稀有</span>
+    </div>
+    <div class="detail-tags animate-item anim-tags2">
+      <span class="tag-cat">创新</span>
+      <span class="tag-cat">创业</span>
+      <span class="tag-cat">综合实践</span>
+    </div>
+
+    <div class="meta-bar animate-item anim-meta">
+      <span>更新日期：2026年7月</span>
+    </div>
+
+    <div class="oneliner animate-item anim-oneliner">
+      把科研成果、技术原型或社会实践项目做成能解决真实问题、能证明创新与可行性、能完成路演答辩的项目。
+    </div>
+
+    <!-- ========== 选项卡导航 ========== -->
+    <nav class="tab-nav animate-item anim-tabs">
+      <button class="tab-btn active" data-tab="sec-1">基础信息</button>
+      <button class="tab-btn" data-tab="sec-2">竞赛内容</button>
+      <button class="tab-btn" data-tab="sec-3">能力要求</button>
+      <button class="tab-btn" data-tab="sec-4">团队组成</button>
+      <button class="tab-btn" data-tab="sec-5">时间节点</button>
+      <button class="tab-btn" data-tab="sec-source">资料来源</button>
+    </nav>
+
+    <!-- ========== 一、基础信息 ========== -->
+    <div id="sec-1" class="section">
+      <div class="section-head">
+        <span class="section-num">一</span>
+        <span class="section-title">基础信息</span>
+      </div>
+      <div class="info-grid">
+        <div class="label">竞赛简称</div>
+        <div class="value">国创赛、互联网+（原称）</div>
+        <div class="label">主办单位</div>
+        <div class="value">教育部等11部门、江苏省人民政府</div>
+        <div class="label">校内组织</div>
+        <div class="value">西南交通大学本科生院、校团委；物理学院组织院赛与推荐</div>
+        <div class="label">相关方向</div>
+        <div class="value">光电传感/成像、新材料、新能源、量子科技、AI+物理、轨道交通检测等</div>
+        <div class="label">适合年级</div>
+        <div class="value">本科各年级；有科研、大创或实践项目更合适，低年级可从技术、调研或展示岗位加入</div>
+        <div class="label">信息入口</div>
+        <div class="value">西南交通大学本科生院"创新创业教育"栏目；报名须同时关注学院通知、校赛系统与全国大学生创业服务网</div>
+      </div>
+    </div>
+
+    <!-- ========== 二、竞赛内容说明 ========== -->
+    <div id="sec-2" class="section">
+      <div class="section-head">
+        <span class="section-num">二</span>
+        <span class="section-title">竞赛内容说明</span>
+      </div>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">
+        把科研成果、技术原型或社会实践项目打磨成可验证、可落地、可清晰路演的创新创业项目，经过校赛、省赛和国赛逐级选拔。
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>赛道</th>
+            <th>主要做什么</th>
+            <th>常见成果</th>
+            <th>更适合的项目</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>高教主赛道</td>
+            <td>围绕技术、产品、服务或模式创新参赛；分本科生/研究生组及创意组/创业组</td>
+            <td>项目书、原型或产品、实验/运营数据、知识产权、PPT和视频</td>
+            <td>科研成果、技术原型、大创项目或已注册创业项目</td>
+          </tr>
+          <tr>
+            <td>青年红色筑梦之旅</td>
+            <td>以科技创新、乡村振兴、社区治理或城乡融合为场景，完成真实调研与实践</td>
+            <td>调研与实践证明、产品/服务方案、成效数据、项目书、PPT和视频</td>
+            <td>已进入基层开展服务、助农、公益或社会创新的项目</td>
+          </tr>
+          <tr>
+            <td>产业赛道</td>
+            <td>面向企业命题提出解决方案，或推动高校科技成果转化</td>
+            <td>应答方案、技术原型、测试报告、成本/产业分析、知识产权和路演材料</td>
+            <td>有企业需求、产学研合作或教师科研成果转化基础的项目</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:14px;line-height:1.7;margin:12px 0 4px;">
+        <strong>2026年西南交大校赛</strong>设置高教主赛道、"青年红色筑梦之旅"赛道和产业赛道。物理学院项目可从光电传感与成像、新材料、新能源、量子科技、AI+物理及轨道交通检测等方向切入。
+      </p>
+
+      <p style="font-size:14px;line-height:1.7;margin:0 0 8px;font-weight:700;color:var(--accent);">参赛流程</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:14px;margin-bottom:4px;">
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">学院报名与院级初赛</span>
+        <span style="color:var(--accent);font-weight:700;">→</span>
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">西南交大校赛</span>
+        <span style="color:var(--accent);font-weight:700;">→</span>
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">四川省复赛</span>
+        <span style="color:var(--accent);font-weight:700;">→</span>
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">全国总决赛</span>
+      </div>
+      <p style="font-size:12px;color:var(--text_y);margin:6px 0 0;">
+        报名时按项目基础选择一个赛道和组别，并在校赛系统、全国大学生创业服务网按通知提交一致材料。（赛道、组别、材料和晋级方式以当届正式通知为准）
+      </p>
+    </div>
+
+    <!-- ========== 三、参赛能力要求 ========== -->
+    <div id="sec-3" class="section">
+      <div class="section-head">
+        <span class="section-num">三</span>
+        <span class="section-title">参赛能力要求</span>
+      </div>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">
+        个人不必掌握全部内容，但团队应同时覆盖项目技术、验证数据、材料呈现和路演答辩。
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>赛道</th>
+            <th>需要掌握的知识与工具</th>
+            <th>需要具备的能力</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>高教主赛道</td>
+            <td>项目技术路线所需的物理/光学/材料/电子/算法知识；文献与专利检索；Excel、Origin、MATLAB/Python；按项目选用CAD、EDA或COMSOL；Word、PPT和视频剪辑。</td>
+            <td>能找准真实痛点；完成样机、关键实验、算法或仿真；用指标和竞品对比证明效果；讲清创新点、知识产权、成本、市场和落地路径；完成路演问答。</td>
+          </tr>
+          <tr>
+            <td>青年红色筑梦之旅</td>
+            <td>访谈、问卷和实地调研；政策与行业资料检索；Excel和数据可视化；项目/服务设计；Word、PPT和视频剪辑。</td>
+            <td>能进入真实场景发现需求并与服务对象协作；形成可执行方案；用案例和数据证明社会、经济或公益成效；说明持续运营与复制推广方式。</td>
+          </tr>
+          <tr>
+            <td>产业赛道</td>
+            <td>企业技术要求与行业标准；工程设计/仿真/开发工具；测试与质量方法；专利与成果转化基础；成本、供应链和产业分析；PPT。</td>
+            <td>能读懂企业命题并拆解指标；交付技术方案、原型和测试结果；分析技术与经济可行性；协调企业、教师和学生资源；完成答辩与成果转化说明。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ========== 四、团队组成要求 ========== -->
+    <div id="sec-4" class="section">
+      <div class="section-head">
+        <span class="section-num">四</span>
+        <span class="section-title">团队组成要求</span>
+      </div>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">
+        通常以3—15人的实际核心成员组队；项目只能选择一个赛道，负责人学籍或学历决定代表学校。
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>项目</th>
+            <th>参赛要求</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>通用团队</td>
+            <td>通常3—15人（含负责人），均须为项目实际核心成员；每个项目只能选择一个赛道</td>
+            <td>负责人学籍/学历确定代表学校；往届国赛金、银奖项目不得重复参赛</td>
+          </tr>
+          <tr>
+            <td>指导与组队</td>
+            <td>建议同时配备技术指导和创新创业/行业指导；鼓励跨专业、跨学院组队</td>
+            <td>产业赛道可师生共同组队；最终人数和身份要求以当届赛道细则及西南交大通知为准</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:14px;font-weight:700;color:var(--accent);margin:14px 0 8px;">推荐分工（4—6人）</p>
+      <table>
+        <thead>
+          <tr>
+            <th>赛道</th>
+            <th>推荐分工</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>高教主赛道</td>
+            <td>项目负责人/技术统筹；核心技术与样机验证；市场、成本与知识产权；项目书、PPT、视频和答辩。</td>
+          </tr>
+          <tr>
+            <td>红旅赛道</td>
+            <td>项目负责人；实地调研与落地协作；技术/产品或服务设计；成效数据、材料和答辩。</td>
+          </tr>
+          <tr>
+            <td>产业赛道</td>
+            <td>项目与企业对接；技术开发和测试；工程成本与产业分析；材料整合和答辩。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ========== 五、时间节点设置 ========== -->
+    <div id="sec-5" class="section">
+      <div class="section-head">
+        <span class="section-num">五</span>
+        <span class="section-title">时间节点设置</span>
+      </div>
+      <p style="font-size:12px;color:var(--text_y);margin:0 0 10px;">
+        按西南交通大学2026年校赛安排和国家官方赛程整理；四川省赛具体日期仍须以四川省教育厅后续通知为准。
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>阶段</th>
+            <th>2026年时间</th>
+            <th>主要任务</th>
+            <th>层级/状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>前期征集</td>
+            <td>2月14日发布通知<br>2月27日16:00截止</td>
+            <td>提交预征集报名表、汇总表、路演PPT及支撑材料；参加竞技营打磨</td>
+            <td>西南交大前期培育</td>
+          </tr>
+          <tr>
+            <td>院赛/校赛</td>
+            <td>3—4月院赛<br>4月15日前推荐<br>4月下旬网评；5月上旬决赛</td>
+            <td>完成学院报名与初赛；校赛系统和全国平台报名；准备项目书、PPT、支撑材料与路演</td>
+            <td>西南交大校级</td>
+          </tr>
+          <tr>
+            <td>四川省赛</td>
+            <td>校内5—7月遴选/准备<br>省级复赛官方窗口4—8月；四川具体日期待通知</td>
+            <td>按省赛要求提交材料，参加网评/路演；择优推荐国赛</td>
+            <td>省级</td>
+          </tr>
+          <tr>
+            <td>全国报名/遴选</td>
+            <td>报名4—7月<br>校级、省级初复赛4—8月</td>
+            <td>全国大学生创业服务网报名；资格、知识产权和项目真实性审查；省级推荐</td>
+            <td>国家官方赛程</td>
+          </tr>
+          <tr>
+            <td>全国总决赛</td>
+            <td>2026年9月<br>南京大学、南京市</td>
+            <td>入围项目评审、现场比赛及同期成果展示/资源对接活动</td>
+            <td>国家级</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:12px;color:var(--text_y);margin:8px 0 16px;">
+        截至2026年7月30日：国家官方赛程明确校级初赛和省级复赛于4—8月开展，全国总决赛在9月举行。
+      </p>
+
+      <p style="font-size:14px;font-weight:700;color:var(--accent);margin:14px 0 10px;">建议准备节奏</p>
+      <div class="rhythm-cards">
+        <div class="rhythm-card">
+          <div class="period">11月 — 次年2月</div>
+          <div class="desc">从科研、大创或社会实践中筛选项目，明确真实需求、知识产权和核心创新，做出第一版验证。</div>
+        </div>
+        <div class="rhythm-card">
+          <div class="period">3月 — 4月</div>
+          <div class="desc">完成报名表、项目书、PPT和支撑材料；补齐样机、关键实验、用户调研或运营数据，开始路演。</div>
+        </div>
+        <div class="rhythm-card">
+          <div class="period">5月 — 8月</div>
+          <div class="desc">根据校赛评审意见迭代，强化对比测试、市场/成本分析、合作证明和可复制性，备战省赛。</div>
+        </div>
+        <div class="rhythm-card">
+          <div class="period">9月</div>
+          <div class="desc">按国赛要求完成资格与知识产权核验，压缩表达、准备高频问答，保持演示和数据稳定。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 资料来源 ========== -->
+    <div id="sec-source" class="section">
+      <div class="section-head">
+        <span class="section-num">六</span>
+        <span class="section-title">资料来源与说明</span>
+      </div>
+      <ol class="source-list">
+        <li>西南交通大学2027年推荐免试研究生A类学科竞赛目录</li>
+        <li>西南交通大学：中国国际大学生创新大赛（2026）第二轮预征集及竞技营通知</li>
+        <li>西南交通大学：中国国际大学生创新大赛（2026）校内选拔赛通知</li>
+        <li>全国大学生创业服务网：教育部关于举办中国国际大学生创新大赛（2026）的通知</li>
+        <li>全国大学生创业服务网：中国国际大学生创新大赛官方网站与赛程</li>
+        <li>教育部：中国国际大学生创新大赛（2026）"青年红色筑梦之旅"启动</li>
+        <li>四川省教育厅官方网站（省赛通知与结果查询入口）</li>
+        <li>西南交通大学物理科学与技术学院官方网站（学院竞赛通知入口）</li>
+        <li>西南交通大学校赛系统</li>
+        <li>全国大学生创业服务网报名入口</li>
+      </ol>
+      <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">
+        说明：本信息卡面向西南交通大学物理科学与技术学院学生使用。时间信息核验至2026年7月30日；后续按本科生院、物理学院、四川省教育厅及大赛官网通知更新。
+      </p>
+    </div>
+
+    <!-- ========== 返回按钮（左上角固定） ========== -->
+    <a class="back-link animate-item anim-footer" href="select.html">←返回</a>
+
+    <!-- ========== 底部 ========== -->
+    <div style="text-align:center;">
+      <div class="footer-line animate-item anim-footer">
+        <span class="footer-year">©2026 物院科创工作室</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function() {
+      var tabs = document.querySelectorAll('.tab-btn');
+      var sections = document.querySelectorAll('.section');
+      var currentId = 'sec-1';
+
+      // 切换到指定 section
+      function switchTo(targetId) {
+        if (targetId === currentId) return;
+        var prev = document.getElementById(currentId);
+        var next = document.getElementById(targetId);
+        if (!next) return;
+
+        // 更新按钮状态
+        tabs.forEach(function(t) {
+          t.classList.remove('active');
+          if (t.getAttribute('data-tab') === targetId) t.classList.add('active');
+        });
+
+        // 隐藏当前
+        if (prev) {
+          prev.classList.remove('active', 'switch-in');
+        }
+
+        // 显示目标：先 active 使其进入渲染树，再强制回流后加 switch-in 触发动画
+        next.classList.add('active');
+        void next.offsetWidth; // 强制回流
+        next.classList.add('switch-in');
+
+        currentId = targetId;
+      }
+
+      // 选项卡点击
+      tabs.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          switchTo(this.getAttribute('data-tab'));
+        });
+      });
+
+      // 初始加载：延迟后显示第一节
+      setTimeout(function() {
+        var first = document.getElementById('sec-1');
+        first.classList.add('active');
+        void first.offsetWidth;
+        first.classList.add('switch-in');
+      }, 1000);
+    })();
+
+    // 全局清理：动画结束后移除 switch-in
+    document.addEventListener('animationend', function(e) {
+      if (e.target.classList.contains('switch-in')) {
+        e.target.classList.remove('switch-in');
+      }
+    });
+  </script>
+
+  <script>
+    (function() {
+      var canvas = document.getElementById('radarChart');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var W = canvas.width, H = canvas.height;
+      var cx = W / 2, cy = H / 2;
+      var R = 100;
+      var N = 6;
+
+      var labels = ['难度', '热度', '卷度', '肝度', '获奖难度', '含金量'];
+      var values = [9, 10, 7, 7, 9, 8];
+      var maxVal = 10;
+
+      // 背景网格
+      var levels = 5;
+      ctx.strokeStyle = 'rgba(164,31,27,0.10)';
+      ctx.lineWidth = 1;
+      for (var l = 1; l <= levels; l++) {
+        var r = (R / levels) * l;
+        ctx.beginPath();
+        for (var i = 0; i < N; i++) {
+          var angle = -Math.PI / 2 + (2 * Math.PI / N) * i;
+          var x = cx + r * Math.cos(angle);
+          var y = cy + r * Math.sin(angle);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.stroke();
+      }
+
+      // 轴线
+      ctx.strokeStyle = 'rgba(164,31,27,0.25)';
+      ctx.lineWidth = 1;
+      for (var i = 0; i < N; i++) {
+        var angle = -Math.PI / 2 + (2 * Math.PI / N) * i;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + R * Math.cos(angle), cy + R * Math.sin(angle));
+        ctx.stroke();
+      }
+
+      // 数据多边形
+      ctx.fillStyle = 'rgba(164,31,27,0.12)';
+      ctx.strokeStyle = '#a41f1b';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (var i = 0; i < N; i++) {
+        var angle = -Math.PI / 2 + (2 * Math.PI / N) * i;
+        var vr = (R * values[i]) / maxVal;
+        var x = cx + vr * Math.cos(angle);
+        var y = cy + vr * Math.sin(angle);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      // 数据点
+      for (var i = 0; i < N; i++) {
+        var angle = -Math.PI / 2 + (2 * Math.PI / N) * i;
+        var vr = (R * values[i]) / maxVal;
+        var x = cx + vr * Math.cos(angle);
+        var y = cy + vr * Math.sin(angle);
+        ctx.fillStyle = '#a41f1b';
+        ctx.beginPath();
+        ctx.arc(x, y, 3.5, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+
+      // 标签
+      ctx.font = 'bold 11px "NSimSun","SimSun","Songti SC",serif';
+      for (var i = 0; i < N; i++) {
+        var angle = -Math.PI / 2 + (2 * Math.PI / N) * i;
+        var lx = cx + (R + 34) * Math.cos(angle);
+        var ly = cy + (R + 34) * Math.sin(angle);
+        ctx.fillStyle = '#a41f1b';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(labels[i] + ' ' + values[i], lx, ly);
+      }
+    })();
+  </script>
+</body>
+</html>

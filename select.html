@@ -1,0 +1,582 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>竞赛列表</title>
+  <style>
+    :root {
+      --accent: #a41f1b;
+      --bg: #faf9f7;
+      --text: #111;
+      --text_y: #968172;
+      --border: rgba(164, 31, 27, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "NSimSun", "SimSun", "Songti SC", "Microsoft YaHei", serif;
+      overflow-x: hidden;
+      position: relative;
+      padding: 36px 24px 80px;
+    }
+
+    /* 背景装饰线 */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      left: -80px;
+      width: 320px;
+      height: 2px;
+      background: var(--accent);
+      transform-origin: left center;
+      z-index: 0;
+      opacity: 0.6;
+    }
+    body::before { top: 40px; transform: rotate(-45deg); }
+    body::after  { bottom: 40px; transform: rotate(45deg); }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: min(960px, 100%);
+      margin: 0 auto;
+    }
+
+    /* 动画 */
+    @keyframes riseFade {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-item {
+      opacity: 0;
+      animation: riseFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .anim-logo    { animation-delay: 0.05s; }
+    .anim-divider { animation-delay: 0.12s; }
+    .anim-dept    { animation-delay: 0.20s; }
+    .anim-h1      { animation-delay: 0.28s; }
+    .anim-sub     { animation-delay: 0.34s; }
+    .anim-cards   { animation-delay: 0.42s; }
+    .anim-footer  { animation-delay: 0.50s; }
+
+    /* 头部 */
+    .header { text-align: center; margin-bottom: 8px; }
+
+    .logo {
+      width: 90px; height: auto; display: block;
+      margin: 0 auto 2px; object-fit: contain;
+    }
+
+    .divider {
+      width: 100%; max-width: 420px; margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; color: var(--accent);
+    }
+    .divider::before, .divider::after {
+      content: ""; flex: 1; height: 2px; background: currentColor;
+    }
+    .divider .square {
+      width: 12px; height: 12px; background: currentColor;
+      transform: rotate(45deg); flex-shrink: 0;
+    }
+
+    .dept {
+      font-size: 17px; font-weight: 700; margin: 6px 0 28px;
+      text-align: center;
+    }
+
+    .title-block { text-align: center; margin-bottom: 4px; }
+    .title {
+      font-size: 44px; font-weight: bolder; letter-spacing: 3px;
+      margin: 0; line-height: 1.2; color: var(--accent);
+    }
+    .title-en {
+      margin-top: 4px; font-size: 14px; letter-spacing: 1px; color: var(--text_y);
+    }
+
+    /* 搜索框 */
+    .search-wrap {
+      display: flex; justify-content: center; margin: 20px 0 0;
+    }
+    .search-input {
+      width: min(360px, 100%);
+      padding: 10px 16px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(164, 31, 27, 0.08);
+    }
+    .search-input::placeholder {
+      color: var(--text_y);
+    }
+
+    /* 筛选栏 */
+    .filter-row {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 14px; margin: 12px 0 0;
+    }
+
+    .filter-select {
+      padding: 6px 12px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.25s;
+      letter-spacing: 1px;
+    }
+    .filter-select:focus {
+      border-color: var(--accent);
+    }
+
+    .no-result {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px 0;
+      color: var(--text_y);
+      font-size: 15px;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .card {
+      display: block;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px 14px;
+      text-decoration: none;
+      color: var(--text);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(164, 31, 27, 0.10);
+      border-color: var(--accent);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .card-num {
+      width: 32px; height: 32px;
+      background: var(--accent); color: #fff;
+      font-size: 14px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .card-name {
+      font-size: 15px; font-weight: 700; line-height: 1.4;
+      color: #222;
+      flex: 1;
+    }
+
+    .card-tags {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px;
+    }
+
+    .tag-a {
+      display: inline-flex; align-items: center;
+      height: 20px;
+      background: var(--accent);
+      color: #fff;
+      padding: 0 8px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    .tag-level {
+      display: inline-flex; align-items: center;
+      height: 20px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0 6px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    .tag-cat {
+      display: inline-flex; align-items: center;
+      height: 20px;
+      background: rgba(164, 31, 27, 0.06);
+      color: var(--text_y);
+      padding: 0 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    .tag-legend {
+      background: linear-gradient(135deg, #b8860b, #daa520);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(218, 165, 32, 0.5), 0 0 16px rgba(218, 165, 32, 0.2);
+    }
+
+    .tag-epic {
+      background: linear-gradient(135deg, #7b2d8b, #b44dc9);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(180, 77, 201, 0.5), 0 0 16px rgba(180, 77, 201, 0.2);
+    }
+
+    .tag-rare {
+      background: linear-gradient(135deg, #1b8b2d, #3dc95a);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(61, 201, 90, 0.5), 0 0 16px rgba(61, 201, 90, 0.2);
+    }
+
+    .tag-night {
+      background: linear-gradient(135deg, #0d1b3e, #1c3a6b);
+      color: #c8daf5;
+      box-shadow: 0 0 8px rgba(28, 58, 107, 0.5), 0 0 16px rgba(28, 58, 107, 0.2);
+    }
+
+    .tag-done {
+      background: #8a8a8a;
+      color: #fff;
+    }
+
+    .card-bars {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+
+    .card-bar-row {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px;
+    }
+
+    .card-bar-label {
+      width: 28px; text-align: right; font-weight: 700;
+      color: var(--accent); flex-shrink: 0;
+    }
+
+    .card-bar-wrap {
+      flex: 1; height: 5px;
+      background: rgba(164, 31, 27, 0.07);
+      border-radius: 3px; overflow: hidden;
+    }
+
+    .card-bar-fill {
+      height: 100%; background: var(--accent); border-radius: 3px;
+    }
+
+    .card-bar-val {
+      width: 16px; text-align: center; color: var(--text_y);
+      flex-shrink: 0;
+    }
+
+    /* 底部 */
+    .footer-line {
+      width: 100%; max-width: 420px; margin: 40px auto 0;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; color: var(--accent);
+    }
+    .footer-line::before, .footer-line::after {
+      content: ""; flex: 1; height: 2px; background: currentColor;
+    }
+    .footer-year {
+      font-size: 14px; font-weight: 700; color: var(--accent);
+      margin: 0 4px; letter-spacing: 2px;
+    }
+
+    .back-link {
+      display: inline-block; margin-top: 14px;
+      padding: 10px 24px; border-radius: 999px;
+      background: var(--accent); color: #fff;
+      text-decoration: none; font-size: 16px; font-weight: 700;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(164, 31, 27, 0.2);
+      transition: transform 0.2s ease;
+    }
+    .back-link:hover { transform: translateY(-2px); }
+
+    @media (max-width: 640px) {
+      .title { font-size: 30px; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- ========== 头部 ========== -->
+    <div class="header">
+      <img class="logo animate-item anim-logo" src="xiaohui.png" alt="校徽" />
+      <div class="divider animate-item anim-divider">
+        <span class="square"></span>
+      </div>
+      <div class="dept animate-item anim-dept">物理科学与技术学院 · 科创工作室</div>
+    </div>
+
+    <div class="title-block">
+      <h1 class="title animate-item anim-h1">竞赛列表</h1>
+      <div class="title-en animate-item anim-sub">Competition Information Database</div>
+    </div>
+
+    <!-- ========== 搜索框 ========== -->
+    <div class="search-wrap animate-item anim-cards">
+      <input class="search-input" id="searchInput" type="text" placeholder="搜索竞赛名称或词条…" />
+    </div>
+
+    <!-- ========== 筛选栏 ========== -->
+    <div class="filter-row animate-item anim-cards">
+      <select class="filter-select" id="filterClass">
+        <option value="">类别：不限</option>
+        <option value="A">A类</option>
+        <option value="B">B类</option>
+        <option value="C">C类及以下</option>
+      </select>
+      <select class="filter-select" id="filterLevel">
+        <option value="">级别：不限</option>
+        <option value="国">国家级</option>
+        <option value="省">省级</option>
+      </select>
+    </div>
+
+    <!-- ========== 卡片列表 ========== -->
+    <div class="card-grid animate-item anim-cards" id="cardGrid"></div>
+
+    <!-- ========== 底部 ========== -->
+    <div style="text-align:center;">
+      <div class="footer-line animate-item anim-footer">
+        <span class="footer-year">©2026 物院科创工作室</span>
+      </div>
+      <a class="back-link animate-item anim-footer" href="main.html">←返回首页</a>
+    </div>
+
+  </div>
+
+  <script>
+    // 竞赛数据：编号, 名称, 难度, 热度, 卷度, 级别, 类别字母, [分类标签]
+    var competitions = [
+      [ 1, "中国国际大学生创新大赛", 9, 10, 7, "国", "A类", ["稀有","创新","创业","综合实践"]],
+      [ 2, "挑战杯全国大学生课外学术科技作品竞赛", 9, 10, 7, "国", "A类", ["史诗","创新","创业","技术","综合实践"]],
+      [ 3, "挑战杯中国大学生创业计划大赛", 8, 10, 6, "国", "A类", ["稀有","创新","创业","综合实践"]],
+      [ 4, "ACM-ICPC国际大学生程序设计竞赛", 10, 10, 10, "国", "A类", ["传奇","计算机","信息","编程","算法","学科类"]],
+      [ 5, "全国大学生数学建模竞赛", 7, 10, 8, "国", "A类", ["史诗","数学","算法","编程","论文","学科类","熬夜"],],
+      [ 6, "全国大学生电子设计竞赛", 9, 10, 9, "国", "A类", ["传奇","电子","机械","算法","学科类","熬夜"]],
+      [ 7, "全国大学生机械创新设计大赛", 7, 7, 5, "国", "A类", ["稀有","熬夜","机械","设计","创新","实践","学科类"]],
+      [ 8, "全国大学生结构设计竞赛", 8, 9, 5, "国", "A类", ["稀有","熬夜","土木","结构","设计","力学","学科类"]],
+      [ 9, "全国大学生广告艺术大赛", 5, 9, 4, "国", "A类", ["较水","设计","传媒","广告","创意","艺术"]],
+      [10, "全国大学生智能汽车竞赛", 8, 7, 6, "国", "A类", ["史诗","电子","机械","编程","自动化","学科类"]],
+      [11, "全国大学生交通运输科技大赛", 6, 9, 4, "国", "A类", ["交通","运输","技术","综合实践"]],
+      [12, "全国大学生电子商务创新创意及创业挑战赛", 5, 7, 4, "国", "A类", ["创新","创业","电子商务","商业"]],
+      [13, "全国大学生节能减排社会实践与科技竞赛", 6, 9, 5, "国", "A类", ["能源","环保","技术","社会实践"]],
+      [14, "中国大学生工程实践与创新能力大赛", 6, 9, 5, "国", "A类", ["稀有","机械","工程","创新","实践","制造"]],
+      [15, "全国大学生物流设计大赛", 5, 9, 4, "国", "A类", ["物流","设计","管理","商业"]],
+      [16, "外研社国才杯理解当代中国全国大学生外语能力大赛", 6, 7, 5, "国", "A类", ["外语","演讲","写作","翻译","语言"]],
+      [17, "全国大学生创新年会", 7, 4, 6, "国", "A类", ["创新","学术","展示","交流"]],
+      [18, "全国大学生机器人大赛CURC", 9, 7, 7, "国", "A类", ["机器人","机械","电子","编程","自动化"]],
+      [19, "西门子杯中国智能制造挑战赛", 7, 9, 5, "国", "A类", ["稀有","智能制造","自动化","电子","机械","工业"]],
+      [20, "全国大学生化工设计竞赛", 7, 7, 5, "国", "A类", ["化工","设计","实践","学科类"]],
+      [21, "全国大学生先进成图技术与产品信息建模创新大赛", 6, 6, 5, "国", "A类", ["机械","建模","CAD","设计","土木"]],
+      [22, "中国大学生计算机设计大赛", 5, 7, 4, "国", "A类", ["较水","计算机","设计","编程","创意","IT"]],
+      [23, "全国大学生市场调查与分析大赛", 5, 7, 4, "国", "A类", ["商业","调研","数据分析","统计"]],
+      [24, "中国大学生服务外包创新创业大赛", 6, 7, 5, "国", "A类", ["创新","创业","IT","服务","商业"]],
+      [25, "两岸新锐设计竞赛华灿奖", 5, 8, 4, "国", "A类", ["设计","创意","艺术","文化"]],
+      [26, "中国高校计算机大赛", 7, 7, 5, "国", "A类", ["计算机","编程","算法","IT","大数据"]],
+      [27, "中国机器人大赛暨RoboCup机器人世界杯中国赛", 9, 3, 7, "国", "A类", ["传奇","机器人","AI","编程","电子","自动化"]],
+      [28, "全国大学生信息安全竞赛", 8, 7, 6, "国", "A类", ["稀有","计算机","信息安全","网络","CTF"]],
+      [29, "全国周培源大学生力学竞赛", 8, 4, 6, "国", "A类", ["史诗","力学","数学","理论","学科类"]],
+      [30, "中国大学生机械工程创新创意大赛", 7, 7, 5, "国", "A类", ["机械","工程","创新","设计","制造"]],
+      [31, "蓝桥杯全国软件和信息技术专业人才大赛", 5, 10, 4, "国", "A类", ["较水","编程","算法","计算机","IT"]],
+      [32, "全国大学生金相技能大赛", 5, 8, 4, "国", "A类", ["材料","机械","实验","学科类"]],
+      [33, "中国软件杯大学生软件设计大赛", 6, 7, 5, "国", "A类", ["软件","编程","计算机","开发"]],
+      [34, "全国大学生光电设计竞赛", 7, 9, 5, "国", "A类", ["稀有","光电","物理","电子","光学","学科类"]],
+      [35, "未来设计师全国高校数字艺术设计大赛", 5, 6, 4, "国", "A类", ["设计","数字艺术","创意","传媒"]],
+      [36, "中美青年创客大赛", 6, 9, 5, "国", "A类", ["创新","创业","创意","技术","国际"]],
+      [37, "全国大学生地质技能竞赛", 6, 8, 5, "国", "A类", ["地质","地球科学","实践","野外","学科类"]],
+      [38, "米兰设计周中国高校设计学科师生优秀作品展", 5, 6, 4, "国", "A类", ["较水","设计","艺术","展示","文化","国际"]],
+      [39, "全国大学生集成电路创新创业大赛", 8, 4, 6, "国", "A类", ["史诗","集成电路","电子","半导体","芯片","创新"]],
+      [40, "中国机器人及人工智能大赛CRAIC", 7, 8, 5, "国", "A类", ["机器人","AI","编程","算法"]],
+      [41, "全国高校商业精英挑战赛", 5, 7, 4, "国", "A类", ["商业","管理","创新","创业","综合实践"]],
+      [42, "中国好创意暨全国数字艺术设计大赛", 5, 7, 4, "国", "A类", ["设计","数字艺术","创意","IT","传媒"]],
+      [43, "全国三维数字化创新设计大赛", 6, 8, 5, "国", "A类", ["较水","3D","设计","建模","创新","机械"]],
+      [44, "学创杯全国大学生创业综合模拟大赛", 4, 3, 7, "国", "A类", ["创业","模拟","商业","管理"]],
+      [45, "大学生新一代信息通信科技大赛", 7, 7, 5, "国", "A类", ["通信","信息","5G","电子","IT"]],
+      [46, "全国大学生物理实验竞赛", 6, 7, 5, "国", "A类", ["物理","实验","学科类"]],
+      [47, "全国高校BIM毕业设计创新大赛", 5, 8, 4, "国", "A类", ["BIM","建筑","设计","土木"]],
+      [48, "睿抗机器人开发者大赛RAICOM", 7, 7, 5, "国", "A类", ["机器人","开发","编程","AI","自动化"]],
+      [49, "全国大学生生命科学竞赛", 6, 7, 5, "国", "A类", ["生物","生命科学","实验","学科类"]],
+      [50, "华为ICT大赛", 7, 7, 6, "国", "A类", ["稀有","计算机","网络","通信","IT","华为"]],
+      [51, "全国大学生嵌入式芯片与系统设计竞赛", 7, 9, 5, "国", "A类", ["稀有","嵌入式","芯片","电子","编程","硬件"]],
+      [52, "中国高校智能机器人创意大赛", 7, 9, 5, "国", "A类", ["机器人","创意","AI","设计","机械"]],
+      [53, "全国大学生数学竞赛", 8, 10, 6, "国", "A类", ["史诗","数学","理论","学科类"]],
+      [54, "四川省大学生工业设计大赛", 4, 6, 3, "省", "A类", ["工业设计","设计","产品","艺术","实践"]],
+      [55, "四川省大学生模拟法庭大赛", 5, 5, 4, "省", "A类", ["法学","辩论","法律","实践"]],
+      [56, "四川省大学生材料设计大赛", 5, 4, 4, "省", "A类", ["材料","设计","实验","学科类"]],
+      [57, "四川省大学生测绘技能竞赛", 5, 5, 4, "省", "A类", ["测绘","测量","实践","土木"]],
+      [58, "四川省大学生未来飞行器挑战赛", 6, 5, 4, "省", "A类", ["航空航天","飞行器","设计","创新","机械"]],
+      [59, "中国大学生物理学术竞赛", 7, 8, 5, "国", "B类/同A类加分", ["物理","学术","辩论","实验","学科类"]]
+    ];
+
+    // 已创建详情页的竞赛编号（新增页面后在此添加编号即可）
+    var existingPages = [1, 2, 3, 4, 5, 6];
+
+    var grid = document.getElementById('cardGrid');
+    var html = '';
+
+    competitions.forEach(function(c) {
+      var id = c[0], name = c[1], diff = c[2], heat = c[3], juan = c[4], level = c[5], cls = c[6], cats = c[7];
+      var numStr = id < 10 ? '0' + id : '' + id;
+      var specialTags = '', normalTags = '';
+      cats.forEach(function(cat) {
+        var extra = '';
+        if (cat.indexOf('传奇') !== -1) extra = ' tag-legend';
+        else if (cat.indexOf('史诗') !== -1) extra = ' tag-epic';
+        else if (cat.indexOf('稀有') !== -1) extra = ' tag-rare';
+        else if (cat.indexOf('熬夜') !== -1) extra = ' tag-night';
+        else if (cat.indexOf('较水') !== -1) extra = ' tag-done';
+        if (extra !== '') {
+          specialTags += '<span class="tag-cat' + extra + '">' + cat + '</span>';
+        } else {
+          normalTags += '<span class="tag-cat">' + cat + '</span>';
+        }
+      });
+      html +=
+        '<div class="card" data-id="' + id + '" data-cls="' + cls + '" data-level="' + level + '" tabindex="0">' +
+          '<div class="card-top">' +
+            '<span class="card-num">' + numStr + '</span>' +
+            '<span class="card-name">' + name + '</span>' +
+          '</div>' +
+          '<div class="card-tags">' +
+            '<span class="tag-a">' + cls + '</span>' +
+            '<span class="tag-level">' + level + '</span>' +
+            specialTags +
+          '</div>' +
+          (normalTags !== '' ? '<div class="card-tags">' + normalTags + '</div>' : '') +
+          '<div class="card-bars">' +
+            '<div class="card-bar-row">' +
+              '<span class="card-bar-label">难度</span>' +
+              '<div class="card-bar-wrap"><div class="card-bar-fill" style="width:' + (diff * 10) + '%"></div></div>' +
+              '<span class="card-bar-val">' + diff + '</span>' +
+            '</div>' +
+            '<div class="card-bar-row">' +
+              '<span class="card-bar-label">热度</span>' +
+              '<div class="card-bar-wrap"><div class="card-bar-fill" style="width:' + (heat * 10) + '%"></div></div>' +
+              '<span class="card-bar-val">' + heat + '</span>' +
+            '</div>' +
+            '<div class="card-bar-row">' +
+              '<span class="card-bar-label">卷度</span>' +
+              '<div class="card-bar-wrap"><div class="card-bar-fill" style="width:' + (juan * 10) + '%"></div></div>' +
+              '<span class="card-bar-val">' + juan + '</span>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    });
+
+    grid.innerHTML = html;
+
+    // 搜索 + 筛选
+    var searchInput = document.getElementById('searchInput');
+    var filterClass = document.getElementById('filterClass');
+    var filterLevel = document.getElementById('filterLevel');
+
+    function applyFilters() {
+      var keyword = searchInput.value.trim().toLowerCase();
+      var clsFilter = filterClass.value;
+      var lvlFilter = filterLevel.value;
+      var cards = grid.querySelectorAll('.card');
+      var visible = 0;
+
+      cards.forEach(function(card) {
+        var name = card.querySelector('.card-name').textContent.toLowerCase();
+        var catSpans = card.querySelectorAll('.tag-cat');
+        var catText = '';
+        catSpans.forEach(function(s) { catText += s.textContent.toLowerCase() + ' '; });
+
+        var matchSearch = (keyword === '' || name.indexOf(keyword) !== -1 || catText.indexOf(keyword) !== -1);
+
+        // cls 中包含对应字母即匹配
+        var matchClass = true;
+        if (clsFilter !== '') {
+          var cardCls = card.getAttribute('data-cls');
+          if (clsFilter === 'C') {
+            matchClass = (cardCls.indexOf('A') === -1 && cardCls.indexOf('B') === -1);
+          } else {
+            matchClass = (cardCls.indexOf(clsFilter) !== -1);
+          }
+        }
+
+        var matchLevel = (lvlFilter === '' || card.getAttribute('data-level') === lvlFilter);
+
+        if (matchSearch && matchClass && matchLevel) {
+          card.style.display = '';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      var oldTip = grid.querySelector('.no-result');
+      if (oldTip) oldTip.remove();
+      if (visible === 0) {
+        var tip = document.createElement('div');
+        tip.className = 'no-result';
+        tip.textContent = '未找到匹配的竞赛';
+        grid.appendChild(tip);
+      }
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    filterClass.addEventListener('change', applyFilters);
+    filterLevel.addEventListener('change', applyFilters);
+
+    // 卡片点击：已有页面直接跳转，未创建则跳转 404
+    grid.addEventListener('click', function(e) {
+      var card = e.target.closest('.card');
+      if (!card) return;
+      var id = parseInt(card.getAttribute('data-id'));
+      if (existingPages.indexOf(id) !== -1) {
+        window.location.href = id + '.html';
+      } else {
+        window.location.href = '404.html';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>全国大学生数学建模竞赛 · 信息卡</title>
+  <style>
+    :root { --accent: #a41f1b; --bg: #faf9f7; --text: #111; --text_y: #968172; --card-bg: #fdfcfb; --border: rgba(164, 31, 27, 0.15); }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+      font-family: "NSimSun", "SimSun", "Songti SC", "Microsoft YaHei", serif;
+      display: flex; align-items: flex-start; justify-content: center;
+      overflow-x: hidden; position: relative; padding: 36px 24px 80px;
+    }
+    body::before, body::after {
+      content: ""; position: fixed; left: -80px; width: 320px; height: 2px;
+      background: var(--accent); transform-origin: left center; z-index: 0; opacity: 0.6;
+    }
+    body::before { top: 40px; transform: rotate(-45deg); }
+    body::after  { bottom: 40px; transform: rotate(45deg); }
+    .wrap { position: relative; z-index: 1; width: min(860px, 100%); }
+
+    @keyframes riseFade {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-item { opacity: 0; animation: riseFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .anim-logo     { animation-delay: 0.05s; }
+    .anim-divider  { animation-delay: 0.12s; }
+    .anim-dept     { animation-delay: 0.20s; }
+    .anim-icon     { animation-delay: 0.28s; }
+    .anim-h1       { animation-delay: 0.34s; }
+    .anim-sub      { animation-delay: 0.40s; }
+    .anim-progress { animation-delay: 0.48s; }
+    .anim-tags1    { animation-delay: 0.54s; }
+    .anim-tags2    { animation-delay: 0.58s; }
+    .anim-meta     { animation-delay: 0.64s; }
+    .anim-oneliner { animation-delay: 0.68s; }
+    .anim-tabs     { animation-delay: 0.76s; }
+    .anim-footer   { animation-delay: 1.1s; }
+
+    .header { text-align: center; margin-bottom: 8px; }
+    .logo { width: 90px; height: auto; display: block; margin: 0 auto 2px; object-fit: contain; }
+    .divider { width: 100%; max-width: 420px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 2px; background: currentColor; }
+    .divider .square { width: 12px; height: 12px; background: currentColor; transform: rotate(45deg); flex-shrink: 0; }
+    .dept { font-size: 17px; font-weight: 700; margin: 6px 0 28px; text-align: center; font-family: inherit; }
+    .title-block { text-align: center; margin-bottom: 10px; }
+    .title { font-size: 44px; font-weight: bolder; letter-spacing: 3px; margin: 0; line-height: 1.2; color: var(--accent); }
+    .title-en { margin-top: 4px; font-size: 14px; letter-spacing: 1px; color: var(--text_y); }
+    .comp-icon { width: 80px; height: auto; display: block; margin: 0 auto 12px; object-fit: contain; }
+    .radar-wrap { display: flex; justify-content: center; margin: 8px auto 0; }
+    .radar-canvas { display: block; max-width: 300px; width: 100%; height: auto; }
+
+    .meta-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 32px; margin: 18px 0 10px; font-size: 15px; color: var(--text_y); text-align: center; }
+    .meta-bar span { white-space: nowrap; }
+    .detail-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 6px; }
+
+    .tag-a { display: inline-flex; align-items: center; height: 20px; background: var(--accent); color: #fff; padding: 0 8px; border-radius: 3px; font-size: 11px; font-weight: 700; letter-spacing: 1px; line-height: 1; vertical-align: middle; }
+    .tag-level { display: inline-flex; align-items: center; height: 20px; border: 1px solid var(--accent); color: var(--accent); padding: 0 6px; border-radius: 3px; font-size: 11px; font-weight: 700; letter-spacing: 1px; line-height: 1; vertical-align: middle; }
+    .tag-cat { display: inline-flex; align-items: center; height: 20px; background: rgba(164, 31, 27, 0.06); color: var(--text_y); padding: 0 6px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; line-height: 1; vertical-align: middle; }
+    .tag-legend { background: linear-gradient(135deg, #b8860b, #daa520); color: #fff; box-shadow: 0 0 8px rgba(218, 165, 32, 0.5), 0 0 16px rgba(218, 165, 32, 0.2); }
+    .tag-epic   { background: linear-gradient(135deg, #7b2d8b, #b44dc9); color: #fff; box-shadow: 0 0 8px rgba(180, 77, 201, 0.5), 0 0 16px rgba(180, 77, 201, 0.2); }
+    .tag-rare   { background: linear-gradient(135deg, #1b8b2d, #3dc95a); color: #fff; box-shadow: 0 0 8px rgba(61, 201, 90, 0.5), 0 0 16px rgba(61, 201, 90, 0.2); }
+    .tag-night  { background: linear-gradient(135deg, #0d1b3e, #1c3a6b); color: #c8daf5; box-shadow: 0 0 8px rgba(28, 58, 107, 0.5), 0 0 16px rgba(28, 58, 107, 0.2); }
+    .tag-done   { background: #8a8a8a; color: #fff; }
+
+    .oneliner { text-align: center; max-width: 640px; margin: 12px auto 24px; padding: 14px 20px; background: rgba(164, 31, 27, 0.04); border-left: 3px solid var(--accent); border-right: 3px solid var(--accent); font-size: 15px; line-height: 1.7; color: #333; }
+    .tab-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0; margin: 20px 0 28px; border-bottom: 2px solid var(--border); }
+    .tab-btn { position: relative; bottom: -2px; padding: 10px 18px; font-size: 14px; font-weight: 700; font-family: inherit; color: var(--text_y); background: none; border: 2px solid transparent; border-bottom: none; cursor: pointer; transition: color 0.25s, border-color 0.25s; letter-spacing: 1px; white-space: nowrap; }
+    .tab-btn:hover { color: var(--accent); }
+    .tab-btn.active { color: var(--accent); border-color: var(--border); background: var(--bg); }
+    .section { display: none; margin: 22px 0 12px; }
+    .section.active { display: block; }
+    .section.switch-in { animation: riseFade 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .section-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .section-num { width: 30px; height: 30px; background: var(--accent); color: #fff; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .section-title { font-size: 20px; font-weight: 700; color: var(--accent); letter-spacing: 1px; }
+    .info-grid { display: grid; grid-template-columns: 120px 1fr; gap: 1px; border: 1px solid var(--border); background: var(--border); }
+    .info-grid .label { background: #fff; padding: 10px 14px; font-weight: 700; font-size: 14px; color: var(--accent); display: flex; align-items: flex-start; }
+    .info-grid .value { background: #fff; padding: 10px 14px; font-size: 14px; line-height: 1.6; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.6; }
+    thead th { background: var(--accent); color: #fff; padding: 10px 12px; font-weight: 700; font-size: 13px; text-align: center; letter-spacing: 1px; }
+    tbody td { padding: 10px 12px; border: 1px solid var(--border); vertical-align: top; background: #fff; }
+    tbody tr:nth-child(even) td { background: #fdfcfb; }
+    tbody td:first-child { font-weight: 700; color: var(--accent); text-align: center; white-space: nowrap; width: 110px; }
+    .rhythm-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .rhythm-card { background: #fff; border: 1px solid var(--border); padding: 14px 16px; border-radius: 4px; }
+    .rhythm-card .period { font-weight: 700; color: var(--accent); font-size: 15px; margin-bottom: 6px; }
+    .rhythm-card .desc { font-size: 13px; line-height: 1.7; color: #444; }
+    .source-list { list-style: none; padding: 0; font-size: 13px; line-height: 2; color: #555; }
+    .source-list li::before { content: "▸ "; color: var(--accent); }
+    .footer-line { width: 100%; max-width: 420px; margin: 40px auto 0; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
+    .footer-line::before, .footer-line::after { content: ""; flex: 1; height: 2px; background: currentColor; }
+    .footer-year { font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 4px; letter-spacing: 2px; }
+    .back-link { position: fixed; top: 18px; left: 18px; z-index: 10; display: inline-block; padding: 8px 18px; border-radius: 999px; background: var(--accent); color: #fff; text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(164, 31, 27, 0.2); transition: transform 0.2s ease; }
+    .back-link:hover { transform: translateY(-2px); }
+    @media (max-width: 640px) {
+      .title { font-size: 30px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .info-grid .label { border-bottom: none; padding-bottom: 2px; }
+      .info-grid .value { padding-top: 2px; }
+      .rhythm-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link animate-item anim-footer" href="select.html">←返回</a>
+
+  <div class="wrap">
+    <div class="header">
+      <img class="logo animate-item anim-logo" src="xiaohui.png" alt="校徽" />
+      <div class="divider animate-item anim-divider"><span class="square"></span></div>
+      <div class="dept animate-item anim-dept">物理科学与技术学院 · 科创工作室</div>
+    </div>
+
+    <div class="title-block">
+      <img class="comp-icon animate-item anim-icon" src="5.png" alt="竞赛图标" />
+      <h1 class="title animate-item anim-h1">全国大学生数学建模竞赛</h1>
+      <div class="title-en animate-item anim-sub">Contemporary Undergraduate Mathematical Contest in Modeling (CUMCM)</div>
+      <div class="radar-wrap animate-item anim-progress">
+        <canvas class="radar-canvas" id="radarChart" width="300" height="300"></canvas>
+      </div>
+    </div>
+
+    <div class="detail-tags animate-item anim-tags1">
+      <span class="tag-a">A类</span>
+      <span class="tag-level">国</span>
+      <span class="tag-cat tag-epic">史诗</span>
+    </div>
+    <div class="detail-tags animate-item anim-tags2">
+      <span class="tag-cat">数学</span>
+      <span class="tag-cat">算法</span>
+      <span class="tag-cat">编程</span>
+      <span class="tag-cat">论文</span>
+      <span class="tag-cat">学科类</span>
+      <span class="tag-cat tag-night">熬夜</span>
+    </div>
+
+    <div class="meta-bar animate-item anim-meta"><span>更新日期：2026年7月</span></div>
+
+    <div class="oneliner animate-item anim-oneliner">
+      3名队员在3天（72小时）内从多道题目中选择一个实际问题，建立数学模型、编程求解并撰写一篇完整的学术论文，重点考查建模、编程、写作和团队协作能力。——"三天建一个模，写完一篇论文。"
+    </div>
+
+    <nav class="tab-nav animate-item anim-tabs">
+      <button class="tab-btn active" data-tab="sec-1">基础信息</button>
+      <button class="tab-btn" data-tab="sec-2">竞赛内容</button>
+      <button class="tab-btn" data-tab="sec-3">能力要求</button>
+      <button class="tab-btn" data-tab="sec-4">团队组成</button>
+      <button class="tab-btn" data-tab="sec-5">时间节点</button>
+      <button class="tab-btn" data-tab="sec-source">资料来源</button>
+    </nav>
+
+    <div id="sec-1" class="section">
+      <div class="section-head"><span class="section-num">一</span><span class="section-title">基础信息</span></div>
+      <div class="info-grid">
+        <div class="label">竞赛简称</div><div class="value">数学建模国赛、国赛数模、CUMCM</div>
+        <div class="label">主办与组织</div><div class="value">中国工业与应用数学学会（CSIAM）；全国大学生数学建模竞赛组委会</div>
+        <div class="label">校内组织</div><div class="value">西南交通大学数学学院；面向全校本科生组织报名、培训与选拔</div>
+        <div class="label">相关方向</div><div class="value">数学建模、数值计算与分析、优化算法、统计与数据挖掘、微分方程、图论与网络、科学计算与编程</div>
+        <div class="label">适合年级</div><div class="value">本科各年级；大一须先具备高等数学、线性代数基础及至少一门编程语言（MATLAB或Python）；大二及以上更适合参赛</div>
+        <div class="label">信息入口</div><div class="value">西南交通大学本科生院竞赛通知、数学学院网站；全国大学生数学建模竞赛官网（mcm.edu.cn）</div>
+      </div>
+    </div>
+
+    <div id="sec-2" class="section">
+      <div class="section-head"><span class="section-num">二</span><span class="section-title">竞赛内容说明</span></div>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">3人组队在3天（72小时）内从A、B、C三道题目中选择一题，完成问题分析、模型建立、算法设计、编程求解和论文撰写，最终提交一篇完整的学术论文作为评审依据。</p>
+      <table>
+        <thead><tr><th>题目类型</th><th>常见的实际问题</th><th>主要任务</th><th>评审要点</th></tr></thead>
+        <tbody>
+          <tr><td>A题（物理/工程类）</td><td>力学分析、热传导、电磁场、流体问题等</td><td>根据物理规律建立微分方程或偏微分方程模型，进行数值求解与参数分析</td><td>模型建立的合理性、方程推导的严谨性、数值求解的准确性</td></tr>
+          <tr><td>B题（优化/运筹类）</td><td>路径规划、资源分配、调度问题、排队系统、网络优化等</td><td>建立优化模型（线性规划、整数规划、动态规划、图模型），设计求解算法并分析结果</td><td>模型对实际约束的覆盖度、算法的效率与正确性、结果的可解释性</td></tr>
+          <tr><td>C题（数据/统计类）</td><td>数据挖掘、分类预测、综合评价、信号处理、时序分析等</td><td>进行数据预处理与探索性分析，建立统计学习或机器学习模型，完成预测或分类并对结果进行检验</td><td>数据处理的质量、特征选择的依据、模型的交叉验证、结论的统计显著性</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:14px;line-height:1.7;margin:12px 0 4px;"><strong>赛题说明：</strong>本科组从A、B、C三题中选一题作答；专科组另设D、E题。近年题目越来越强调数据驱动建模和跨学科融合，物理学院学生在涉及物理建模、数值计算和数据分析的题目上有一定优势。最终仅提交一篇PDF论文，不设现场答辩，评审完全依据论文质量。</p>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 8px;font-weight:700;color:var(--accent);">参赛路径</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:14px;margin-bottom:4px;">
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">校赛选拔/数学建模协会</span><span style="color:var(--accent);font-weight:700;">→</span>
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">暑期集训（7—8月）</span><span style="color:var(--accent);font-weight:700;">→</span>
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">全国赛（9月）</span><span style="color:var(--accent);font-weight:700;">→</span>
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">省级/国家级评奖</span><span style="color:var(--accent);font-weight:700;">→</span>
+        <span style="background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-weight:700;color:var(--accent);">美赛MCM/ICM（2月，独立赛事）</span>
+      </div>
+      <p style="font-size:12px;color:var(--text_y);margin:6px 0 0;">注：全国大学生数学建模竞赛（CUMCM）与美国大学生数学建模竞赛（MCM/ICM，通常称"美赛"）是两个独立赛事，国赛在9月、美赛在次年2月，但内容和能力要求高度重叠，参赛队伍通常会同时准备。</p>
+    </div>
+
+    <div id="sec-3" class="section">
+      <div class="section-head"><span class="section-num">三</span><span class="section-title">参赛能力要求</span></div>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">建议先补齐数学基础和编程工具，再按团队分工强化建模、编程和写作能力；个人不必精通全部，但三名队员应分别能独立承担建模推导、编程实现和论文写作中的至少一个核心环节。</p>
+      <table>
+        <thead><tr><th>能力模块</th><th>需要掌握的工具与知识</th><th>需要具备的具体能力</th></tr></thead>
+        <tbody>
+          <tr><td>数学建模与理论</td><td>高等数学、线性代数、概率论与数理统计、微分方程、运筹学、数值分析、离散数学和图论</td><td>能将实际问题抽象为数学问题并选择或构造合适的模型；分析模型假设的合理性、适用范围和局限性；进行理论推导和误差分析</td></tr>
+          <tr><td>编程与算法实现</td><td>MATLAB、Python（NumPy/SciPy/Matplotlib）、lingo；常用算法库与工具箱；数据可视化</td><td>能独立完成数据处理、算法编码、数值计算和结果可视化；能快速调试和验证代码的正确性；掌握常见的优化函数、ODE/PDE求解器和统计工具</td></tr>
+          <tr><td>论文写作与呈现</td><td>LaTeX或Word论文排版；Origin/Excel/PPT图表制作；学术写作规范、英文摘要撰写</td><td>能在72小时内完成一篇结构完整、逻辑清晰、图表规范的学术论文；能写好中英文摘要、问题分析、模型假设、求解过程、结果分析及参考文献；图表有自明性、排版整洁美观</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px;line-height:1.7;color:#555;margin:10px 0 0;">物理学院学生的优势在于数学基础扎实、物理建模和数值计算能力强；需要重点补齐的是编程熟练度、数据处理能力和学术论文写作速度。</p>
+    </div>
+
+    <div id="sec-4" class="section">
+      <div class="section-head"><span class="section-num">四</span><span class="section-title">团队组成要求</span></div>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">全国大学生数学建模竞赛每队由同一高校3名本科生组成，允许跨专业组队；竞赛期间3人共用电脑和资料，内部自主分工，在72小时内完成全部工作。</p>
+      <table>
+        <thead><tr><th>项目</th><th>参赛要求</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>成员与身份</td><td>同一高校3名本科生组队；必须通过学校统一报名</td><td>不允许跨校组队；每名学生只能参加一支队伍；参赛时须为在校本科生</td></tr>
+          <tr><td>竞赛环境与资料</td><td>竞赛在开放环境中进行；可查阅任意纸质和网络资料；3人内部自主分工</td><td>不得与队员之外的任何人讨论赛题；不得抄袭或代做；论文须独立完成</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:14px;font-weight:700;color:var(--accent);margin:14px 0 8px;">推荐分工（3人，经典"铁三角"）</p>
+      <table>
+        <thead><tr><th>角色</th><th>分工内容</th></tr></thead>
+        <tbody>
+          <tr><td>建模手</td><td>负责问题的数学抽象、模型选择与推导、符号定义、假设说明和理论分析；主导论文的方法论部分撰写</td></tr>
+          <tr><td>编程手</td><td>负责数据处理、算法设计与实现、数值计算、结果可视化、代码整理和关键结果复核</td></tr>
+          <tr><td>写作手</td><td>负责论文整体框架、摘要和结论撰写、图表整合、文献整理、格式排版和最终校对</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px;line-height:1.7;color:#555;margin:8px 0 0;">实际协作中角色高度交叉：编程手需理解模型才能正确实现，写作手需参与建模讨论以准确表达，建模手需读懂程序输出才能调整模型。建议三人都在暑期集训中补齐各自短板，确保在竞赛72小时内任何人遇到瓶颈时其他两人能及时补位。</p>
+    </div>
+
+    <div id="sec-5" class="section">
+      <div class="section-head"><span class="section-num">五</span><span class="section-title">时间节点设置</span></div>
+      <p style="font-size:12px;color:var(--text_y);margin:0 0 10px;">下表采用2026年全国大学生数学建模竞赛官方节点，覆盖校赛选拔、暑期培训、全国赛及美赛准备。</p>
+      <table>
+        <thead><tr><th>阶段</th><th>2026年官方时间</th><th>主要任务</th><th>层级/说明</th></tr></thead>
+        <tbody>
+          <tr><td>西南交大校赛</td><td>3月报名<br>3月下旬—4月上旬比赛</td><td>3人组队参加校内选拔，熟悉竞赛流程和论文撰写规范</td><td>校级<br>数学学院组织</td></tr>
+          <tr><td>暑期建模集训</td><td>7月—8月</td><td>系统培训常见模型（优化、微分方程、统计、图论等）、编程工具和论文写作；通过历年真题模拟实战</td><td>校级<br>数学建模指导组</td></tr>
+          <tr><td>全国报名与确认</td><td>6月—8月报名<br>9月初参赛确认</td><td>学校统一在官网报名；确认队员信息和参赛资格</td><td>国家级<br>CUMCM组委会</td></tr>
+          <tr><td>全国赛</td><td>9月10日（周四）18:00<br>—9月13日（周日）20:00</td><td>72小时不间断竞赛：选题、建模、编程、写作，在规定时间内提交论文PDF及支撑材料</td><td>国家级<br>各校自行安排场地</td></tr>
+          <tr><td>省级/国家级评审</td><td>9月下旬—11月</td><td>各省赛区初评，推荐优秀论文参加全国评审；评选国奖（一、二等奖）和省奖</td><td>省级→国家级</td></tr>
+          <tr><td>美赛MCM/ICM</td><td>次年2月</td><td>独立国际赛事：在4天内从6题中选1题完成英文论文；物理学院学生可以继续参加</td><td>国际级<br>独立赛事</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text_y);margin:8px 0 16px;">2026年全国赛时间：9月10日18:00至9月13日20:00。校赛和集训为校内环节，具体日期以数学学院通知为准。美赛为独立赛事，通常在春节前后。</p>
+      <p style="font-size:14px;font-weight:700;color:var(--accent);margin:14px 0 10px;">建议准备节奏</p>
+      <div class="rhythm-cards">
+        <div class="rhythm-card"><div class="period">1—4月（基础积累期）</div><div class="desc">学习高等数学、线性代数、概率论核心内容；掌握MATLAB或Python基本语法、数据处理和绘图；阅读往年优秀论文，了解论文结构和写作规范。</div></div>
+        <div class="rhythm-card"><div class="period">5—6月（组队与校赛期）</div><div class="desc">与熟悉且互补的同学组队；参加校赛检验队伍配合；明确各自的分工定位，开始针对性强化建模/编程/写作技能。</div></div>
+        <div class="rhythm-card"><div class="period">7—8月（集训强化期）</div><div class="desc">参加学校组织的暑期建模培训，系统学习各类型模型和求解方法；完成3—5次真题模拟赛，磨合72小时协作流程，建立模板库和代码库。</div></div>
+        <div class="rhythm-card"><div class="period">9月—次年2月（竞赛期）</div><div class="desc">参加全国赛；赛后复盘论文和评审意见，总结问题，为次年美赛或下一次国赛做准备；继续参加美赛MCM/ICM。</div></div>
+      </div>
+    </div>
+
+    <div id="sec-source" class="section">
+      <div class="section-head"><span class="section-num">六</span><span class="section-title">资料来源与说明</span></div>
+      <ol class="source-list">
+        <li>西南交通大学2027年推荐免试研究生A类学科竞赛目录</li>
+        <li>西南交通大学数学学院：2026年全国大学生数学建模竞赛校内选拔通知</li>
+        <li>西南交通大学本科生院：2026年数学建模竞赛报名通知</li>
+        <li>全国大学生数学建模竞赛组委会：2026年竞赛报名与参赛通知</li>
+        <li>全国大学生数学建模竞赛官方网站（mcm.edu.cn）</li>
+        <li>中国工业与应用数学学会（CSIAM）相关公告</li>
+        <li>西南交通大学数学建模协会往年培训与参赛资料</li>
+        <li>全国大学生数学建模竞赛历年优秀论文汇编</li>
+        <li>美国大学生数学建模竞赛（MCM/ICM）官方网站</li>
+        <li>西南交通大学新闻网：历年数学建模竞赛获奖报道</li>
+      </ol>
+      <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">说明：本信息卡面向西南交通大学物理科学与技术学院学生。时间与资格信息核验至2026年7月30日；校赛、集训及报名具体安排应以数学学院和本科生院最新通知为准。美赛MCM/ICM为独立国际赛事，本卡仅作关联介绍。</p>
+    </div>
+
+    <div style="text-align:center;">
+      <div class="footer-line animate-item anim-footer"><span class="footer-year">©2026 物院科创工作室</span></div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var tabs = document.querySelectorAll('.tab-btn');
+      var sections = document.querySelectorAll('.section');
+      var currentId = 'sec-1';
+      function switchTo(targetId) {
+        if (targetId === currentId) return;
+        var prev = document.getElementById(currentId);
+        var next = document.getElementById(targetId);
+        if (!next) return;
+        tabs.forEach(function(t) { t.classList.remove('active'); if (t.getAttribute('data-tab') === targetId) t.classList.add('active'); });
+        if (prev) { prev.classList.remove('active', 'switch-in'); }
+        next.classList.add('active'); void next.offsetWidth; next.classList.add('switch-in');
+        currentId = targetId;
+      }
+      tabs.forEach(function(btn) { btn.addEventListener('click', function() { switchTo(this.getAttribute('data-tab')); }); });
+      setTimeout(function() { var first = document.getElementById('sec-1'); first.classList.add('active'); void first.offsetWidth; first.classList.add('switch-in'); }, 1000);
+    })();
+    document.addEventListener('animationend', function(e) { if (e.target.classList.contains('switch-in')) { e.target.classList.remove('switch-in'); } });
+  </script>
+
+  <script>
+    (function() {
+      var canvas = document.getElementById('radarChart');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var W = canvas.width, H = canvas.height, cx = W / 2, cy = H / 2, R = 100, N = 6;
+      var labels = ['难度', '热度', '卷度', '肝度', '获奖难度', '含金量'];
+      var values = [7, 10, 8, 9, 7, 8];
+      var maxVal = 10, levels = 5;
+      ctx.strokeStyle = 'rgba(164,31,27,0.10)'; ctx.lineWidth = 1;
+      for (var l = 1; l <= levels; l++) { var r = (R / levels) * l; ctx.beginPath(); for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var x = cx + r * Math.cos(angle), y = cy + r * Math.sin(angle); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); } ctx.closePath(); ctx.stroke(); }
+      ctx.strokeStyle = 'rgba(164,31,27,0.25)'; ctx.lineWidth = 1;
+      for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + R * Math.cos(angle), cy + R * Math.sin(angle)); ctx.stroke(); }
+      ctx.fillStyle = 'rgba(164,31,27,0.12)'; ctx.strokeStyle = '#a41f1b'; ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var vr = (R * values[i]) / maxVal; var x = cx + vr * Math.cos(angle), y = cy + vr * Math.sin(angle); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); }
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+      for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var vr = (R * values[i]) / maxVal; var x = cx + vr * Math.cos(angle), y = cy + vr * Math.sin(angle); ctx.fillStyle = '#a41f1b'; ctx.beginPath(); ctx.arc(x, y, 3.5, 0, 2 * Math.PI); ctx.fill(); }
+      ctx.font = 'bold 11px "NSimSun","SimSun","Songti SC",serif';
+      for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var lx = cx + (R + 34) * Math.cos(angle), ly = cy + (R + 34) * Math.sin(angle); ctx.fillStyle = '#a41f1b'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(labels[i] + ' ' + values[i], lx, ly); }
+    })();
+  </script>
+</body>
+</html>
