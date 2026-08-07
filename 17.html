@@ -96,6 +96,21 @@
     .footer-year { font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 4px; letter-spacing: 2px; }
     .back-link { position: fixed; top: 18px; left: 18px; z-index: 10; display: inline-block; padding: 8px 18px; border-radius: 999px; background: var(--accent); color: #fff; text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(164, 31, 27, 0.2); transition: transform 0.2s ease; }
     .back-link:hover { transform: translateY(-2px); }
+    
+    /* 官网按钮 */
+    .official-btn {
+      display: block; width: fit-content; margin: 0 auto 20px;
+      padding: 10px 36px; background: var(--accent); color: #fff;
+      text-decoration: none; font-size: 15px; font-weight: 700;
+      letter-spacing: 2px; border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(164, 31, 27, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    .official-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(164, 31, 27, 0.35);
+    }
     @media (max-width: 640px) {
       .title { font-size: 30px; }
       .info-grid { grid-template-columns: 1fr; }
@@ -106,7 +121,7 @@
   </style>
 </head>
 <body>
-  <a class="back-link animate-item anim-footer" href="select.html">←返回</a>
+  <a class="back-link animate-item anim-footer" href="javascript:history.back()">←返回</a>
 
   <div class="wrap">
     <div class="header">
@@ -140,6 +155,7 @@
     <div class="oneliner animate-item anim-oneliner">
       从大创项目中选拔论文、成果和创业项目参加全国年会展示与交流，是项目成果的集中亮相而非常规书面比赛。
     </div>
+    <a class="official-btn animate-item anim-oneliner" href="https://www.gjcxcy.cn/" target="_blank" rel="noopener">立即前往</a>
 
     <nav class="tab-nav animate-item anim-tabs">
       <button class="tab-btn active" data-tab="sec-1">基础信息</button>

@@ -63,11 +63,26 @@
     .footer-year { font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 4px; letter-spacing: 2px; }
     .back-link { position: fixed; top: 18px; left: 18px; z-index: 10; display: inline-block; padding: 8px 18px; border-radius: 999px; background: var(--accent); color: #fff; text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(164, 31, 27, 0.2); transition: transform 0.2s ease; }
     .back-link:hover { transform: translateY(-2px); }
+    
+    /* 官网按钮 */
+    .official-btn {
+      display: block; width: fit-content; margin: 0 auto 20px;
+      padding: 10px 36px; background: var(--accent); color: #fff;
+      text-decoration: none; font-size: 15px; font-weight: 700;
+      letter-spacing: 2px; border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(164, 31, 27, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    .official-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(164, 31, 27, 0.35);
+    }
     @media (max-width: 640px) { .title { font-size: 30px; } .info-grid { grid-template-columns: 1fr; } .info-grid .label { border-bottom: none; padding-bottom: 2px; } .info-grid .value { padding-top: 2px; } .rhythm-cards { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
-  <a class="back-link animate-item anim-footer" href="select.html">←返回</a>
+  <a class="back-link animate-item anim-footer" href="javascript:history.back()">←返回</a>
   <div class="wrap">
     <div class="header">
       <img class="logo animate-item anim-logo" src="xiaohui.png" alt="校徽" />
@@ -84,6 +99,7 @@
     <div class="detail-tags animate-item anim-tags2"><span class="tag-cat">智能制造</span><span class="tag-cat">自动化</span><span class="tag-cat">电子</span><span class="tag-cat">机械</span><span class="tag-cat">工业</span></div>
     <div class="meta-bar animate-item anim-meta"><span>更新日期：2026年7月30日</span></div>
     <div class="oneliner animate-item anim-oneliner">以工业流程标准在真实工业设备上完成控制、运动与嵌入式编程，并答辩说明制造方案。</div>
+    <a class="official-btn animate-item anim-oneliner" href="http://www.siemenscup-cimc.org.cn/" target="_blank" rel="noopener">立即前往</a>
     <nav class="tab-nav animate-item anim-tabs">
       <button class="tab-btn active" data-tab="sec-1">基础信息</button><button class="tab-btn" data-tab="sec-2">竞赛内容</button><button class="tab-btn" data-tab="sec-3">能力要求</button><button class="tab-btn" data-tab="sec-4">团队组成</button><button class="tab-btn" data-tab="sec-5">时间节点</button><button class="tab-btn" data-tab="sec-source">资料来源</button>
     </nav>

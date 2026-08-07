@@ -227,6 +227,21 @@
     }
     .back-link:hover { transform: translateY(-2px); }
 
+    
+    /* 官网按钮 */
+    .official-btn {
+      display: block; width: fit-content; margin: 0 auto 20px;
+      padding: 10px 36px; background: var(--accent); color: #fff;
+      text-decoration: none; font-size: 15px; font-weight: 700;
+      letter-spacing: 2px; border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(164, 31, 27, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    .official-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(164, 31, 27, 0.35);
+    }
     @media (max-width: 640px) {
       .title { font-size: 30px; }
       .info-grid { grid-template-columns: 1fr; }
@@ -237,7 +252,7 @@
   </style>
 </head>
 <body>
-  <a class="back-link animate-item anim-footer" href="select.html">←返回</a>
+  <a class="back-link animate-item anim-footer" href="javascript:history.back()">←返回</a>
 
   <div class="wrap">
 
@@ -278,6 +293,7 @@
     <div class="oneliner animate-item anim-oneliner">
       把技术、产品或服务项目做成有真实需求、实践数据、商业模式和发展前景的创业计划，并完成路演答辩。
     </div>
+    <a class="official-btn animate-item anim-oneliner" href="https://www.tiaozhanbei.net/" target="_blank" rel="noopener">立即前往</a>
 
     <!-- ========== 选项卡导航 ========== -->
     <nav class="tab-nav animate-item anim-tabs">

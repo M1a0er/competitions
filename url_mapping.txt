@@ -1,0 +1,178 @@
+竞赛名称 — 官网URL 对应表
+生成日期：2026-08-07
+============================================================
+
+ 1. 中国国际大学生创新大赛
+    官网：https://cy.ncss.cn/
+
+ 2. “挑战杯”全国大学生课外学术科技作品竞赛
+    官网：https://www.tiaozhanbei.net/
+
+ 3. “挑战杯”中国大学生创业计划大赛
+    官网：https://www.tiaozhanbei.net/
+
+ 4. ICPC国际大学生程序设计竞赛
+    官网：https://icpc.global/
+
+ 5. 全国大学生数学建模竞赛
+    官网：https://www.mcm.edu.cn/
+
+ 6. 全国大学生电子设计竞赛
+    官网：https://nuedc.xjtu.edu.cn/
+
+ 7. 全国大学生机械创新设计大赛
+    官网：http://umic.ckcest.cn/
+
+ 8. 全国大学生结构设计竞赛
+    官网：http://www.ccea.zju.edu.cn/structure/
+
+ 9. 全国大学生广告艺术大赛
+    官网：https://www.sun-ada.net/
+
+10. 全国大学生智能汽车竞赛
+    官网：https://www.smartcar.zone/index.html
+
+11. 全国大学生交通运输科技大赛
+    官网：https://www.nactrans.com/
+
+12. 全国大学生电子商务“创新、创意及创业”挑战赛
+    官网：https://www.3chuang.net/
+
+13. 全国大学生节能减排社会实践与科技竞赛
+    官网：https://jienengjianpai.org/
+
+14. 中国大学生工程实践与创新能力大赛
+    官网：http://www.gcxl.edu.cn/
+
+15. 全国大学生物流设计大赛
+    官网：http://www.clpp.org.cn/
+
+16. “外研社·国才杯”“理解当代中国”全国大学生外语能力大赛
+    官网：https://ucc.fltrp.com/
+
+17. 全国大学生创新年会
+    官网：https://www.gjcxcy.cn/
+
+18. 全国大学生机器人大赛（CURC）
+    官网：https://robocon.org.cn/
+
+19. “西门子杯”中国智能制造挑战赛
+    官网：http://www.siemenscup-cimc.org.cn/
+
+20. 全国大学生化工设计竞赛
+    官网：https://iche.zju.edu.cn/
+
+21. 全国大学生先进成图技术与产品信息建模创新大赛
+    官网：https://www.chengtudasai.com/
+
+22. 中国大学生计算机设计大赛
+    官网：https://jsjds.blcu.edu.cn/
+
+23. 全国大学生市场调查与分析大赛
+    官网：http://www.china-cssc.org/
+
+24. 中国大学生服务外包创新创业大赛
+    官网：http://www.fwwb.org.cn/
+
+25. 两岸新锐设计竞赛·华灿奖
+    官网：https://huacanjiang.com/
+
+26. 中国高校计算机大赛
+    官网：https://www.c4best.cn/
+
+27. 中国机器人大赛暨RoboCup机器人世界杯中国赛
+    官网：https://rcccaa.drct-caa.org.cn/
+
+28. 全国大学生信息安全竞赛
+    官网：https://www.ciscn.cn/
+
+29. 全国周培源大学生力学竞赛
+    官网：http://zpy.cstam.org.cn/
+
+30. 中国大学生机械工程创新创意大赛
+    官网：https://www.cmes.org/notice/010c5f85554e440e99d702008b58a26f.html
+
+31. 蓝桥杯全国软件和信息技术专业人才大赛
+    官网：https://dasai.lanqiao.cn/
+
+32. 全国大学生金相技能大赛
+    官网：http://www.jxds.tech/
+
+33. “中国软件杯”大学生软件设计大赛
+    官网：http://www.cnsoftbei.com/
+
+34. 全国大学生光电设计竞赛
+    官网：https://gxsjsd.moocollege.com/home
+
+35. 未来设计师·全国高校数字艺术设计大赛
+    官网：https://www.ncda.org.cn/
+
+36. 中美青年创客大赛
+    官网：https://chinaus-maker.cscse.edu.cn/?aisiteOutPageId=657cbac89f914444bde592b9aff1232f
+
+37. 全国大学生地质技能竞赛
+    官网：https://www.geosociety.org.cn/?v1=v14&v2=6a4b7915a7605&v3=v41&v4=v20&v6=1
+
+38. 米兰设计周—中国高校设计学科师生优秀作品展
+    官网：https://www.milan-aap.org.cn/index.html
+
+39. 全国大学生集成电路创新创业大赛
+    官网：https://www.ciciec.com/login.jsp
+
+40. 中国机器人及人工智能大赛（CRAIC）
+    官网：https://www.caairobot.com/index.html
+
+41. 全国高校商业精英挑战赛
+    官网：http://www.ccpitcsc.com/
+
+42. 中国好创意暨全国数字艺术设计大赛
+    官网：http://www.cdec.org.cn/
+
+43. 全国三维数字化创新设计大赛
+    官网：https://3dshow.3ddl.net/
+
+44. “学创杯”全国大学生创业综合模拟大赛
+    官网：http://www.xcbds.com/
+
+45. 大学生新一代信息通信科技大赛
+    官网：https://dtcup.dtxiaotangren.com/
+
+46. 全国大学生物理实验竞赛
+    官网：https://wlsycx.moocollege.com/
+
+47. 全国高校BIM毕业设计创新大赛
+    官网：https://bimgraduation.com/
+
+48. 睿抗机器人开发者大赛（RAICOM）
+    官网：https://www.raicom.com.cn/
+
+49. 全国大学生生命科学竞赛
+    官网：https://culsc.cn/
+
+50. 华为ICT大赛
+    官网：https://e.huawei.com/cn/talent/ict-academy/
+
+51. 全国大学生嵌入式芯片与系统设计竞赛
+    官网：https://www.socchina.net/
+
+52. 中国高校智能机器人创意大赛
+    官网：https://www.robotcontest.cn/
+
+53. 全国大学生数学竞赛
+    官网：https://www.cmathc.org.cn/
+
+54. 四川省大学生工业设计大赛
+    官网：https://www.cuidc.net/
+
+55. 四川省大学生模拟法庭大赛
+    官网：https://gg.swjtu.edu.cn/info/1009/30675.htm
+
+56. 四川省大学生材料设计大赛
+    官网：https://mse.scu.edu.cn/info/1011/3651.htm
+
+57. 四川省大学生测绘技能竞赛
+    官网：https://gsee.swjtu.edu.cn/info/1061/32913.htm
+
+58. 四川省大学生未来飞行器挑战赛
+    官网：https://www.news.uestc.edu.cn/?Id=93921&n=UestcNews.Front.DocumentV2.ArticlePage
+

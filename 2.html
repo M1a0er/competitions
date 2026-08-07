@@ -561,6 +561,29 @@
       transform: translateY(-2px);
     }
 
+    /* 官网按钮 */
+    .official-btn {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 20px;
+      padding: 10px 36px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(164, 31, 27, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+
+    .official-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(164, 31, 27, 0.35);
+    }
+
     /* 响应式 */
     @media (max-width: 640px) {
       .title { font-size: 30px; }
@@ -598,7 +621,7 @@
     <div class="detail-tags animate-item anim-tags1">
       <span class="tag-a">A类</span>
       <span class="tag-level">国</span>
-      <span class="tag-cat tag-epic">史诗</span>
+      <span class="tag-cat tag-epic">资深</span>
     </div>
     <div class="detail-tags animate-item anim-tags2">
       <span class="tag-cat">创新</span>
@@ -614,6 +637,7 @@
     <div class="oneliner animate-item anim-oneliner">
       把学生课外科研成果、发明作品或社会调查做成有真实证据、有创新结论、能够规范展示和答辩的竞赛作品。
     </div>
+    <a class="official-btn animate-item anim-oneliner" href="https://www.tiaozhanbei.net/" target="_blank" rel="noopener">立即前往</a>
 
     <!-- ========== 选项卡导航 ========== -->
     <nav class="tab-nav animate-item anim-tabs">
@@ -900,7 +924,7 @@
     </div>
 
     <!-- ========== 返回按钮（左上角固定） ========== -->
-    <a class="back-link animate-item anim-footer" href="select.html">←返回</a>
+    <a class="back-link animate-item anim-footer" href="javascript:history.back()">←返回</a>
 
     <!-- ========== 底部 ========== -->
     <div style="text-align:center;">
