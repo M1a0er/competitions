@@ -91,6 +91,17 @@
     .rhythm-card .desc { font-size: 13px; line-height: 1.7; color: #444; }
     .source-list { list-style: none; padding: 0; font-size: 13px; line-height: 2; color: #555; }
     .source-list li::before { content: "▸ "; color: var(--accent); }
+    .source-list a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(164, 31, 27, 0.35);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .source-list a:hover {
+      color: #c72a25;
+      border-bottom-color: #c72a25;
+    }
     .footer-line { width: 100%; max-width: 420px; margin: 40px auto 0; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
     .footer-line::before, .footer-line::after { content: ""; flex: 1; height: 2px; background: currentColor; }
     .footer-year { font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 4px; letter-spacing: 2px; }
@@ -261,16 +272,16 @@
     <div id="sec-source" class="section">
       <div class="section-head"><span class="section-num">六</span><span class="section-title">资料来源与说明</span></div>
       <ol class="source-list">
-        <li>西南交通大学：2027年推免A类学科竞赛目录</li>
-        <li>2026第十届集创赛官方通知</li>
-        <li>集创赛官网</li>
-        <li>工业和信息化部人才交流中心通知</li>
-        <li>西南交通大学集成电路科学与工程学院通知</li>
-        <li>企业命题指导团队通知</li>
-        <li>西南交通大学本科生院：学科竞赛通知栏目</li>
-        <li>西南交通大学本科生院</li>
-        <li>全国普通高校大学生竞赛分析报告官网</li>
-        <li>全国大学生竞赛服务平台</li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?setAction=newsDetail&viewType=web&newsId=4B4FD7C7197B57B2" target="_blank" rel="noopener">西南交通大学：2027年推免A类学科竞赛目录</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?newsId=526D9C5488D9D521&setAction=newsDetail&viewType=web" target="_blank" rel="noopener">西南交大第十届集创赛校园行通知</a></li>
+        <li><a href="https://univ.ciciec.com/col.jsp?id=123" target="_blank" rel="noopener">第十届集创赛主赛项章程</a></li>
+        <li><a href="https://univ.ciciec.com/col.jsp?id=288" target="_blank" rel="noopener">第十届集创赛14个技术方向与企业命题</a></li>
+        <li><a href="https://univ.ciciec.com/nd.jsp?fromMid=1047&id=1049" target="_blank" rel="noopener">第十届集创赛初赛通知</a></li>
+        <li><a href="https://news.uestc.edu.cn/info/1004/42372.htm" target="_blank" rel="noopener">2026西南赛区决赛报道</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?bigTypeId=42ED96EE3E089C19&newsType=yes&selectType=bigType&setAction=newsList&viewType=secondStyle" target="_blank" rel="noopener">西南交通大学本科生院：学科竞赛通知栏目</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/" target="_blank" rel="noopener">西南交通大学本科生院</a></li>
+        <li><a href="https://www.cahe.edu.cn/" target="_blank" rel="noopener">全国普通高校大学生竞赛分析报告官网</a></li>
+        <li><a href="https://cp.moocollege.com/" target="_blank" rel="noopener">全国大学生竞赛服务平台</a></li>
       </ol>
       <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">说明：本信息卡面向西南交通大学物理科学与技术学院学生。信息核验至2026年7月31日；西南赛区决赛及结果公示已完成，全国总决赛调整至8月下旬。具体以本科生院、集成电路科学与工程学院及大赛官方最新通知为准。</p>
     </div>

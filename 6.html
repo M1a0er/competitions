@@ -91,6 +91,17 @@
     .rhythm-card .desc { font-size: 13px; line-height: 1.7; color: #444; }
     .source-list { list-style: none; padding: 0; font-size: 13px; line-height: 2; color: #555; }
     .source-list li::before { content: "▸ "; color: var(--accent); }
+    .source-list a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(164, 31, 27, 0.35);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .source-list a:hover {
+      color: #c72a25;
+      border-bottom-color: #c72a25;
+    }
     .footer-line { width: 100%; max-width: 420px; margin: 40px auto 0; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
     .footer-line::before, .footer-line::after { content: ""; flex: 1; height: 2px; background: currentColor; }
     .footer-year { font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 4px; letter-spacing: 2px; }
@@ -156,7 +167,7 @@
     <div class="oneliner animate-item anim-oneliner">
       把电路、控制程序和结构真正做成可通电、可测量、可重复运行的电子系统，并用设计报告说明方案、指标和调试过程。——"四天三夜，从零到一做出一个能跑的系统。"
     </div>
-    <a class="official-btn animate-item anim-oneliner" href="https://nuedc.xjtu.edu.cn/" target="_blank" rel="noopener">立即前往</a>
+    <a class="official-btn animate-item anim-oneliner" href="https://www.nuedc-training.com.cn/" target="_blank" rel="noopener">立即前往</a>
 
     <nav class="tab-nav animate-item anim-tabs">
       <button class="tab-btn active" data-tab="sec-1">基础信息</button>
@@ -263,16 +274,16 @@
     <div id="sec-source" class="section">
       <div class="section-head"><span class="section-num">六</span><span class="section-title">资料来源与说明</span></div>
       <ol class="source-list">
-        <li>西南交通大学：2027年推免A类学科竞赛目录</li>
-        <li>西南交通大学：2026年春季电子设计竞赛预赛通知</li>
-        <li>西南交通大学：2026年春季电子设计竞赛正式赛题通知</li>
-        <li>西南交通大学：2025全国大学生电子设计竞赛报名通知</li>
-        <li>西南交通大学：2025春季电子设计竞赛结果通知</li>
-        <li>西南交通大学：2026"ST杯"嵌入式系统大赛通知</li>
-        <li>全国大学生电子设计竞赛官网</li>
-        <li>四川农业大学：2026年四川省大学生电子设计竞赛参赛选拔通知</li>
-        <li>全国大学生电子设计竞赛培训网：2025年综合测评实施办法</li>
-        <li>全国大学生电子设计竞赛官网：通知公告</li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?setAction=newsDetail&viewType=web&newsId=4B4FD7C7197B57B2" target="_blank" rel="noopener">西南交通大学：2027年推免A类学科竞赛目录</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?newsId=E20FE8E12DA6F82C&setAction=newsDetail&viewType=web" target="_blank" rel="noopener">西南交通大学：2026年春季电子设计竞赛预赛通知</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?newsId=19044250501C3128&setAction=newsDetail&viewType=web" target="_blank" rel="noopener">西南交通大学：2026年春季电子设计竞赛正式赛题通知</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?newsId=787300EF50680017&setAction=newsDetail&viewType=web" target="_blank" rel="noopener">西南交通大学：2025全国大学生电子设计竞赛报名通知</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?newsId=9EE37C8E54E36CD8&setAction=newsDetail&viewType=web" target="_blank" rel="noopener">西南交通大学：2025春季电子设计竞赛结果通知</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?newsId=4D4396AF906A2FA1&setAction=newsDetail&viewType=web" target="_blank" rel="noopener">西南交通大学：2026“ST杯”嵌入式系统大赛通知</a></li>
+        <li><a href="https://www.nuedc-training.com.cn/" target="_blank" rel="noopener">全国大学生电子设计竞赛官网</a></li>
+        <li><a href="https://jdxy.sicau.edu.cn/info/1033/6790.htm" target="_blank" rel="noopener">四川农业大学：2026年四川省大学生电子设计竞赛参赛选拔通知</a></li>
+        <li><a href="https://www.nuedc-training.com.cn/index/news/details/new_id/337" target="_blank" rel="noopener">全国大学生电子设计竞赛培训网：2025年综合测评实施办法</a></li>
+        <li><a href="https://nuedc.xjtu.edu.cn/index/index/news/catid/6.html" target="_blank" rel="noopener">全国大学生电子设计竞赛官网：通知公告</a></li>
       </ol>
       <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">说明：本信息卡面向西南交通大学物理科学与技术学院学生。规则核验至2026年8月4日；四川赛区正赛每年形式基本一致，偶数年评奖止于省级，奇数年从省级一等奖队伍中遴选参加全国综合测评并评定国家级奖项。具体以本科生院、四川赛区及全国组委会当届通知为准。</p>
     </div>

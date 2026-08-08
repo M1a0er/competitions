@@ -91,6 +91,17 @@
     .rhythm-card .desc { font-size: 13px; line-height: 1.7; color: #444; }
     .source-list { list-style: none; padding: 0; font-size: 13px; line-height: 2; color: #555; }
     .source-list li::before { content: "▸ "; color: var(--accent); }
+    .source-list a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(164, 31, 27, 0.35);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .source-list a:hover {
+      color: #c72a25;
+      border-bottom-color: #c72a25;
+    }
     .footer-line { width: 100%; max-width: 420px; margin: 40px auto 0; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
     .footer-line::before, .footer-line::after { content: ""; flex: 1; height: 2px; background: currentColor; }
     .footer-year { font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 4px; letter-spacing: 2px; }
@@ -255,16 +266,16 @@
     <div id="sec-source" class="section">
       <div class="section-head"><span class="section-num">六</span><span class="section-title">资料来源与说明</span></div>
       <ol class="source-list">
-        <li>西南交通大学：2027年推免A类学科竞赛目录</li>
-        <li>中国机器人大赛官方通知</li>
-        <li>RoboCup中国赛官网</li>
-        <li>中国自动化学会竞赛公告</li>
-        <li>RoboCup中国委员会通知</li>
-        <li>2026赛季各赛项规则文件</li>
-        <li>本科生院学科竞赛通知栏目</li>
-        <li>物理科学与技术学院</li>
-        <li>全国普通高校大学生竞赛排行榜</li>
-        <li>全国大学生竞赛信息平台</li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?setAction=newsDetail&viewType=web&newsId=4B4FD7C7197B57B2" target="_blank" rel="noopener">西南交通大学：2027年推免A类学科竞赛目录</a></li>
+        <li><a href="https://faculty.swjtu.edu.cn/liusilu/zh_CN/zdylm/840716/list/index.htm" target="_blank" rel="noopener">西南交通大学教师主页：机器人相关竞赛获奖记录</a></li>
+        <li><a href="https://www.caa.org.cn/Content/33.html" target="_blank" rel="noopener">中国自动化学会：中国机器人大赛暨RoboCup中国赛简介</a></li>
+        <li><a href="https://rcccaa.drct-caa.org.cn/" target="_blank" rel="noopener">赛事官方门户</a></li>
+        <li><a href="https://rcccaa.drct-caa.org.cn/article_info.php?id=114" target="_blank" rel="noopener">2026 RoboCup赛区比赛通知（第一轮）</a></li>
+        <li><a href="https://rcccaa.drct-caa.org.cn/article_info.php?id=125" target="_blank" rel="noopener">2026 RoboCup赛区赛程及报到须知</a></li>
+        <li><a href="https://rcccaa.drct-caa.org.cn/article_info.php?id=113" target="_blank" rel="noopener">2026 RoboCup赛区规则发布</a></li>
+        <li><a href="https://rcccaa.drct-caa.org.cn/article_info.php?id=133" target="_blank" rel="noopener">2026中国机器人大赛专项赛规则</a></li>
+        <li><a href="https://rcccaa.drct-caa.org.cn/article_info.php?id=131" target="_blank" rel="noopener">2026 RoboCup赛区获奖成绩公示</a></li>
+        <li><a href="https://robotreg.drct-caa.org.cn/" target="_blank" rel="noopener">赛事官方报名系统</a></li>
       </ol>
       <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">说明：本信息卡面向西南交通大学物理科学与技术学院学生。信息核验至2026年7月30日；RoboCup赛区已于5月完成；中国机器人大赛专项赛规则已发布。具体以本科生院、各赛项官方最新通知为准。</p>
     </div>

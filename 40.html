@@ -91,6 +91,17 @@
     .rhythm-card .desc { font-size: 13px; line-height: 1.7; color: #444; }
     .source-list { list-style: none; padding: 0; font-size: 13px; line-height: 2; color: #555; }
     .source-list li::before { content: "▸ "; color: var(--accent); }
+    .source-list a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(164, 31, 27, 0.35);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .source-list a:hover {
+      color: #c72a25;
+      border-bottom-color: #c72a25;
+    }
     .footer-line { width: 100%; max-width: 420px; margin: 40px auto 0; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
     .footer-line::before, .footer-line::after { content: ""; flex: 1; height: 2px; background: currentColor; }
     .footer-year { font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 4px; letter-spacing: 2px; }
@@ -254,16 +265,16 @@
     <div id="sec-source" class="section">
       <div class="section-head"><span class="section-num">六</span><span class="section-title">资料来源与说明</span></div>
       <ol class="source-list">
-        <li>西南交通大学：2027年推免A类学科竞赛目录</li>
-        <li>2026中国机器人及人工智能大赛官方通知</li>
-        <li>CRAIC大赛官网</li>
-        <li>中国机电一体化技术应用协会通知</li>
-        <li>西南交通大学信息科学与技术学院竞赛通知</li>
-        <li>四川省赛组委会通知</li>
-        <li>西南交通大学本科生院：学科竞赛通知栏目</li>
-        <li>西南交通大学本科生院</li>
-        <li>全国普通高校大学生竞赛分析报告官网</li>
-        <li>全国大学生竞赛服务平台</li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?setAction=newsDetail&viewType=web&newsId=4B4FD7C7197B57B2" target="_blank" rel="noopener">西南交通大学：2027年推免A类学科竞赛目录</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?newsId=BBC136DAF6C49FB5&setAction=newsDetail&viewType=web" target="_blank" rel="noopener">西南交通大学本科生院：第二十八届CRAIC四川赛区通知</a></li>
+        <li><a href="https://news.swjtu.edu.cn/info/1011/106775.htm" target="_blank" rel="noopener">西南交通大学：Apollo星火自动驾驶西南大区暨四川省赛报道</a></li>
+        <li><a href="https://www.caairobot.com/index.html" target="_blank" rel="noopener">中国机器人及人工智能大赛官网</a></li>
+        <li><a href="https://www.caairobot.com/post/notification-online-craic2026/" target="_blank" rel="noopener">CRAIC官网：第二十八届全国决赛（线上）通知</a></li>
+        <li><a href="https://craic.aicomp.cn/wp-content/uploads/2026/03/%E3%80%90%E5%9B%BD%E8%B5%9B%E7%BB%84%E5%A7%94%E4%BC%9A%E3%80%91%E5%85%B3%E4%BA%8E%E4%B8%BE%E5%8A%9E%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%85%AB%E5%B1%8A%E4%B8%AD%E5%9B%BD%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%8F%8A%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%A4%A7%E8%B5%9B%E7%9A%84%E9%A2%84%E9%80%9A%E7%9F%A520260131.pdf" target="_blank" rel="noopener">第二十八届中国机器人及人工智能大赛预通知</a></li>
+        <li><a href="https://www.caairobot.com/post/notification-shengjicengcixuanbasai-craic2026/" target="_blank" rel="noopener">CRAIC官网：第二十八届省级层次选拔赛通知</a></li>
+        <li><a href="https://www.caairobot.com/post/notification-finalhefei-craic2026/" target="_blank" rel="noopener">CRAIC官网：第二十八届全国决赛（合肥）通知</a></li>
+        <li><a href="https://www.caairobot.com/post/notification-finalhaerbin-craic2026/" target="_blank" rel="noopener">CRAIC官网：第二十八届全国决赛（哈尔滨）通知</a></li>
+        <li><a href="https://www.beijing.gov.cn/fwcj/calendar/zlzh/6a42949b9405807783d02437.html" target="_blank" rel="noopener">北京市政府：第二十八届CRAIC人形机器人专项赛日程</a></li>
       </ol>
       <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">说明：本信息卡面向西南交通大学物理科学与技术学院学生。赛项、时间和规则核验至2026年7月30日；2026常规报名和四川省赛已结束，全国决赛正在分批举行。具体以本科生院、信息科学与技术学院及大赛官方最新通知为准。</p>
     </div>

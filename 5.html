@@ -91,6 +91,17 @@
     .rhythm-card .desc { font-size: 13px; line-height: 1.7; color: #444; }
     .source-list { list-style: none; padding: 0; font-size: 13px; line-height: 2; color: #555; }
     .source-list li::before { content: "▸ "; color: var(--accent); }
+    .source-list a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(164, 31, 27, 0.35);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .source-list a:hover {
+      color: #c72a25;
+      border-bottom-color: #c72a25;
+    }
     .footer-line { width: 100%; max-width: 420px; margin: 40px auto 0; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
     .footer-line::before, .footer-line::after { content: ""; flex: 1; height: 2px; background: currentColor; }
     .footer-year { font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 4px; letter-spacing: 2px; }
@@ -266,16 +277,16 @@
     <div id="sec-source" class="section">
       <div class="section-head"><span class="section-num">六</span><span class="section-title">资料来源与说明</span></div>
       <ol class="source-list">
-        <li>西南交通大学2027年推荐免试研究生A类学科竞赛目录</li>
-        <li>西南交通大学数学学院：2026年全国大学生数学建模竞赛校内选拔通知</li>
-        <li>西南交通大学本科生院：2026年数学建模竞赛报名通知</li>
-        <li>全国大学生数学建模竞赛组委会：2026年竞赛报名与参赛通知</li>
-        <li>全国大学生数学建模竞赛官方网站（mcm.edu.cn）</li>
-        <li>中国工业与应用数学学会（CSIAM）相关公告</li>
-        <li>西南交通大学数学建模协会往年培训与参赛资料</li>
-        <li>全国大学生数学建模竞赛历年优秀论文汇编</li>
-        <li>美国大学生数学建模竞赛（MCM/ICM）官方网站</li>
-        <li>西南交通大学新闻网：历年数学建模竞赛获奖报道</li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?setAction=newsDetail&viewType=web&newsId=4B4FD7C7197B57B2" target="_blank" rel="noopener">西南交通大学：2027年推免A类学科竞赛目录</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/" target="_blank" rel="noopener">西南交通大学：2026年全国大学生数学建模竞赛报名通知（学校PDF归档）</a></li>
+        <li><a href="https://maths.swjtu.edu.cn/info/1149/5065.htm" target="_blank" rel="noopener">西南交通大学数学学院：数学建模校赛赛制与历年时间</a></li>
+        <li><a href="https://maths.swjtu.edu.cn/info/1149/14244.htm" target="_blank" rel="noopener">西南交通大学数学学院：全年数学建模竞赛与培训安排</a></li>
+        <li><a href="https://www.mcm.edu.cn/" target="_blank" rel="noopener">全国大学生数学建模竞赛官网</a></li>
+        <li><a href="https://www.mcm.edu.cn/html_cn/node/d6fd7a0ee8f3a3d525e30af1c365fcec.html" target="_blank" rel="noopener">2026高教社杯全国大学生数学建模竞赛第一次通知</a></li>
+        <li><a href="https://www.mcm.edu.cn/html_cn/node/9d8e511fe7a1447b35f53a82c908e2e0.html" target="_blank" rel="noopener">全国大学生数学建模竞赛参赛规则（2026年修订稿）</a></li>
+        <li><a href="https://www.mcm.edu.cn/html_cn/node/4cd596519c9eb9fbd866398f6df0caa3.html" target="_blank" rel="noopener">全国大学生数学建模竞赛论文格式规范（2026年修订稿）</a></li>
+        <li><a href="https://www.cmathc.org.cn/mcm/tz/424.html" target="_blank" rel="noopener">第二十三届五一数学建模竞赛2026参赛通知</a></li>
+        <li><a href="https://shumo.neepu.edu.cn/info/1004/2051.htm" target="_blank" rel="noopener">第十八届中国电机工程学会杯全国大学生电工数学建模竞赛通知</a></li>
       </ol>
       <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">说明：本信息卡面向西南交通大学物理科学与技术学院学生。时间与资格信息核验至2026年7月30日；校赛、集训及报名具体安排应以数学学院和本科生院最新通知为准。美赛MCM/ICM为独立国际赛事，本卡仅作关联介绍。</p>
     </div>

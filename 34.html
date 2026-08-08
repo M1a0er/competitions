@@ -91,6 +91,17 @@
     .rhythm-card .desc { font-size: 13px; line-height: 1.7; color: #444; }
     .source-list { list-style: none; padding: 0; font-size: 13px; line-height: 2; color: #555; }
     .source-list li::before { content: "▸ "; color: var(--accent); }
+    .source-list a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(164, 31, 27, 0.35);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .source-list a:hover {
+      color: #c72a25;
+      border-bottom-color: #c72a25;
+    }
     .footer-line { width: 100%; max-width: 420px; margin: 40px auto 0; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
     .footer-line::before, .footer-line::after { content: ""; flex: 1; height: 2px; background: currentColor; }
     .footer-year { font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 4px; letter-spacing: 2px; }
@@ -258,16 +269,16 @@
     <div id="sec-source" class="section">
       <div class="section-head"><span class="section-num">六</span><span class="section-title">资料来源与说明</span></div>
       <ol class="source-list">
-        <li>西南交通大学：2027年推免A类学科竞赛目录</li>
-        <li>全国大学生光电设计竞赛简介</li>
-        <li>全国大学生光电设计竞赛官网</li>
-        <li>中国光学学会竞赛通知</li>
-        <li>西南交大2025年光电赛校内通知</li>
-        <li>西南交大2026年光电赛校内通知</li>
-        <li>西南交大物理科学与技术学院竞赛通知</li>
-        <li>本科生院学科竞赛通知栏目</li>
-        <li>全国普通高校大学生竞赛排行榜</li>
-        <li>全国大学生竞赛信息平台</li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?setAction=newsDetail&viewType=web&newsId=4B4FD7C7197B57B2" target="_blank" rel="noopener">西南交通大学2027年推荐免试研究生A类学科竞赛目录</a></li>
+        <li><a href="https://webs.nuist.edu.cn/_s72/2024/0423/c9393a242579/page.psp" target="_blank" rel="noopener">全国大学生光电设计竞赛简介（实物赛与创意赛交替说明）</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?newsId=94DF2F2AF5FBBF33&setAction=newsDetail&viewType=web" target="_blank" rel="noopener">西南交通大学第十三届全国大学生光电设计竞赛报名通知</a></li>
+        <li><a href="https://phys.swjtu.edu.cn/info/1022/27161.htm" target="_blank" rel="noopener">西南交通大学物理学院：2025年校内选拔赛</a></li>
+        <li><a href="https://www.kmust.edu.cn/info/1011/51320.htm" target="_blank" rel="noopener">昆明理工大学：2025年西南区赛</a></li>
+        <li><a href="https://news.uestc.edu.cn/info/1005/34346.htm" target="_blank" rel="noopener">电子科技大学：2025年全国总决赛</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?newsId=CA838A43AADE97B5&setAction=newsDetail&viewType=web" target="_blank" rel="noopener">西南交通大学第十四届全国大学生光电设计竞赛校级选拔赛通知</a></li>
+        <li><a href="https://phys.swjtu.edu.cn/info/1040/57091.htm" target="_blank" rel="noopener">西南交通大学物理学院：2026年校内选拔赛</a></li>
+        <li><a href="https://phy.gzu.edu.cn/2026/0527/c10115a274760/page.htm" target="_blank" rel="noopener">贵州大学：2026年西南赛区现场决赛</a></li>
+        <li><a href="https://www.cust.edu.cn/lgxw2026/033ce6ec98f542a38aa94b630484b1d9.htm" target="_blank" rel="noopener">长春理工大学：2026年全国总决赛</a></li>
       </ol>
       <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">说明：本信息卡面向西南交通大学物理科学与技术学院学生。信息核验至2026年7月29日；2025年第十三届(实物赛)和2026年第十四届(创意赛)均已完成或进行中。具体以物理科学与技术学院及大赛官方最新通知为准。</p>
     </div>

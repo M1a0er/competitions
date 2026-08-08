@@ -91,6 +91,17 @@
     .rhythm-card .desc { font-size: 13px; line-height: 1.7; color: #444; }
     .source-list { list-style: none; padding: 0; font-size: 13px; line-height: 2; color: #555; }
     .source-list li::before { content: "▸ "; color: var(--accent); }
+    .source-list a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(164, 31, 27, 0.35);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .source-list a:hover {
+      color: #c72a25;
+      border-bottom-color: #c72a25;
+    }
     .footer-line { width: 100%; max-width: 420px; margin: 40px auto 0; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--accent); }
     .footer-line::before, .footer-line::after { content: ""; flex: 1; height: 2px; background: currentColor; }
     .footer-year { font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 4px; letter-spacing: 2px; }
@@ -263,16 +274,16 @@
     <div id="sec-source" class="section">
       <div class="section-head"><span class="section-num">六</span><span class="section-title">资料来源与说明</span></div>
       <ol class="source-list">
-        <li>西南交通大学2027年推荐免试研究生A类学科竞赛目录</li>
-        <li>西南交通大学本科生院：2026年第二十一届ACM程序设计竞赛报名通知</li>
-        <li>西南交通大学在线评测系统（OJ）</li>
-        <li>西南交通大学新闻网：校队获ICPC亚洲东大陆决赛金奖</li>
-        <li>成都信息工程大学：2026年四川省大学生程序设计大赛举行</li>
-        <li>ICPC北京总部：2026年ICPC全国邀请赛（陕西）参赛指南</li>
-        <li>ICPC北京总部：2026—2027赛季网络预选赛时间安排</li>
-        <li>ICPC Asia EC：2026—2027年度区域赛承办高校会议纪要</li>
-        <li>ICPC全球官网：区域赛规则与参赛资格</li>
-        <li>ICPC全球官网：2026年世界总决赛规则与日程</li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?setAction=newsDetail&viewType=web&newsId=4B4FD7C7197B57B2" target="_blank" rel="noopener">西南交通大学2027年推荐免试研究生A类学科竞赛目录</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?newsId=97CC68E23D1C872B&setAction=newsDetail&viewType=web" target="_blank" rel="noopener">西南交通大学本科生院：2026年第二十一届ACM程序设计竞赛报名通知</a></li>
+        <li><a href="https://oj.swjtu.edu.cn/" target="_blank" rel="noopener">西南交通大学在线评测系统（OJ）</a></li>
+        <li><a href="https://news.swjtu.edu.cn/info/1011/2897.htm" target="_blank" rel="noopener">西南交通大学新闻网：校队获ICPC亚洲东大陆决赛金奖</a></li>
+        <li><a href="https://www.cuit.edu.cn/info/1003/16603.htm" target="_blank" rel="noopener">成都信息工程大学：2026年四川省大学生程序设计大赛举行</a></li>
+        <li><a href="https://icpc.pku.edu.cn/docs/2026-03/b165028b876f4a99a5d5f961478bd21c.pdf" target="_blank" rel="noopener">ICPC北京总部：2026年ICPC全国邀请赛（陕西）参赛指南</a></li>
+        <li><a href="https://icpc.pku.edu.cn/tzgg/a8fd24b90c57484dafc921f17deee908.htm" target="_blank" rel="noopener">ICPC北京总部：2026—2027赛季网络预选赛时间安排</a></li>
+        <li><a href="https://icpc.pku.edu.cn/docs/2026-02/af6cc8c027c04b25b4caf7ecbeb5256e.pdf" target="_blank" rel="noopener">ICPC Asia EC：2026—2027年度区域赛承办高校会议纪要</a></li>
+        <li><a href="https://icpc.global/regionals/rules/" target="_blank" rel="noopener">ICPC全球官网：区域赛规则与参赛资格</a></li>
+        <li><a href="https://icpc.global/worldfinals/rules/" target="_blank" rel="noopener">ICPC全球官网：2026年世界总决赛规则与日程</a></li>
       </ol>
       <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">说明：本信息卡面向西南交通大学物理科学与技术学院学生。时间与资格信息核验至2026年7月30日；校队名额、区域赛现场安排及下一赛季资格规则应以本科生院、校ACM协会和ICPC官方最新通知为准。</p>
     </div>
