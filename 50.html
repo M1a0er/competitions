@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>全国大学生信息安全竞赛 · 信息卡</title>
+  <title>华为ICT大赛 · 信息卡</title>
   <style>
     :root { --accent: #a41f1b; --bg: #faf9f7; --text: #111; --text_y: #968172; --card-bg: #fdfcfb; --border: rgba(164, 31, 27, 0.15); }
     * { box-sizing: border-box; }
@@ -142,9 +142,9 @@
     </div>
 
     <div class="title-block">
-      <img class="comp-icon animate-item anim-icon" src="logos/28.png" alt="竞赛图标" />
-      <h1 class="title animate-item anim-h1">全国大学生信息安全竞赛</h1>
-      <div class="title-en animate-item anim-sub">National University Student Information Security Competition (CISCN)</div>
+      <img class="comp-icon animate-item anim-icon" src="logos/50.png" alt="竞赛图标" />
+      <h1 class="title animate-item anim-h1">华为ICT大赛</h1>
+      <div class="title-en animate-item anim-sub">Huawei ICT Competition</div>
       <div class="radar-wrap animate-item anim-progress">
         <canvas class="radar-canvas" id="radarChart" width="300" height="300"></canvas>
       </div>
@@ -157,17 +157,18 @@
     </div>
     <div class="detail-tags animate-item anim-tags2">
       <span class="tag-cat">计算机</span>
-      <span class="tag-cat">信息安全</span>
       <span class="tag-cat">网络</span>
-      <span class="tag-cat">CTF</span>
+      <span class="tag-cat">通信</span>
+      <span class="tag-cat">IT</span>
+      <span class="tag-cat">华为</span>
     </div>
 
-    <div class="meta-bar animate-item anim-meta"><span>更新日期：2026年7月30日</span></div>
+    <div class="meta-bar animate-item anim-meta"><span>更新日期：2026年8月8日</span></div>
 
     <div class="oneliner animate-item anim-oneliner">
-      一条赛道做安全创新作品，另一条赛道打CTF与攻防，二者技能和赛程不同。
+      围绕网络、云、AI和昇腾等ICT技术方向，完成理论知识考试和实验操作，经省赛、全国赛和全球总决赛三级选拔。
     </div>
-    <a class="official-btn animate-item anim-oneliner" href="https://www.ciscn.cn/" target="_blank" rel="noopener">立即前往</a>
+    <a class="official-btn animate-item anim-oneliner" href="https://e.huawei.com/cn/talent/ict-academy/" target="_blank" rel="noopener">立即前往</a>
 
     <nav class="tab-nav animate-item anim-tabs">
       <button class="tab-btn active" data-tab="sec-1">基础信息</button>
@@ -181,103 +182,99 @@
     <div id="sec-1" class="section">
       <div class="section-head"><span class="section-num">一</span><span class="section-title">基础信息</span></div>
       <div class="info-grid">
-        <div class="label">竞赛简称</div><div class="value">信息安全竞赛 / CISCN</div>
-        <div class="label">主办单位</div><div class="value">中国信息安全测评中心、教育部高校网络空间安全专业教学指导委员会等</div>
-        <div class="label">校内组织</div><div class="value">本科生院及计算机、信息相关学院网络安全指导团队</div>
-        <div class="label">相关方向</div><div class="value">CTF、漏洞、密码、逆向、网络防护、安全作品</div>
-        <div class="label">适合年级</div><div class="value">实践赛适合有CTF训练者；作品赛适合已有安全项目的大二大三团队</div>
+        <div class="label">竞赛简称</div><div class="value">华为ICT大赛</div>
+        <div class="label">主办单位</div><div class="value">华为技术有限公司</div>
+        <div class="label">校内组织</div><div class="value">信息科学与技术学院、计算机与人工智能学院、本科生院</div>
+        <div class="label">相关方向</div><div class="value">网络赛道（数通/安全/WLAN）、云赛道（云计算/大数据/AI/昇腾）</div>
+        <div class="label">适合年级</div><div class="value">在校本科生及研究生，计算机、通信、电子、AI相关专业</div>
       </div>
     </div>
 
     <div id="sec-2" class="section">
       <div class="section-head"><span class="section-num">二</span><span class="section-title">竞赛内容说明</span></div>
-      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">赛事主要包含作品赛与创新实践能力赛：作品赛提交网络安全系统或研究成果，实践赛通过线上初赛、分区赛和全国赛考查CTF/攻防能力。</p>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">赛事设置网络赛道和云赛道两大方向，含理论考试和实验操作两个环节，覆盖数通、安全、云计算、大数据、AI和昇腾等技术。</p>
       <table>
-        <thead><tr><th>阶段</th><th>主要做什么</th><th>赛制与提交</th><th>核心目标</th></tr></thead>
+        <thead><tr><th>类别</th><th>主要做什么</th><th>赛制与提交</th><th>核心目标</th></tr></thead>
         <tbody>
-          <tr><td>作品赛</td><td>设计信息安全系统、工具、硬件或研究型作品</td><td>作品、报告、视频/演示，入围后现场答辩</td><td>体现安全创新、技术深度、完整度和应用价值</td></tr>
-          <tr><td>创新实践能力赛</td><td>完成Web、Pwn、逆向、密码、Misc等CTF题</td><td>线上初赛、分区赛和全国阶段</td><td>在限时环境中发现、分析并利用/修复安全问题</td></tr>
-          <tr><td>防护/攻防专项</td><td>部署服务、加固系统、分析流量并应对攻击</td><td>按专项赛制进行现场防护或攻防</td><td>把单题技能提升为系统安全运营能力</td></tr>
+          <tr><td>网络赛道</td><td>数通、网络安全、WLAN等技术</td><td>理论笔试+实验操作（eNSP/真实设备）</td><td>掌握企业级网络规划、部署和故障排查能力</td></tr>
+          <tr><td>云赛道</td><td>云计算、大数据、AI、昇腾等</td><td>理论笔试+云平台实验操作</td><td>掌握云服务架构、大数据处理和AI应用开发</td></tr>
         </tbody>
       </table>
-      <p style="font-size:14px;line-height:1.7;margin:12px 0 4px;"><strong>主要竞赛阶段：</strong>作品赛与创新实践能力赛并行开展。作品赛提交安全系统或研究成果经初审后现场答辩；实践赛通过线上初赛、分区赛和全国赛层层晋级，考查CTF解题和攻防实战能力。</p>
+      <p style="font-size:14px;line-height:1.7;margin:12px 0 4px;"><strong>主要竞赛阶段：</strong>报名 → 省赛（理论+实验）→ 全国总决赛 → 全球总决赛。比赛使用华为官方平台和认证题库。</p>
     </div>
 
     <div id="sec-3" class="section">
       <div class="section-head"><span class="section-num">三</span><span class="section-title">参赛能力要求</span></div>
-      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">本赛覆盖"CTF基础""安全工程""作品与合规"三大方向——不必每人全能，但团队必须能独立完成表中的核心任务。</p>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">本赛覆盖"ICT理论知识""实验操作与排错""创新与实践""文档与答辩"四大方向。</p>
       <table>
         <thead><tr><th>方向/模块</th><th>需要掌握的工具与知识</th><th>需要具备的具体能力</th></tr></thead>
         <tbody>
-          <tr><td>CTF基础</td><td>Linux、Python、网络协议、Web、逆向、密码、二进制</td><td>能独立分析题目、编写脚本、复现漏洞</td></tr>
-          <tr><td>安全工程</td><td>威胁建模、代码审计、日志/流量分析、Docker/云环境</td><td>能搭建、测试和加固系统</td></tr>
-          <tr><td>作品与合规</td><td>Git、测试报告、演示视频、开源许可与网络安全法律</td><td>能清楚说明安全边界、创新点、实验结果</td></tr>
+          <tr><td>ICT理论知识</td><td>数通协议、网络安全原理、云计算架构、AI基础</td><td>能正确解答HCIA/HCIP难度级别的理论题目</td></tr>
+          <tr><td>实验操作与排错</td><td>eNSP/HCNA-Security模拟器、华为云平台</td><td>能完成网络配置、云服务部署和故障排查</td></tr>
+          <tr><td>创新与实践</td><td>Python、OpenStack/K8s、TensorFlow/PyTorch</td><td>能完成AI模型训练、云原生应用部署等实践任务</td></tr>
+          <tr><td>文档与答辩</td><td>技术方案文档</td><td>能清晰阐述技术架构和实现思路</td></tr>
         </tbody>
       </table>
     </div>
 
     <div id="sec-4" class="section">
       <div class="section-head"><span class="section-num">四</span><span class="section-title">团队组成要求</span></div>
-      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">各赛道通常以同校学生团队参赛，人数和指导教师按当届通知。</p>
+      <p style="font-size:14px;line-height:1.7;margin:0 0 12px;">每队3名学生、1—2名指导教师；可跨专业组队。网络和云赛道独立组队。</p>
       <table>
         <thead><tr><th>项目</th><th>参赛要求</th><th>说明</th></tr></thead>
         <tbody>
-          <tr><td>团队</td><td>按作品赛/实践赛分别组队</td><td>实践队应覆盖多个CTF方向</td></tr>
-          <tr><td>行为边界</td><td>仅可攻击竞赛授权目标</td><td>违规扫描或攻击真实系统可能取消资格</td></tr>
+          <tr><td>网络赛道</td><td>每队3人</td><td>建议通信+计算机+网络工程组队</td></tr>
+          <tr><td>云赛道</td><td>每队3人</td><td>建议AI+软件+大数据组队</td></tr>
         </tbody>
       </table>
       <p style="font-size:14px;font-weight:700;color:var(--accent);margin:14px 0 8px;">推荐分工</p>
       <table>
         <thead><tr><th>角色</th><th>分工内容</th></tr></thead>
         <tbody>
-          <tr><td>CTF基础主责</td><td>独立分析题目、编写脚本、复现漏洞</td></tr>
-          <tr><td>安全工程主责</td><td>搭建、测试和加固系统</td></tr>
-          <tr><td>作品与合规主责</td><td>清楚说明安全边界、创新点、实验结果</td></tr>
+          <tr><td>理论知识主责</td><td>负责ICT理论知识的系统学习和备赛</td></tr>
+          <tr><td>实验操作主责</td><td>负责实验环境的搭建和操作练习</td></tr>
+          <tr><td>创新实践主责</td><td>负责创新赛道或高阶实验任务</td></tr>
         </tbody>
       </table>
-      <p style="font-size:13px;line-height:1.7;color:#555;margin:8px 0 0;">可在硬件安全、侧信道、传感系统安全和密码/算法方向参与。</p>
-      <p style="font-size:14px;line-height:1.7;margin:8px 0 0;color:var(--accent);font-weight:700;">特别提醒：</p>
-      <p style="font-size:13px;line-height:1.7;color:#555;margin:4px 0 0;">仅可攻击竞赛授权目标，违规扫描或攻击真实系统可能取消资格。</p>
+      <p style="font-size:13px;line-height:1.7;color:#555;margin:8px 0 0;">物理学院建议：在网络协议和数据分析方向有基础，可参与网络赛道或云赛道的数据分析环节。</p>
     </div>
 
     <div id="sec-5" class="section">
       <div class="section-head"><span class="section-num">五</span><span class="section-title">时间节点设置</span></div>
-      <p style="font-size:12px;color:var(--text_y);margin:0 0 10px;">下表列出全国大学生信息安全竞赛的完整节奏，具体日期以当届通知为准。</p>
+      <p style="font-size:12px;color:var(--text_y);margin:0 0 10px;">下表列出华为ICT大赛的典型节奏。</p>
       <table>
         <thead><tr><th>阶段</th><th>时间</th><th>主要任务</th><th>层级/说明</th></tr></thead>
         <tbody>
-          <tr><td>组队与校内选拔</td><td>通常1—3月</td><td>参加校内CTF/作品评审</td><td>校级</td></tr>
-          <tr><td>创新实践线上初赛</td><td>通常春季</td><td>完成统一CTF线上赛</td><td>国家级初赛</td></tr>
-          <tr><td>分区赛</td><td>通常5—6月</td><td>参加区域CTF、防护或综合实践</td><td>区域级</td></tr>
-          <tr><td>作品赛提交与评审</td><td>通常5—7月</td><td>提交完整作品、报告</td><td>国家级初评</td></tr>
-          <tr><td>全国决赛</td><td>作品赛2026年8月</td><td>现场答辩或攻防实战</td><td>国家级</td></tr>
+          <tr><td>报名</td><td>通常9—10月</td><td>组队选择赛道</td><td>全国统一</td></tr>
+          <tr><td>省赛</td><td>通常11—12月</td><td>理论笔试+实验</td><td>省级</td></tr>
+          <tr><td>全国总决赛</td><td>通常次年2—3月</td><td>集中比赛</td><td>国家级</td></tr>
+          <tr><td>全球总决赛</td><td>通常次年5月</td><td>全球决赛</td><td>国际级</td></tr>
         </tbody>
       </table>
-      <p style="font-size:12px;color:var(--text_y);margin:8px 0 16px;">截至2026年7月30日：第十九届作品赛全国阶段安排在8月；创新实践能力赛各阶段以CISCN官网最新通知为准。</p>
+      <p style="font-size:12px;color:var(--text_y);margin:8px 0 16px;">截至说明：第十届华为ICT大赛全国总决赛已结束。</p>
       <p style="font-size:14px;font-weight:700;color:var(--accent);margin:14px 0 10px;">建议准备节奏</p>
       <div class="rhythm-cards">
-        <div class="rhythm-card"><div class="period">基础期（3~6周）</div><div class="desc">学习CTF基础知识，熟悉Linux、Web安全和二进制基础。</div></div>
-        <div class="rhythm-card"><div class="period">专项期（1~2个月）</div><div class="desc">按CTF方向或作品选题完成核心技术攻关。</div></div>
-        <div class="rhythm-card"><div class="period">整合期（1~2个月）</div><div class="desc">完成作品或攻防方案，统一报告和演示材料。</div></div>
-        <div class="rhythm-card"><div class="period">赛前期（2~3周）</div><div class="desc">模拟CTF或答辩演练，复核安全方案和操作规范。</div></div>
+        <div class="rhythm-card"><div class="period">基础期（6~8周）</div><div class="desc">系统学习HCIx认证课程和实验操作。</div></div>
+        <div class="rhythm-card"><div class="period">强化期（4~6周）</div><div class="desc">刷题库和模拟实验，强化薄弱环节。</div></div>
+        <div class="rhythm-card"><div class="period">冲刺期（2~3周）</div><div class="desc">模拟考试和团队配合练习。</div></div>
       </div>
     </div>
 
     <div id="sec-source" class="section">
       <div class="section-head"><span class="section-num">六</span><span class="section-title">资料来源与说明</span></div>
       <ol class="source-list">
-        <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?setAction=newsDetail&viewType=web&newsId=4B4FD7C7197B57B2" target="_blank" rel="noopener">西南交通大学：2027年推免A类学科竞赛目录</a></li>
-        <li><a href="https://www.ciscn.cn/" target="_blank" rel="noopener">全国大学生信息安全竞赛官网</a></li>
-        <li><a href="https://www.ciscn.cn/index.php/announcement?page=1" target="_blank" rel="noopener">CISCN官方通知栏目</a></li>
-        <li><a href="https://cybersec.xjtu.edu.cn/info/1017/2188.htm" target="_blank" rel="noopener">第十九届作品赛2026通知参考</a></li>
-        <li><a href="https://www.ciscn.cn/competition/securityCompetition" target="_blank" rel="noopener">信息安全竞赛赛项页面</a></li>
-        <li><a href="https://scai.swjtu.edu.cn/" target="_blank" rel="noopener">西南交通大学计算机与人工智能学院</a></li>
+        <li><a href="https://jwc.swjtu.edu.cn/download/ueditor/jsp/upload/file/20250613/1749797358424068163.pdf" target="_blank" rel="noopener">西南交通大学：2027年推免A类学科竞赛目录</a></li>
+        <li><a href="https://news.swjtu.edu.cn/info/1011/100335.htm" target="_blank" rel="noopener">西南交大第十届华为ICT中国总决赛报道</a></li>
+        <li><a href="https://e.huawei.com/cn/talent/ict-academy/" target="_blank" rel="noopener">华为ICT大赛官网</a></li>
+        <li><a href="https://e.huawei.com/cn/talent/ict-academy" target="_blank" rel="noopener">华为ICT学院</a></li>
+        <li><a href="https://sist.swjtu.edu.cn/" target="_blank" rel="noopener">西南交通大学信息科学与技术学院</a></li>
+        <li><a href="https://e.huawei.com/cn/talent/" target="_blank" rel="noopener">华为人才在线学习平台</a></li>
         <li><a href="https://jwc.swjtu.edu.cn/vatuu/WebAction?bigTypeId=42ED96EE3E089C19&newsType=yes&selectType=bigType&setAction=newsList&viewType=secondStyle" target="_blank" rel="noopener">西南交通大学本科生院：学科竞赛通知栏目</a></li>
         <li><a href="https://jwc.swjtu.edu.cn/" target="_blank" rel="noopener">西南交通大学本科生院</a></li>
         <li><a href="https://www.cahe.edu.cn/" target="_blank" rel="noopener">全国普通高校大学生竞赛分析报告官网</a></li>
         <li><a href="https://cp.moocollege.com/" target="_blank" rel="noopener">全国大学生竞赛服务平台</a></li>
       </ol>
-      <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">说明：本信息卡面向西南交通大学物理科学与技术学院学生。信息核验至2026年7月30日；第十九届作品赛全国阶段安排在8月；创新实践能力赛各阶段以CISCN官网最新通知为准。</p>
+      <p style="font-size:12px;color:var(--text_y);margin:8px 0 0;line-height:1.7;">说明：本信息卡面向西南交通大学物理科学与技术学院学生。信息核验至2026年8月8日；第十届华为ICT大赛全球总决赛已结束。具体以信息科学与技术学院、本科生院及大赛官方最新通知为准。</p>
     </div>
 
     <div style="text-align:center;">
@@ -313,7 +310,7 @@
       var ctx = canvas.getContext('2d');
       var W = canvas.width, H = canvas.height, cx = W / 2, cy = H / 2, R = 100, N = 6;
       var labels = ['难度', '热度', '卷度', '肝度', '获奖难度', '含金量'];
-      var values = [8, 7, 6, 8, 8, 8];
+      var values = [7, 7, 6, 7, 7, 8];
       var maxVal = 10, levels = 5;
       ctx.strokeStyle = 'rgba(164,31,27,0.10)'; ctx.lineWidth = 1;
       for (var l = 1; l <= levels; l++) { var r = (R / levels) * l; ctx.beginPath(); for (var i = 0; i < N; i++) { var angle = -Math.PI / 2 + (2 * Math.PI / N) * i; var x = cx + r * Math.cos(angle), y = cy + r * Math.sin(angle); if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); } ctx.closePath(); ctx.stroke(); }

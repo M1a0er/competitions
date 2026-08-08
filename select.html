@@ -501,7 +501,7 @@
 
     // 推荐专业：专业名 -> 对应卡片编号数组
     var recommendedMajors = [
-      ["应物", [34, 46, 59]],
+      ["应物", [29, 34, 46, 59]],
       ["电讯", [6, 34, 39, 45, 50, 51]],
       ["计算机", [4, 5, 22, 26, 28, 31, 33, 40, 48]],
       ["机械", [7, 8, 10, 14, 18, 19, 21, 27, 30, 52]],
@@ -514,13 +514,14 @@
       ["外语", [16]],
       ["化学", [20, 13, 32]],
       ["生命", [49, 13]],
-      ["测绘", [57, 37, 8, 21]]
+      ["测绘", [57, 37, 8, 21]],
+      ["力航", [29]]
     ];
 
     // 已创建详情页的竞赛编号（新增页面后在此添加编号即可）
-    var existingPages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
+    var existingPages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
 
-    // 构建 编号 → 专业名数组 的快速查找
+    // 专业名的快速查找
     var majorMap = {};
     recommendedMajors.forEach(function(m) {
       var majorName = m[0];
@@ -551,7 +552,7 @@
           normalTags += '<span class="tag-cat">' + cat + '</span>';
         }
       });
-      // 推荐专业角标（多专业时只渲染第一个，其余通过轮播切换）
+      // 推荐专业角标
       var badges = '';
       if (majorMap[id]) {
         badges = '<span class="major-badge"><span class="major-badge-text" data-majors="' + majorMap[id].join(',') + '">' + majorMap[id][0] + '</span></span>';
@@ -591,7 +592,7 @@
 
     grid.innerHTML = html;
 
-    // 多专业角标轮播（只切换内层文字，红色底条固定不动）
+    // 多专业角标轮播
     var badgeTexts = grid.querySelectorAll('.major-badge-text');
     badgeTexts.forEach(function(badgeText) {
       var majors = badgeText.getAttribute('data-majors').split(',');
