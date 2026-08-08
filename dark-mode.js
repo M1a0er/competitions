@@ -124,13 +124,12 @@
     '  background: #353535;',
     '}',
 
-    
-    'body.dark .rhythm-card .period{',
-    '  background: #353535;',
-    '}',
-    
-    'body.dark .rhythm-card .desc{',
+    'body.dark .rhythm-card{',
     '  background: #2f2f2f;',
+    '}',
+
+        'body.dark .rhythm-card .desc{',
+    '  color: #cac9c7;',
     '}'
   ].join('\n');
   document.head.appendChild(style);
